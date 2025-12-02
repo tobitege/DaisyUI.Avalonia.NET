@@ -54,6 +54,12 @@
                 <ResourceInclude Source="/Themes/DaisyThemeRadio.axaml" />
                 <!-- Custom controls (non-standard DaisyUI extensions) -->
                 <ResourceInclude Source="/Themes/Custom/DaisyModifierKeys.axaml" />
+                <!-- Weather widgets -->
+                <ResourceInclude Source="/Themes/Custom/Weather/WeatherIcons.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherCurrent.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherForecast.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherMetrics.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherCard.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Styles.Resources>

@@ -28,7 +28,8 @@ public partial class MainWindow : Window
             ["Cards"] = () => new CardsExamples(),
             ["Divider"] = () => new DividerExamples(),
             ["Layout"] = () => new LayoutExamples(),
-            ["Theming"] = () => new ThemingExamples()
+            ["Theming"] = () => new ThemingExamples(),
+            ["Weather"] = () => new WeatherExamples()
         };
 
         // Initialize with HomePage (with event handler attached)

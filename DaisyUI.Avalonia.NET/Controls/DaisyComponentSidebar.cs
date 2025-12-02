@@ -347,6 +347,20 @@ namespace DaisyUI.Avalonia.Controls
                         new SidebarItem { Name = "CSS Theme Converter", TabHeader = "Theming" },
                         new SidebarItem { Name = "Theme Radio", TabHeader = "Theming" }
                     }
+                },
+                new SidebarCategory
+                {
+                    Name = "Custom Widgets",
+                    IconKey = "DaisyIconSun",
+                    Items = new ObservableCollection<SidebarItem>
+                    {
+                        new SidebarItem { Name = "Weather Card", TabHeader = "Weather", Badge = "new" },
+                        new SidebarItem { Name = "Current Weather", TabHeader = "Weather" },
+                        new SidebarItem { Name = "Weather Forecast", TabHeader = "Weather" },
+                        new SidebarItem { Name = "Weather Metrics", TabHeader = "Weather" },
+                        new SidebarItem { Name = "Weather Conditions", TabHeader = "Weather" },
+                        new SidebarItem { Name = "Service Integration", TabHeader = "Weather" }
+                    }
                 }
             };
         }

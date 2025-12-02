@@ -1,0 +1,105 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:weather="clr-namespace:DaisyUI.Avalonia.Controls.Custom.Weather;assembly=DaisyUI.Avalonia.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{DynamicResource DaisyBase200Brush}">
+            <weather:DaisyWeatherMetrics
+                UvIndex="0" UvMax="1"
+                WindSpeed="9" WindMax="13" WindUnit="km/h"
+                Humidity="78" HumidityMax="86" />
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type weather:DaisyWeatherMetrics}" TargetType="weather:DaisyWeatherMetrics">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto,Auto,Auto">
+                        <!-- Header Row -->
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="Metric" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   Opacity="0.6" Margin="8,4" />
+                        <TextBlock Grid.Row="0" Grid.Column="1"
+                                   Text="Now" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   Opacity="0.6" Margin="8,4" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="0" Grid.Column="2"
+                                   Text="Max²⁴ʰ" FontSize="10" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   Opacity="0.6" Margin="8,4" HorizontalAlignment="Center" />
+
+                        <!-- UV Row -->
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Spacing="6" Margin="8,6">
+                            <PathIcon Width="16" Height="16"
+                                      Foreground="{DynamicResource DaisyWarningBrush}"
+                                      Data="{StaticResource WeatherIconUV}" />
+                            <TextBlock Text="UV" FontSize="12" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource DaisyBaseContentBrush}" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="1" Grid.Column="1"
+                                   Text="{Binding UvIndex, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0:0}}"
+                                   FontSize="14" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,6" />
+                        <TextBlock Grid.Row="1" Grid.Column="2"
+                                   Text="{Binding UvMax, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0:0}}"
+                                   FontSize="14"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   Opacity="0.7"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,6" />
+
+                        <!-- Wind Row -->
+                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Spacing="6" Margin="8,6">
+                            <PathIcon Width="16" Height="16"
+                                      Foreground="{DynamicResource DaisyInfoBrush}"
+                                      Data="{StaticResource WeatherIconWind}" />
+                            <TextBlock Text="{Binding WindUnit, RelativeSource={RelativeSource TemplatedParent}}"
+                                       FontSize="12" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource DaisyBaseContentBrush}" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="2" Grid.Column="1"
+                                   Text="{Binding WindSpeed, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0:0}}"
+                                   FontSize="14" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,6" />
+                        <TextBlock Grid.Row="2" Grid.Column="2"
+                                   Text="{Binding WindMax, RelativeSource={RelativeSource TemplatedParent}, StringFormat={}{0:0}}"
+                                   FontSize="14"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   Opacity="0.7"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,6" />
+
+                        <!-- Humidity Row -->
+                        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Spacing="6" Margin="8,6">
+                            <PathIcon Width="16" Height="16"
+                                      Foreground="{DynamicResource DaisySecondaryBrush}"
+                                      Data="{StaticResource WeatherIconHumidity}" />
+                            <TextBlock Text="%" FontSize="12" VerticalAlignment="Center"
+                                       Foreground="{DynamicResource DaisyBaseContentBrush}" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="3" Grid.Column="1"
+                                   Text="{Binding Humidity, RelativeSource={RelativeSource TemplatedParent}}"
+                                   FontSize="14" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,6" />
+                        <TextBlock Grid.Row="3" Grid.Column="2"
+                                   Text="{Binding HumidityMax, RelativeSource={RelativeSource TemplatedParent}}"
+                                   FontSize="14"
+                                   Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                   Opacity="0.7"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,6" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>
