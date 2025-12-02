@@ -5,14 +5,39 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Avalonia.Rendering.SceneGraph;
+using Avalonia.Skia;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using SkiaSharp;
 
 namespace Flowery.Controls
 {
     /// <summary>
+    /// Blur rendering mode for DaisyGlass.
+    /// </summary>
+    public enum GlassBlurMode
+    {
+        /// <summary>
+        /// Simulated glass using gradient overlays (no real blur).
+        /// </summary>
+        Simulated,
+
+        /// <summary>
+        /// Captures bitmap and applies BlurEffect (one-time capture).
+        /// </summary>
+        BitmapCapture,
+
+        /// <summary>
+        /// Uses SkiaSharp for GPU-accelerated blur (experimental).
+        /// </summary>
+        SkiaSharp
+    }
+
+    /// <summary>
     /// A glass/frosted effect container control styled after DaisyUI's glass effect.
-    /// Uses RenderTargetBitmap to capture and blur the background behind the control.
+    /// Supports multiple blur modes: Simulated, BitmapCapture, and SkiaSharp.
     /// </summary>
     public class DaisyGlass : ContentControl
     {
@@ -129,6 +154,18 @@ namespace Flowery.Controls
         {
             get => GetValue(EnableBackdropBlurProperty);
             set => SetValue(EnableBackdropBlurProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the blur rendering mode.
+        /// </summary>
+        public static readonly StyledProperty<GlassBlurMode> BlurModeProperty =
+            AvaloniaProperty.Register<DaisyGlass, GlassBlurMode>(nameof(BlurMode), GlassBlurMode.BitmapCapture);
+
+        public GlassBlurMode BlurMode
+        {
+            get => GetValue(BlurModeProperty);
+            set => SetValue(BlurModeProperty, value);
         }
 
         /// <summary>
@@ -344,6 +381,132 @@ namespace Flowery.Controls
                 _needsUpdate = true;
                 ScheduleBackdropCapture();
             }
+        }
+
+        /// <summary>
+        /// Override render to support SkiaSharp blur mode.
+        /// </summary>
+        public override void Render(DrawingContext context)
+        {
+            if (EnableBackdropBlur && BlurMode == GlassBlurMode.SkiaSharp)
+            {
+                // Use custom SkiaSharp draw operation for real-time blur
+                var operation = new SkiaGlassDrawOperation(
+                    new Rect(0, 0, Bounds.Width, Bounds.Height),
+                    GlassBlur,
+                    GlassTint,
+                    GlassTintOpacity,
+                    CornerRadius.TopLeft);
+
+                context.Custom(operation);
+            }
+
+            base.Render(context);
+        }
+    }
+
+    /// <summary>
+    /// Custom SkiaSharp draw operation for real-time glass blur effect.
+    /// </summary>
+    internal class SkiaGlassDrawOperation : ICustomDrawOperation
+    {
+        private readonly Rect _bounds;
+        private readonly float _blurSigma;
+        private readonly SKColor _tintColor;
+        private readonly float _cornerRadius;
+
+        public SkiaGlassDrawOperation(
+            Rect bounds,
+            double blurRadius,
+            Color tintColor,
+            double tintOpacity,
+            double cornerRadius)
+        {
+            _bounds = bounds;
+            // Convert blur radius to sigma (Skia uses sigma, not radius)
+            _blurSigma = (float)(blurRadius / 2.0);
+            _tintColor = new SKColor(
+                tintColor.R,
+                tintColor.G,
+                tintColor.B,
+                (byte)(255 * tintOpacity));
+            _cornerRadius = (float)cornerRadius;
+        }
+
+        public Rect Bounds => _bounds;
+
+        public bool HitTest(Point p) => _bounds.Contains(p);
+
+        public bool Equals(ICustomDrawOperation? other)
+        {
+            return other is SkiaGlassDrawOperation op &&
+                   op._bounds == _bounds &&
+                   Math.Abs(op._blurSigma - _blurSigma) < 0.1f;
+        }
+
+        public void Dispose() { }
+
+        public void Render(ImmediateDrawingContext context)
+        {
+            var leaseFeature = context.TryGetFeature<ISkiaSharpApiLeaseFeature>();
+            if (leaseFeature == null)
+                return;
+
+            using var lease = leaseFeature.Lease();
+            var canvas = lease.SkCanvas;
+
+            if (canvas == null)
+                return;
+
+            var rect = new SKRect(
+                (float)_bounds.X,
+                (float)_bounds.Y,
+                (float)_bounds.Right,
+                (float)_bounds.Bottom);
+
+            var roundedRect = new SKRoundRect(rect, _cornerRadius);
+
+            // Save canvas state
+            int saveCount = canvas.Save();
+
+            // Clip to our bounds
+            canvas.ClipRoundRect(roundedRect, SKClipOperation.Intersect, true);
+
+            // Create blur filter
+            using var blurFilter = SKImageFilter.CreateBlur(_blurSigma, _blurSigma);
+
+            // Save layer with blur filter - this captures what's beneath and blurs it
+            using var layerPaint = new SKPaint
+            {
+                ImageFilter = blurFilter
+            };
+
+            // SaveLayer captures current canvas content behind this control
+            canvas.SaveLayer(layerPaint);
+            // Immediately restore to apply the blur to existing content
+            canvas.Restore();
+
+            // Draw tint overlay
+            using var tintPaint = new SKPaint
+            {
+                Color = _tintColor,
+                Style = SKPaintStyle.Fill,
+                IsAntialias = true
+            };
+            canvas.DrawRoundRect(roundedRect, tintPaint);
+
+            // Draw highlight border (top edge)
+            using var highlightPaint = new SKPaint
+            {
+                Color = new SKColor(255, 255, 255, 60),
+                Style = SKPaintStyle.Stroke,
+                StrokeWidth = 1,
+                IsAntialias = true
+            };
+            canvas.DrawRoundRect(roundedRect, highlightPaint);
+
+            // Restore canvas
+            canvas.RestoreToCount(saveCount);
         }
     }
 }

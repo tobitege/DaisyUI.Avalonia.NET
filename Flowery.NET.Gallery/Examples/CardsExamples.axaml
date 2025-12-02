@@ -140,11 +140,11 @@
 
             <controls:DaisyDivider />
 
-            <!-- DaisyGlass Control - Real Backdrop Blur -->
+            <!-- DaisyGlass Control - Bitmap Capture Mode -->
             <StackPanel Spacing="12">
-                <local:SectionHeader Title="DaisyGlass (Real Backdrop Blur)" />
-                <TextBlock Text="EnableBackdropBlur=True captures and blurs the actual background. Text behind the glass should appear blurred." Opacity="0.7" FontSize="13"/>
-                <Border x:Name="BackdropBlurContainer" CornerRadius="16" Height="320" ClipToBounds="True">
+                <local:SectionHeader Title="DaisyGlass (Bitmap Capture Mode)" />
+                <TextBlock Text="BlurMode=BitmapCapture captures and blurs the background. Good quality, one-time capture." Opacity="0.7" FontSize="13"/>
+                <Border CornerRadius="16" Height="280" ClipToBounds="True">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
                             <GradientStop Color="#667eea" Offset="0"/>
@@ -153,33 +153,75 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <Grid>
-                        <!-- Background text content to demonstrate blur -->
                         <StackPanel Margin="20">
                             <TextBlock Text="BACKGROUND TEXT" FontSize="32" FontWeight="Black" Foreground="White" Opacity="0.9"/>
-                            <TextBlock Text="This text should be blurred when viewed through the glass panel" FontSize="16" Foreground="White" Opacity="0.8" Margin="0,8,0,0"/>
+                            <TextBlock Text="This text is blurred through the glass" FontSize="16" Foreground="White" Opacity="0.8" Margin="0,8,0,0"/>
                             <TextBlock Text="★ ★ ★ ★ ★" FontSize="28" Foreground="Yellow" Margin="0,12,0,0"/>
-                            <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." FontSize="14" Foreground="White" Opacity="0.7" Margin="0,8,0,0" TextWrapping="Wrap" Width="400"/>
+                            <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore."
+                                       FontSize="14" Foreground="#404040" Opacity="0.9" Margin="0,8,0,0" TextWrapping="Wrap" Width="500"/>
                         </StackPanel>
                         <TextBlock Text="SHARP" FontSize="72" FontWeight="Black" Foreground="#40FFFFFF"
                                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20"/>
-                        <TextBlock Text="●●●" FontSize="48" Foreground="White" Opacity="0.5"
-                                   HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,60"/>
 
-                        <!-- Glass panels on top -->
                         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="32">
                             <controls:DaisyGlass Padding="24" CornerRadius="16" Margin="10" Width="220"
-                                                 EnableBackdropBlur="True" GlassBlur="10">
+                                                 EnableBackdropBlur="True" BlurMode="BitmapCapture" GlassBlur="10">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Text="Light Blur" FontWeight="Bold" FontSize="18"/>
+                                    <TextBlock Text="Bitmap Mode" FontWeight="Bold" FontSize="18"/>
                                     <TextBlock Text="GlassBlur=10" TextWrapping="Wrap"/>
                                 </StackPanel>
                             </controls:DaisyGlass>
 
                             <controls:DaisyGlass Padding="24" CornerRadius="16" Margin="10" Width="220"
-                                                 EnableBackdropBlur="True" GlassBlur="20" GlassTint="#FFFFFF" GlassTintOpacity="0.2">
+                                                 EnableBackdropBlur="True" BlurMode="BitmapCapture" GlassBlur="20" GlassTint="#FFFFFF" GlassTintOpacity="0.2">
                                 <StackPanel Spacing="8">
-                                    <TextBlock Text="Medium Blur" FontWeight="Bold" FontSize="18"/>
+                                    <TextBlock Text="With Tint" FontWeight="Bold" FontSize="18"/>
                                     <TextBlock Text="GlassBlur=20" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </controls:DaisyGlass>
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- DaisyGlass Control - SkiaSharp Mode (Experimental) -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="DaisyGlass (SkiaSharp Mode - Experimental)" />
+                <TextBlock Text="BlurMode=SkiaSharp uses GPU-accelerated blur via SkiaSharp. Potentially real-time but experimental." Opacity="0.7" FontSize="13"/>
+                <Border CornerRadius="16" Height="280" ClipToBounds="True">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                            <GradientStop Color="#11998e" Offset="0"/>
+                            <GradientStop Color="#38ef7d" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <StackPanel Margin="20">
+                            <TextBlock Text="SKIA BLUR TEST" FontSize="32" FontWeight="Black" Foreground="White" Opacity="0.9"/>
+                            <TextBlock Text="Testing SkiaSharp GPU blur" FontSize="16" Foreground="White" Opacity="0.8" Margin="0,8,0,0"/>
+                            <TextBlock Text="◆ ◆ ◆ ◆ ◆" FontSize="28" Foreground="#FFD700" Margin="0,12,0,0"/>
+                            <TextBlock Text="Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae."
+                                       FontSize="14" Foreground="#2D4A3E" Opacity="0.9" Margin="0,8,0,0" TextWrapping="Wrap" Width="500"/>
+                        </StackPanel>
+                        <TextBlock Text="GPU" FontSize="72" FontWeight="Black" Foreground="#40FFFFFF"
+                                   HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20"/>
+
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="32">
+                            <controls:DaisyGlass Padding="24" CornerRadius="16" Margin="10" Width="220"
+                                                 EnableBackdropBlur="True" BlurMode="SkiaSharp" GlassBlur="15" GlassTint="#FFFFFF" GlassTintOpacity="0.3">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="SkiaSharp" FontWeight="Bold" FontSize="18"/>
+                                    <TextBlock Text="GlassBlur=15" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </controls:DaisyGlass>
+
+                            <controls:DaisyGlass Padding="24" CornerRadius="16" Margin="10" Width="220"
+                                                 EnableBackdropBlur="True" BlurMode="SkiaSharp" GlassBlur="30" GlassTint="#000000" GlassTintOpacity="0.2">
+                                <StackPanel Spacing="8">
+                                    <TextBlock Text="Dark Skia" FontWeight="Bold" FontSize="18" Foreground="White"/>
+                                    <TextBlock Text="GlassBlur=30" TextWrapping="Wrap" Foreground="White"/>
                                 </StackPanel>
                             </controls:DaisyGlass>
                         </WrapPanel>
