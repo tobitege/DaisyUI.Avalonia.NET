@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{DynamicResource DaisyBase300Brush}" Width="400">
+             <controls:DaisyNavbar>
+                 <Grid ColumnDefinitions="Auto, *, Auto">
+                     <TextBlock Text="daisyUI" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                     <TextBlock Grid.Column="1" Text="Item 1   Item 2" VerticalAlignment="Center" />
+                     <Button Grid.Column="2" Content="Button" />
+                 </Grid>
+             </controls:DaisyNavbar>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyNavbar}" TargetType="controls:DaisyNavbar">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="MinHeight" Value="64" />
+        <Setter Property="Padding" Value="16,8" />
+        <Setter Property="CornerRadius" Value="8" /> <!-- Usually rounded in examples or square if full width -->
+        <!-- Shadow -->
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="5" Color="Black" Opacity="0.1" OffsetX="0" OffsetY="2" />
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      VerticalAlignment="Center" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

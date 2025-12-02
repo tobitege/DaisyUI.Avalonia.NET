@@ -1,11 +1,11 @@
-# Build NuGet package for DaisyUI.Avalonia.NET
+# Build NuGet package for Flowery.NET
 param(
     [string]$Configuration = "Release",
     [string]$OutputDir = "./nupkg"
 )
 
 $ErrorActionPreference = "Stop"
-$ProjectPath = "$PSScriptRoot/../DaisyUI.Avalonia.NET/DaisyUI.Avalonia.NET.csproj"
+$ProjectPath = "$PSScriptRoot/../Flowery.NET/Flowery.NET.csproj"
 
 Write-Host "Building NuGet package..." -ForegroundColor Cyan
 dotnet pack $ProjectPath -c $Configuration -o $OutputDir
@@ -17,4 +17,3 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "Build failed" -ForegroundColor Red
     exit 1
 }
-

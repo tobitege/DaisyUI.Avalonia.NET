@@ -131,7 +131,7 @@ def apply_fix(info: dict) -> None:
 
 
 def main():
-    palettes_dir = Path(__file__).parent.parent / "DaisyUI.Avalonia.NET" / "Themes" / "Palettes"
+    palettes_dir = Path(__file__).parent.parent / "Flowery.NET" / "Themes" / "Palettes"
 
     if not palettes_dir.exists():
         print(f"Error: Palettes directory not found: {palettes_dir}")

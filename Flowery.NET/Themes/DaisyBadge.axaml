@@ -1,0 +1,133 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="10">
+                <controls:DaisyBadge Content="Default" />
+                <controls:DaisyBadge Content="Neutral" Variant="Neutral" />
+                <controls:DaisyBadge Content="Primary" Variant="Primary" />
+                <controls:DaisyBadge Content="Outline" Variant="Secondary" IsOutline="True" />
+                <controls:DaisyBadge Content="Small" Variant="Accent" Size="Small" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyBadge}" TargetType="controls:DaisyBadge">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}"
+                        Height="{TemplateBinding Height}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Variants -->
+        <Style Selector="^[Variant=Neutral]">
+            <Setter Property="Background" Value="{DynamicResource DaisyNeutralBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyNeutralContentColor}" />
+        </Style>
+
+        <Style Selector="^[Variant=Primary]">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+
+        <Style Selector="^[Variant=Secondary]">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentColor}" />
+        </Style>
+
+        <Style Selector="^[Variant=Accent]">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentColor}" />
+        </Style>
+
+        <Style Selector="^[Variant=Ghost]">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Info]">
+            <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+        <Style Selector="^[Variant=Success]">
+            <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+        <Style Selector="^[Variant=Warning]">
+            <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+        <Style Selector="^[Variant=Error]">
+            <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+        <!-- Outline -->
+        <Style Selector="^[IsOutline=True]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        </Style>
+
+        <Style Selector="^[IsOutline=True][Variant=Primary]">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[IsOutline=True][Variant=Secondary]">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+         <Style Selector="^[IsOutline=True][Variant=Accent]">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+
+        <!-- Sizes -->
+        <Style Selector="^[Size=Large]">
+            <Setter Property="Height" Value="24" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="12,0" />
+        </Style>
+        <Style Selector="^[Size=Small]">
+            <Setter Property="Height" Value="16" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="CornerRadius" Value="8" />
+             <Setter Property="Padding" Value="6,0" />
+        </Style>
+        <Style Selector="^[Size=ExtraSmall]">
+            <Setter Property="Height" Value="12" />
+            <Setter Property="FontSize" Value="8" />
+            <Setter Property="CornerRadius" Value="6" />
+             <Setter Property="Padding" Value="4,0" />
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

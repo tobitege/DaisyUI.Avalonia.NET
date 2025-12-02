@@ -1,0 +1,153 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET"
+             xmlns:local="clr-namespace:Flowery.NET.Gallery.Examples"
+             x:Class="Flowery.NET.Gallery.Examples.NavigationExamples">
+
+    <ScrollViewer x:Name="MainScrollViewer" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Margin="24,0,24,32">
+
+            <!-- Breadcrumbs -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Breadcrumbs" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <controls:DaisyBreadcrumbs>
+                            <TextBlock Text="Home" />
+                            <TextBlock Text="Documents" />
+                            <TextBlock Text="Add Document" />
+                        </controls:DaisyBreadcrumbs>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Menu -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Menu" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <controls:DaisyMenu Width="200">
+                            <ListBoxItem>Item 1</ListBoxItem>
+                            <ListBoxItem>Parent</ListBoxItem>
+                            <ListBoxItem>Item 3</ListBoxItem>
+                        </controls:DaisyMenu>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Navbar -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Navbar" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <controls:DaisyNavbar>
+                            <Grid ColumnDefinitions="Auto, *, Auto">
+                                <TextBlock Text="daisyUI" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                <controls:DaisyMenu Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <ListBoxItem>Item 1</ListBoxItem>
+                                    <ListBoxItem>Item 2</ListBoxItem>
+                                </controls:DaisyMenu>
+                                <controls:DaisyButton Grid.Column="2" Content="Get Started" Variant="Primary" Size="Small"/>
+                            </Grid>
+                        </controls:DaisyNavbar>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Pagination -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Pagination" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <controls:DaisyPagination>
+                            <ListBoxItem>1</ListBoxItem>
+                            <ListBoxItem IsSelected="True">2</ListBoxItem>
+                            <ListBoxItem>3</ListBoxItem>
+                            <ListBoxItem>4</ListBoxItem>
+                        </controls:DaisyPagination>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Steps -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Steps" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="300">
+                        <controls:DaisySteps SelectedIndex="1">
+                            <TextBlock Text="Register" />
+                            <TextBlock Text="Plan" />
+                            <TextBlock Text="Purchase" />
+                        </controls:DaisySteps>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Tabs -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Tabs" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,20,10">
+                        <TextBlock Text="None" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyTabs Variant="None">
+                            <TabItem Header="Tab 1">
+                                <TextBlock Text="Content 1" Padding="10"/>
+                            </TabItem>
+                            <TabItem Header="Tab 2">
+                                <TextBlock Text="Content 2" Padding="10"/>
+                            </TabItem>
+                        </controls:DaisyTabs>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,20,10">
+                        <TextBlock Text="Bordered" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyTabs Variant="Bordered">
+                            <TabItem Header="Tab 1">
+                                <TextBlock Text="Content 1" Padding="10"/>
+                            </TabItem>
+                            <TabItem Header="Tab 2">
+                                <TextBlock Text="Content 2" Padding="10"/>
+                            </TabItem>
+                        </controls:DaisyTabs>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,20,10">
+                        <TextBlock Text="Lifted" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyTabs Variant="Lifted">
+                            <TabItem Header="Tab 1">
+                                <TextBlock Text="Content 1" Padding="10"/>
+                            </TabItem>
+                            <TabItem Header="Tab 2">
+                                <TextBlock Text="Content 2" Padding="10"/>
+                            </TabItem>
+                        </controls:DaisyTabs>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,20,10">
+                        <TextBlock Text="Boxed" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyTabs Variant="Boxed">
+                            <TabItem Header="Tab 1">
+                                <TextBlock Text="Content 1" Padding="10"/>
+                            </TabItem>
+                            <TabItem Header="Tab 2">
+                                <TextBlock Text="Content 2" Padding="10"/>
+                            </TabItem>
+                        </controls:DaisyTabs>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

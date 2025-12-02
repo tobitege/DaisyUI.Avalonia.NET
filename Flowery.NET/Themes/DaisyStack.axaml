@@ -1,0 +1,36 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="50">
+             <controls:DaisyStack>
+                 <Border Background="Red" Width="100" Height="100" />
+                 <Border Background="Green" Width="100" Height="100" />
+                 <Border Background="Blue" Width="100" Height="100" />
+             </controls:DaisyStack>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Styles for DaisyStack -->
+    <Style Selector="controls|DaisyStack > :is(Control)">
+        <Setter Property="ZIndex" Value="10" />
+        <Setter Property="RenderTransform" Value="none" />
+        <Setter Property="Opacity" Value="1" />
+    </Style>
+
+    <!-- 2nd item -->
+    <Style Selector="controls|DaisyStack > :is(Control):nth-child(2)">
+        <Setter Property="ZIndex" Value="5" />
+        <Setter Property="RenderTransform" Value="translate(4px, 4px) scale(0.95)" />
+        <Setter Property="Opacity" Value="0.8" />
+    </Style>
+
+    <!-- 3rd item -->
+    <Style Selector="controls|DaisyStack > :is(Control):nth-child(3)">
+        <Setter Property="ZIndex" Value="1" />
+        <Setter Property="RenderTransform" Value="translate(8px, 8px) scale(0.9)" />
+        <Setter Property="Opacity" Value="0.6" />
+    </Style>
+
+</Styles>

@@ -1,17 +1,17 @@
 <div align="center">
 
-# 🌼 DaisyUI.Avalonia.NET
+# 🌼 Flowery.NET
 
 **A C# port of the popular [DaisyUI](https://daisyui.com/) component library for [Avalonia UI](https://avaloniaui.net/).**
 
-[![NuGet](https://img.shields.io/nuget/v/DaisyUI.Avalonia.NET?style=flat-square)](https://www.nuget.org/packages/DaisyUI.Avalonia.NET)
-[![License](https://img.shields.io/github/license/tobitege/DaisyUI.Avalonia.NET?style=flat-square)](LICENSE)
+[![NuGet](https://img.shields.io/nuget/v/Flowery.NET?style=flat-square)](https://www.nuget.org/packages/Flowery.NET)
+[![License](https://img.shields.io/github/license/tobitege/Flowery.NET?style=flat-square)](LICENSE)
 [![Avalonia](https://img.shields.io/badge/Avalonia-11.0+-purple?style=flat-square)](https://avaloniaui.net/)
 [![X](https://img.shields.io/badge/X-@tobitege45259-000000?style=flat-square&logo=x)](https://x.com/tobitege45259)
 
 </div>
 
-![DaisyUI.Avalonia.Gallery Screenshot](DaisyUI.Avalonia.Gallery.png)
+![Flowery.NET.Gallery Screenshot](Flowery.NET.Gallery.png)
 
 This library provides native Avalonia controls that mimic the utility-first, semantic class naming of DaisyUI, making it easy to build beautiful, themed UIs in Avalonia. A NuGet package will hopefully be available soon, too.
 
@@ -29,17 +29,17 @@ This library provides native Avalonia controls that mimic the utility-first, sem
 - **Runtime Theme Switching**: Use `DaisyThemeDropdown` to switch themes at runtime.
 - **Variants**: Supports `Primary`, `Secondary`, `Accent`, `Ghost`, etc.
 - **Framework Support**: Library targets `netstandard2.0` for maximum compatibility.
-- **Gallery App**: Includes a full demo application (`DaisyUI.Avalonia.Gallery`) showcasing all controls and features.
+- **Gallery App**: Includes a full demo application (`Flowery.NET.Gallery`) showcasing all controls and features.
 
 ## Installation
 
-1. Add the reference to `DaisyUI.Avalonia.NET` project/dll.
+1. Add the reference to `Flowery.NET` project/dll.
 
 2. Add the theme to your `App.axaml`:
 
 ```xml
 <Application ...
-             xmlns:daisy="clr-namespace:DaisyUI.Avalonia;assembly=DaisyUI.Avalonia.NET">
+             xmlns:daisy="clr-namespace:Flowery;assembly=Flowery.NET">
     <Application.Styles>
         <FluentTheme />
         <daisy:DaisyUITheme />
@@ -176,7 +176,7 @@ When the app's theme changes (e.g., via `DaisyThemeDropdown`), the controller au
 `DaisyThemeManager` is the centralized theme management system:
 
 ```csharp
-using DaisyUI.Avalonia.Controls;
+using Flowery.Controls;
 
 // Apply a theme by name
 DaisyThemeManager.ApplyTheme("Synthwave");
@@ -209,7 +209,7 @@ The library includes helper utilities for parsing DaisyUI CSS theme files and ge
 #### Parse a DaisyUI CSS Theme File
 
 ```csharp
-using DaisyUI.Avalonia.Theming;
+using Flowery.Theming;
 
 // Parse a single CSS file
 var theme = DaisyUiCssParser.ParseFile("path/to/synthwave.css");
@@ -229,7 +229,7 @@ foreach (var color in theme.Colors)
 #### Generate AXAML from Parsed Theme
 
 ```csharp
-using DaisyUI.Avalonia.Theming;
+using Flowery.Theming;
 
 var theme = DaisyUiCssParser.ParseFile("dracula.css");
 
@@ -247,7 +247,7 @@ File.WriteAllText("Themes/Colors.axaml", combinedAxaml);
 #### Runtime Theme Loading
 
 ```csharp
-using DaisyUI.Avalonia.Theming;
+using Flowery.Theming;
 
 // Create a loader instance
 var loader = new DaisyThemeLoader();
@@ -273,7 +273,7 @@ var axaml = DaisyThemeLoader.ExportToAxaml(synthwave);
 #### Color Conversion
 
 ```csharp
-using DaisyUI.Avalonia.Theming;
+using Flowery.Theming;
 
 // Convert OKLCH (used by DaisyUI CSS) to Hex
 var hex = ColorConverter.OklchToHex("65.69% 0.196 275.75");

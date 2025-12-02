@@ -1,0 +1,128 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET"
+             x:Class="Flowery.NET.Gallery.Examples.HomePage">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="0">
+
+            <!-- Hero Section -->
+            <Border Padding="40,60" Margin="0,0,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Color="#667eea" Offset="0"/>
+                        <GradientStop Color="#764ba2" Offset="0.5"/>
+                        <GradientStop Color="#f093fb" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel HorizontalAlignment="Center" Spacing="16">
+                    <TextBlock Text="🌼" FontSize="64" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Flowery.NET" FontSize="42" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Beautiful DaisyUI components for Avalonia UI" FontSize="20" Foreground="White" Opacity="0.9" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="12" Margin="0,16,0,0">
+                        <controls:DaisyButton Content="Browse Components" Variant="Neutral" Size="Large" x:Name="BrowseBtn" Click="BrowseBtn_Click" />
+                        <controls:DaisyButton Content="View on GitHub" ButtonStyle="Outline" Size="Large" x:Name="GitHubBtn" Click="GitHubBtn_Click">
+                            <controls:DaisyButton.Foreground>
+                                <SolidColorBrush Color="White"/>
+                            </controls:DaisyButton.Foreground>
+                        </controls:DaisyButton>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- About Section -->
+            <Border Padding="40,50" Background="{DynamicResource DaisyBase200Brush}">
+                <StackPanel MaxWidth="800" HorizontalAlignment="Center" Spacing="20">
+                    <TextBlock Text="About This Project" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                    <TextBlock TextWrapping="Wrap" FontSize="16" LineHeight="26" TextAlignment="Center" Opacity="0.8" Foreground="{DynamicResource DaisyBaseContentBrush}">
+                        Flowery.NET brings the popular DaisyUI component library to Avalonia UI,
+                        enabling .NET developers to create beautiful, modern desktop and cross-platform applications
+                        with ease. This library provides a comprehensive set of pre-styled components that follow
+                        DaisyUI's design system, complete with theme support and responsive layouts.
+                    </TextBlock>
+                    <WrapPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <controls:DaisyBadge Content="60+ Components" Variant="Primary" Margin="4"/>
+                        <controls:DaisyBadge Content="30+ Themes" Variant="Secondary" Margin="4"/>
+                        <controls:DaisyBadge Content="Cross-Platform" Variant="Accent" Margin="4"/>
+                        <controls:DaisyBadge Content="MIT License" Variant="Info" Margin="4"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Thank You Section -->
+            <Border Padding="40,50">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Color="{DynamicResource DaisyBase100}" Offset="0"/>
+                        <GradientStop Color="{DynamicResource DaisyBase200}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel MaxWidth="900" HorizontalAlignment="Center" Spacing="30">
+                    <StackPanel Spacing="8" HorizontalAlignment="Center">
+                        <TextBlock Text="💖" FontSize="48" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Special Thanks" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                        <TextBlock Text="This project wouldn't be possible without these amazing projects" FontSize="14" Opacity="0.7" HorizontalAlignment="Center" Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                    </StackPanel>
+
+                    <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <!-- DaisyUI Card -->
+                        <controls:DaisyCard Width="380" Margin="10" CornerRadius="16">
+                            <StackPanel Spacing="16">
+                                <Border Height="120" CornerRadius="12" ClipToBounds="True">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                            <GradientStop Color="#1ad1a5" Offset="0"/>
+                                            <GradientStop Color="#14b8a6" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="🌼" FontSize="48"/>
+                                    </StackPanel>
+                                </Border>
+                                <TextBlock Text="DaisyUI" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                                <TextBlock TextWrapping="Wrap" FontSize="14" Opacity="0.8" Foreground="{DynamicResource DaisyBaseContentBrush}">
+                                    The most popular component library for Tailwind CSS. DaisyUI provides
+                                    beautiful, semantic component classes that make building UIs a breeze.
+                                </TextBlock>
+                                <controls:DaisyButton Content="Visit DaisyUI →" Variant="Success" HorizontalAlignment="Left" x:Name="DaisyUIBtn" Click="DaisyUIBtn_Click"/>
+                            </StackPanel>
+                        </controls:DaisyCard>
+
+                        <!-- Avalonia Card -->
+                        <controls:DaisyCard Width="380" Margin="10" CornerRadius="16">
+                            <StackPanel Spacing="16">
+                                <Border Height="120" CornerRadius="12" ClipToBounds="True">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                            <GradientStop Color="#8b5cf6" Offset="0"/>
+                                            <GradientStop Color="#6366f1" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="◈" FontSize="56" Foreground="White" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </Border>
+                                <TextBlock Text="Avalonia UI" FontSize="22" FontWeight="Bold" Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                                <TextBlock TextWrapping="Wrap" FontSize="14" Opacity="0.8" Foreground="{DynamicResource DaisyBaseContentBrush}">
+                                    A cross-platform UI framework for .NET providing a flexible styling system
+                                    and supporting Windows, macOS, Linux, iOS, Android and WebAssembly.
+                                </TextBlock>
+                                <controls:DaisyButton Content="Visit Avalonia →" Variant="Secondary" HorizontalAlignment="Left" x:Name="AvaloniaBtn" Click="AvaloniaBtn_Click"/>
+                            </StackPanel>
+                        </controls:DaisyCard>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Footer -->
+            <Border Padding="30" Background="{DynamicResource DaisyBase300Brush}">
+                <StackPanel HorizontalAlignment="Center" Spacing="8">
+                    <TextBlock Text="Made with 💜 using Avalonia UI" FontSize="14" Opacity="0.7" HorizontalAlignment="Center" Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                    <TextBlock Text="© 2025 tobitege - MIT License" FontSize="12" Opacity="0.5" HorizontalAlignment="Center" Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

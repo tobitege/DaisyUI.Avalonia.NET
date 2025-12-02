@@ -1,0 +1,308 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="40">
+                <!-- Horizontal Timeline -->
+                <TextBlock Text="Horizontal Timeline" FontWeight="Bold" />
+                <controls:DaisyTimeline Orientation="Horizontal">
+                    <controls:DaisyTimelineItem StartContent="1984" EndContent="First Mac" HasEndLine="True" IsActive="True">
+                        <controls:DaisyTimelineItem.MiddleContent>
+                            <PathIcon Width="16" Height="16" Foreground="{DynamicResource DaisyPrimaryBrush}"
+                                      Data="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
+                        </controls:DaisyTimelineItem.MiddleContent>
+                    </controls:DaisyTimelineItem>
+                    <controls:DaisyTimelineItem StartContent="1998" EndContent="iMac" HasStartLine="True" HasEndLine="True" IsActive="True">
+                        <controls:DaisyTimelineItem.MiddleContent>
+                            <PathIcon Width="16" Height="16" Foreground="{DynamicResource DaisyPrimaryBrush}"
+                                      Data="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
+                        </controls:DaisyTimelineItem.MiddleContent>
+                    </controls:DaisyTimelineItem>
+                    <controls:DaisyTimelineItem StartContent="2007" EndContent="iPhone" HasStartLine="True">
+                        <controls:DaisyTimelineItem.MiddleContent>
+                            <PathIcon Width="16" Height="16"
+                                      Data="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
+                        </controls:DaisyTimelineItem.MiddleContent>
+                    </controls:DaisyTimelineItem>
+                </controls:DaisyTimeline>
+
+                <!-- Vertical Timeline -->
+                <TextBlock Text="Vertical Timeline" FontWeight="Bold" />
+                <controls:DaisyTimeline Orientation="Vertical">
+                    <controls:DaisyTimelineItem StartContent="1984" EndContent="First Mac" IsBoxed="True" HasEndLine="True" IsActive="True">
+                        <controls:DaisyTimelineItem.MiddleContent>
+                            <PathIcon Width="16" Height="16" Foreground="{DynamicResource DaisyPrimaryBrush}"
+                                      Data="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
+                        </controls:DaisyTimelineItem.MiddleContent>
+                    </controls:DaisyTimelineItem>
+                    <controls:DaisyTimelineItem StartContent="1998" EndContent="iMac" IsBoxed="True" HasStartLine="True" HasEndLine="True">
+                        <controls:DaisyTimelineItem.MiddleContent>
+                            <PathIcon Width="16" Height="16"
+                                      Data="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
+                        </controls:DaisyTimelineItem.MiddleContent>
+                    </controls:DaisyTimelineItem>
+                    <controls:DaisyTimelineItem StartContent="2007" EndContent="iPhone" IsBoxed="True" HasStartLine="True">
+                        <controls:DaisyTimelineItem.MiddleContent>
+                            <PathIcon Width="16" Height="16"
+                                      Data="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
+                        </controls:DaisyTimelineItem.MiddleContent>
+                    </controls:DaisyTimelineItem>
+                </controls:DaisyTimeline>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- DaisyTimeline Container -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTimeline}" TargetType="controls:DaisyTimeline">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Default: Horizontal -->
+        <Setter Property="ItemsPanel">
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </Setter>
+
+        <!-- Vertical layout -->
+        <Style Selector="^[Orientation=Vertical]">
+            <Setter Property="ItemsPanel">
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter>
+        </Style>
+    </ControlTheme>
+
+    <!-- DaisyTimelineItem -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTimelineItem}" TargetType="controls:DaisyTimelineItem">
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <!-- Horizontal Layout (default) -->
+                <Grid Name="HorizontalRoot" RowDefinitions="Auto, Auto, Auto" MinWidth="80">
+                    <!-- Start content (top for horizontal) -->
+                    <ContentPresenter Name="StartPresenter"
+                                      Grid.Row="0"
+                                      Content="{TemplateBinding StartContent}"
+                                      HorizontalAlignment="Center"
+                                      Margin="8,0,8,4" />
+
+                    <!-- Middle row: Line + Icon + Line -->
+                    <Grid Grid.Row="1" ColumnDefinitions="*, Auto, *" Height="24">
+                        <!-- Start Line -->
+                        <Border Name="StartLine"
+                                Grid.Column="0"
+                                Height="4"
+                                Background="{DynamicResource DaisyBase300Brush}"
+                                VerticalAlignment="Center"
+                                IsVisible="{TemplateBinding HasStartLine}" />
+
+                        <!-- Middle Icon -->
+                        <ContentPresenter Name="MiddlePresenter"
+                                          Grid.Column="1"
+                                          Content="{TemplateBinding MiddleContent}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          Margin="4,0" />
+
+                        <!-- End Line -->
+                        <Border Name="EndLine"
+                                Grid.Column="2"
+                                Height="4"
+                                Background="{DynamicResource DaisyBase300Brush}"
+                                VerticalAlignment="Center"
+                                IsVisible="{TemplateBinding HasEndLine}" />
+                    </Grid>
+
+                    <!-- End content (bottom for horizontal) -->
+                    <ContentPresenter Name="EndPresenter"
+                                      Grid.Row="2"
+                                      Content="{TemplateBinding EndContent}"
+                                      HorizontalAlignment="Center"
+                                      Margin="8,4,8,0" />
+
+                    <!-- End Box (when IsBoxed) -->
+                    <Border Name="EndBox"
+                            Grid.Row="2"
+                            Background="{DynamicResource DaisyBase200Brush}"
+                            BorderBrush="{DynamicResource DaisyBase300Brush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="12,8"
+                            HorizontalAlignment="Center"
+                            Margin="8,4,8,0"
+                            IsVisible="False">
+                        <ContentPresenter Content="{TemplateBinding EndContent}" />
+                    </Border>
+
+                    <!-- Start Box (when IsBoxed and Position=Start) -->
+                    <Border Name="StartBox"
+                            Grid.Row="0"
+                            Background="{DynamicResource DaisyBase200Brush}"
+                            BorderBrush="{DynamicResource DaisyBase300Brush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="12,8"
+                            HorizontalAlignment="Center"
+                            Margin="8,0,8,4"
+                            IsVisible="False">
+                        <ContentPresenter Content="{TemplateBinding StartContent}" />
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Active state - colored lines -->
+        <Style Selector="^[IsActive=True] /template/ Border#StartLine">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[IsActive=True] /template/ Border#EndLine">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+        <!-- Boxed style for End content -->
+        <Style Selector="^[IsBoxed=True] /template/ ContentPresenter#EndPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^[IsBoxed=True] /template/ Border#EndBox">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <!-- Boxed style for Start content when Position=Start -->
+        <Style Selector="^[IsBoxed=True][Position=Start] /template/ ContentPresenter#StartPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^[IsBoxed=True][Position=Start] /template/ Border#StartBox">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <!-- Vertical orientation - different template -->
+        <Style Selector="^[Orientation=Vertical]">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid Name="VerticalRoot" ColumnDefinitions="Auto, 24, Auto" RowDefinitions="12, *, Auto, *, 12" MinHeight="56">
+                        <!-- Start Line (from top edge to icon) -->
+                        <Border Name="StartLine"
+                                Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
+                                Width="4"
+                                Background="{DynamicResource DaisyBase300Brush}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Stretch"
+                                IsVisible="{TemplateBinding HasStartLine}" />
+
+                        <!-- End Line (from icon to bottom edge) -->
+                        <Border Name="EndLine"
+                                Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"
+                                Width="4"
+                                Background="{DynamicResource DaisyBase300Brush}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Stretch"
+                                IsVisible="{TemplateBinding HasEndLine}" />
+
+                        <!-- Start content (left for vertical) - spans content rows -->
+                        <ContentPresenter Name="StartPresenter"
+                                          Grid.Column="0" Grid.Row="1" Grid.RowSpan="3"
+                                          Content="{TemplateBinding StartContent}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Margin="0,0,8,0" />
+
+                        <!-- Start Box - spans content rows -->
+                        <Border Name="StartBox"
+                                Grid.Column="0" Grid.Row="1" Grid.RowSpan="3"
+                                Background="{DynamicResource DaisyBase200Brush}"
+                                BorderBrush="{DynamicResource DaisyBase300Brush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="12,8"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Margin="0,0,8,0"
+                                IsVisible="False">
+                            <ContentPresenter Content="{TemplateBinding StartContent}" />
+                        </Border>
+
+                        <!-- Middle Icon -->
+                        <ContentPresenter Name="MiddlePresenter"
+                                          Grid.Column="1" Grid.Row="2"
+                                          Content="{TemplateBinding MiddleContent}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center" />
+
+                        <!-- End content (right for vertical) - spans content rows -->
+                        <ContentPresenter Name="EndPresenter"
+                                          Grid.Column="2" Grid.Row="1" Grid.RowSpan="3"
+                                          Content="{TemplateBinding EndContent}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          Margin="8,0,0,0" />
+
+                        <!-- End Box - spans content rows -->
+                        <Border Name="EndBox"
+                                Grid.Column="2" Grid.Row="1" Grid.RowSpan="3"
+                                Background="{DynamicResource DaisyBase200Brush}"
+                                BorderBrush="{DynamicResource DaisyBase300Brush}"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="12,8"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Margin="8,0,0,0"
+                                IsVisible="False">
+                            <ContentPresenter Content="{TemplateBinding EndContent}" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <!-- Vertical + Active lines -->
+        <Style Selector="^[Orientation=Vertical][IsActive=True] /template/ Border#StartLine">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[Orientation=Vertical][IsActive=True] /template/ Border#EndLine">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+        <!-- Vertical + Boxed for End -->
+        <Style Selector="^[Orientation=Vertical][IsBoxed=True] /template/ ContentPresenter#EndPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^[Orientation=Vertical][IsBoxed=True] /template/ Border#EndBox">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <!-- Vertical + Boxed for Start when Position=Start -->
+        <Style Selector="^[Orientation=Vertical][IsBoxed=True][Position=Start] /template/ ContentPresenter#StartPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^[Orientation=Vertical][IsBoxed=True][Position=Start] /template/ Border#StartBox">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <!-- Compact mode - hide start content -->
+        <Style Selector="^[IsCompact=True] /template/ ContentPresenter#StartPresenter">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^[IsCompact=True] /template/ Border#StartBox">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <!-- Snap Icon - align to start -->
+        <Style Selector="^[SnapIcon=True] /template/ ContentPresenter#MiddlePresenter">
+            <Setter Property="VerticalAlignment" Value="Top" />
+        </Style>
+        <Style Selector="^[Orientation=Vertical][SnapIcon=True] /template/ ContentPresenter#MiddlePresenter">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+    </ControlTheme>
+
+</ResourceDictionary>

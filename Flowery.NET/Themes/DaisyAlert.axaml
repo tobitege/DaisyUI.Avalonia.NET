@@ -1,0 +1,70 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Width="400">
+            <StackPanel Spacing="10">
+                <controls:DaisyAlert Content="This is an info alert" Variant="Info" />
+                <controls:DaisyAlert Content="This is a success alert" Variant="Success" />
+                <controls:DaisyAlert Content="This is a warning alert" Variant="Warning" />
+                <controls:DaisyAlert Content="This is an error alert" Variant="Error" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyAlert}" TargetType="controls:DaisyAlert">
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid ColumnDefinitions="Auto, *">
+                        <ContentPresenter Grid.Column="0"
+                                          Content="{TemplateBinding Icon}"
+                                          Margin="0,0,12,0"
+                                          VerticalAlignment="Center"
+                                          IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                        <ContentPresenter Grid.Column="1"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Variants -->
+        <Style Selector="^[Variant=Info]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^[Variant=Success]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisySuccessBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Warning]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyWarningBrush}" />
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Error]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyErrorBrush}" />
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

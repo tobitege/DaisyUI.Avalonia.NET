@@ -1,0 +1,53 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="0" Width="400" Height="300">
+             <controls:DaisyModal IsOpen="True">
+                 <StackPanel Spacing="10">
+                     <TextBlock Text="Hello!" FontSize="20" FontWeight="Bold"/>
+                     <TextBlock Text="Press ESC key or click the button below to close" />
+                     <Button Content="Close" />
+                 </StackPanel>
+             </controls:DaisyModal>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyModal}" TargetType="controls:DaisyModal">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Padding" Value="24" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="ZIndex" Value="999" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid IsVisible="{TemplateBinding IsOpen}">
+                    <!-- Backdrop -->
+                    <Rectangle Fill="Black" Opacity="0.4" />
+
+                    <!-- Modal Box -->
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            MaxWidth="500"
+                            BoxShadow="0 10 25 0 #80000000"> <!-- DaisyUI shadow -->
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Transitions -->
+        <Style Selector="^[IsOpen=True]">
+             <!-- Add transition logic here if desired.
+                  Simple visibility toggle is default. -->
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

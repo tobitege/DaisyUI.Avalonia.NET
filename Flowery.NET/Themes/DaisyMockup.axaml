@@ -1,0 +1,145 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+             <StackPanel Spacing="20">
+                 <controls:DaisyMockup Variant="Code">
+                     <TextBlock Text="console.log('Hello world');" Foreground="White" />
+                 </controls:DaisyMockup>
+                 <controls:DaisyMockup Variant="Window">
+                     <TextBlock Text="Window Content" />
+                 </controls:DaisyMockup>
+                 <controls:DaisyMockup Variant="Browser" Url="https://daisyui.com" Width="400">
+                     <TextBlock Text="Hello!" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                 </controls:DaisyMockup>
+             </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyMockup}" TargetType="controls:DaisyMockup">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DaisyBase300Brush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="Padding" Value="20" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <!-- Outer border: Background matches BorderBrush so corners show border color -->
+                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Background="{TemplateBinding BorderBrush}">
+                    <!-- Inner container with actual background, slightly smaller corner radius -->
+                    <Border Name="InnerContainer"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="15"
+                            ClipToBounds="True">
+                        <Grid RowDefinitions="Auto, *">
+                            <!-- Header with dots -->
+                            <Border Name="Header" Height="32">
+                                <StackPanel Orientation="Horizontal" Spacing="6" Margin="16,0,0,0" VerticalAlignment="Center">
+                                    <Border Width="12" Height="12" CornerRadius="6" Background="#FF5F56" />
+                                    <Border Width="12" Height="12" CornerRadius="6" Background="#FFBD2E" />
+                                    <Border Width="12" Height="12" CornerRadius="6" Background="#27C93F" />
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Content -->
+                            <Border Grid.Row="1"
+                                    Name="ContentBorder"
+                                    Padding="{TemplateBinding Padding}">
+                                 <ContentPresenter Content="{TemplateBinding Content}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Code Variant -->
+        <Style Selector="^[Variant=Code]">
+             <Setter Property="Background" Value="#2a303c" />
+             <Setter Property="BorderThickness" Value="0" />
+             <Setter Property="Foreground" Value="White" />
+             <Setter Property="Padding" Value="24" />
+        </Style>
+
+        <!-- Window Variant: Outer=border color, Header=Base200, Content=Base100 -->
+        <Style Selector="^[Variant=Window]">
+             <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+             <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="^[Variant=Window] /template/ Border#ContentBorder">
+             <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+             <Setter Property="Padding" Value="20" />
+        </Style>
+
+        <!-- Browser Variant -->
+        <Style Selector="^[Variant=Browser]">
+             <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+             <Setter Property="Padding" Value="0" />
+             <Setter Property="Template">
+                 <ControlTemplate>
+                     <!-- Outer border: Background matches BorderBrush so corners show border color -->
+                     <Border BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             CornerRadius="{TemplateBinding CornerRadius}"
+                             Background="{TemplateBinding BorderBrush}">
+                         <!-- Inner container with actual background, slightly smaller corner radius -->
+                         <Border Name="InnerContainer"
+                                 Background="{TemplateBinding Background}"
+                                 CornerRadius="15"
+                                 ClipToBounds="True">
+                             <Grid RowDefinitions="Auto, *">
+                                 <!-- Browser Toolbar -->
+                                 <Border Name="BrowserToolbar"
+                                         Height="52"
+                                         Padding="90,0,16,0">
+                                     <Panel>
+                                         <StackPanel Orientation="Horizontal"
+                                                     Spacing="6"
+                                                     VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left"
+                                                     Margin="-74,0,0,0">
+                                             <Border Width="12" Height="12" CornerRadius="6" Background="#FF5F56" />
+                                             <Border Width="12" Height="12" CornerRadius="6" Background="#FFBD2E" />
+                                             <Border Width="12" Height="12" CornerRadius="6" Background="#27C93F" />
+                                         </StackPanel>
+
+                                         <!-- URL Address Bar -->
+                                         <Border Background="{DynamicResource DaisyBase200Brush}"
+                                                 CornerRadius="8"
+                                                 Padding="16,8"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                 MinWidth="200">
+                                             <TextBlock Text="{TemplateBinding Url}"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="13"
+                                                        Opacity="0.8" />
+                                         </Border>
+                                     </Panel>
+                                 </Border>
+
+                                 <!-- Content area with top border line -->
+                                 <Border Grid.Row="1"
+                                         Name="ContentBorder"
+                                         BorderBrush="{DynamicResource DaisyBase300Brush}"
+                                         BorderThickness="0,1,0,0"
+                                         Padding="{TemplateBinding Padding}"
+                                         ClipToBounds="True">
+                                     <ContentPresenter Content="{TemplateBinding Content}" />
+                                 </Border>
+                             </Grid>
+                         </Border>
+                     </Border>
+                 </ControlTemplate>
+             </Setter>
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

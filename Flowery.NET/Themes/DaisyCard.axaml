@@ -1,0 +1,67 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{DynamicResource DaisyBase200Brush}">
+            <StackPanel Spacing="20">
+                <controls:DaisyCard>
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Card Title" FontWeight="Bold" FontSize="18" />
+                        <TextBlock Text="If a dog chews shoes whose shoes does he choose?" />
+                    </StackPanel>
+                </controls:DaisyCard>
+
+                <controls:DaisyCard Variant="Compact">
+                     <StackPanel Spacing="5">
+                        <TextBlock Text="Compact Card" FontWeight="Bold" />
+                        <TextBlock Text="Less padding here." />
+                    </StackPanel>
+                </controls:DaisyCard>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyCard}" TargetType="controls:DaisyCard">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Padding" Value="32" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="10" Color="Black" Opacity="0.1" OffsetX="0" OffsetY="2" />
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Variants -->
+        <Style Selector="^[Variant=Compact]">
+            <Setter Property="Padding" Value="16" />
+        </Style>
+
+        <Style Selector="^[Variant=Side]">
+             <!-- Side variant usually means image on side, but for a general ContentControl
+                  we can just remove some default styling or expect layout inside.
+                  DaisyUI .card-side is flex-row. We can't force content layout easily
+                  without defining Content/Image slots.
+                  For now, Side just implies standard padding but maybe different radius?
+                  DaisyUI .card-side aligns items flex-row.
+                  Since we inherit ContentControl, the user provides the StackPanel/Grid.
+                  We won't enforce layout here. -->
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

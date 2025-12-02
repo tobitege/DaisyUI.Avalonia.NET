@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET"
+             xmlns:local="clr-namespace:Flowery.NET.Gallery.Examples"
+             x:Class="Flowery.NET.Gallery.Examples.CardsExamples">
+
+    <ScrollViewer x:Name="MainScrollViewer" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Margin="24,0,24,32">
+
+            <!-- Card -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Card" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="300">
+                        <TextBlock Text="Basic Card" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <controls:DaisyCard>
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="Card Title" FontWeight="Bold" FontSize="18"/>
+                                <TextBlock Text="This is a simple card component." TextWrapping="Wrap"/>
+                                <controls:DaisyButton Content="Action" Variant="Primary" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </controls:DaisyCard>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="300">
+                        <TextBlock Text="Card with Image" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <controls:DaisyCard>
+                            <StackPanel Spacing="10">
+                                <Border Height="120" CornerRadius="8" ClipToBounds="True">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                                            <GradientStop Color="#667eea" Offset="0"/>
+                                            <GradientStop Color="#764ba2" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <PathIcon Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                                              Foreground="White" Opacity="0.3"
+                                              Width="80" Height="80"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <TextBlock Text="Featured Card" FontWeight="Bold" FontSize="18"/>
+                                <TextBlock Text="A card with a gradient header and icon." TextWrapping="Wrap"/>
+                                <controls:DaisyButton Content="Learn More" Variant="Secondary" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </controls:DaisyCard>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

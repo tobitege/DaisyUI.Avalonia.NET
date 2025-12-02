@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Convert DaisyUI CSS theme files to Avalonia AXAML ResourceDictionary format.
-Uses the existing Daisy* key naming convention from DaisyUI.Avalonia.NET.
+Uses the existing Daisy* key naming convention from Flowery.NET.
 """
 
 import os
@@ -263,7 +263,7 @@ def convert_theme_file(css_path: Path, output_dir: Path):
 def main():
     script_dir = Path(__file__).parent
     themes_dir = script_dir / 'EmbeddedThemes'
-    output_dir = script_dir.parent / 'DaisyUI.Avalonia.NET' / 'Themes' / 'Palettes'
+    output_dir = script_dir.parent / 'Flowery.NET' / 'Themes' / 'Palettes'
 
     css_files = sorted(themes_dir.glob('*.css')) if themes_dir.exists() else []
 

@@ -1,0 +1,178 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Width="400">
+             <StackPanel Spacing="4">
+                 <TextBlock Text="Basic dividers:" FontWeight="Bold" />
+                 <controls:DaisyDivider />
+                 <controls:DaisyDivider>OR</controls:DaisyDivider>
+
+                 <TextBlock Text="Colors:" FontWeight="Bold" Margin="0,12,0,0" />
+                 <controls:DaisyDivider Color="Primary">Primary</controls:DaisyDivider>
+                 <controls:DaisyDivider Color="Secondary">Secondary</controls:DaisyDivider>
+                 <controls:DaisyDivider Color="Accent">Accent</controls:DaisyDivider>
+
+                 <TextBlock Text="Placements:" FontWeight="Bold" Margin="0,12,0,0" />
+                 <controls:DaisyDivider Placement="Start">Start</controls:DaisyDivider>
+                 <controls:DaisyDivider Placement="End">End</controls:DaisyDivider>
+
+                 <TextBlock Text="Horizontal:" FontWeight="Bold" Margin="0,12,0,0" />
+                 <StackPanel Orientation="Horizontal" Height="60" HorizontalAlignment="Center" Spacing="16">
+                     <TextBlock Text="Left" VerticalAlignment="Center" />
+                     <controls:DaisyDivider Horizontal="True">OR</controls:DaisyDivider>
+                     <TextBlock Text="Right" VerticalAlignment="Center" />
+                 </StackPanel>
+             </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyDivider}" TargetType="controls:DaisyDivider">
+        <Setter Property="Background" Value="{DynamicResource DaisyBaseContentBrush}" /> <!-- Line color - uses content color for auto-contrast -->
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="20" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Vertical layout (default): horizontal line -->
+                    <Grid x:Name="PART_VerticalGrid" ColumnDefinitions="*, Auto, *">
+                        <Border x:Name="PART_StartLine" Height="2" Background="{TemplateBinding Background}" Opacity="0.1" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <ContentPresenter x:Name="PART_Content" Grid.Column="1"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center" />
+                        <Border x:Name="PART_EndLine" Grid.Column="2" Height="2" Background="{TemplateBinding Background}" Opacity="0.1" VerticalAlignment="Center" Margin="8,0,0,0" />
+                    </Grid>
+
+                    <!-- Horizontal layout: vertical line -->
+                    <Grid x:Name="PART_HorizontalGrid" RowDefinitions="*, Auto, *" IsVisible="False">
+                        <Border x:Name="PART_StartLineH" Width="2" Background="{TemplateBinding Background}" Opacity="0.1" HorizontalAlignment="Center" Margin="0,0,0,8" />
+                        <ContentPresenter x:Name="PART_ContentH" Grid.Row="1"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center" />
+                        <Border x:Name="PART_EndLineH" Grid.Row="2" Width="2" Background="{TemplateBinding Background}" Opacity="0.1" HorizontalAlignment="Center" Margin="0,8,0,0" />
+                    </Grid>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Horizontal mode: show vertical line layout, hide horizontal line layout -->
+        <Style Selector="^[Horizontal=True]">
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="MinWidth" Value="20" />
+        </Style>
+        <Style Selector="^[Horizontal=True] /template/ Grid#PART_VerticalGrid">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^[Horizontal=True] /template/ Grid#PART_HorizontalGrid">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+
+        <!-- Color variants (full opacity per official DaisyUI CSS) -->
+        <!-- Neutral -->
+        <Style Selector="^[Color=Neutral] /template/ Border#PART_StartLine, ^[Color=Neutral] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyNeutralBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Neutral] /template/ Border#PART_EndLine, ^[Color=Neutral] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyNeutralBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Primary -->
+        <Style Selector="^[Color=Primary] /template/ Border#PART_StartLine, ^[Color=Primary] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Primary] /template/ Border#PART_EndLine, ^[Color=Primary] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Secondary -->
+        <Style Selector="^[Color=Secondary] /template/ Border#PART_StartLine, ^[Color=Secondary] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Secondary] /template/ Border#PART_EndLine, ^[Color=Secondary] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Accent -->
+        <Style Selector="^[Color=Accent] /template/ Border#PART_StartLine, ^[Color=Accent] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Accent] /template/ Border#PART_EndLine, ^[Color=Accent] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Success -->
+        <Style Selector="^[Color=Success] /template/ Border#PART_StartLine, ^[Color=Success] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Success] /template/ Border#PART_EndLine, ^[Color=Success] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Warning -->
+        <Style Selector="^[Color=Warning] /template/ Border#PART_StartLine, ^[Color=Warning] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Warning] /template/ Border#PART_EndLine, ^[Color=Warning] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Info -->
+        <Style Selector="^[Color=Info] /template/ Border#PART_StartLine, ^[Color=Info] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Info] /template/ Border#PART_EndLine, ^[Color=Info] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Error -->
+        <Style Selector="^[Color=Error] /template/ Border#PART_StartLine, ^[Color=Error] /template/ Border#PART_StartLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+        <Style Selector="^[Color=Error] /template/ Border#PART_EndLine, ^[Color=Error] /template/ Border#PART_EndLineH">
+            <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <!-- Placement variants (per official DaisyUI CSS: divider-start hides before, divider-end hides after) -->
+        <Style Selector="^[Placement=Start] /template/ Border#PART_StartLine, ^[Placement=Start] /template/ Border#PART_StartLineH">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+        <Style Selector="^[Placement=End] /template/ Border#PART_EndLine, ^[Placement=End] /template/ Border#PART_EndLineH">
+            <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+        <!-- Empty state: remove margins when no content for seamless line -->
+        <Style Selector="^:empty /template/ Border">
+             <Setter Property="Margin" Value="0" />
+        </Style>
+        <Style Selector="^:empty /template/ ContentPresenter">
+             <Setter Property="IsVisible" Value="False" />
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

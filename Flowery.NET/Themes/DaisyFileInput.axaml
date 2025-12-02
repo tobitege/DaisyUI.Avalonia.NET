@@ -1,0 +1,110 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+             <StackPanel Spacing="10">
+                 <controls:DaisyFileInput />
+                 <controls:DaisyFileInput Variant="Primary" FileName="image.png" />
+                 <controls:DaisyFileInput Variant="Accent" Size="Large" />
+             </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyFileInput}" TargetType="controls:DaisyFileInput">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinHeight" Value="48" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <!-- Border frame with visible lighter color -->
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Opacity="0.3" />
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                    <Grid ColumnDefinitions="Auto, *">
+                        <Border x:Name="ButtonPart"
+                                Grid.Column="0"
+                                Background="{DynamicResource DaisyBase300Brush}"
+                                CornerRadius="7,0,0,7"
+                                Padding="16,0"
+                                VerticalAlignment="Stretch">
+                            <TextBlock Text="Choose File"
+                                       VerticalAlignment="Center"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource DaisyBaseContentBrush}"/>
+                        </Border>
+
+                        <TextBlock x:Name="FileNamePart"
+                                   Grid.Column="1"
+                                   Text="{TemplateBinding FileName}"
+                                   VerticalAlignment="Center"
+                                   Margin="16,0"
+                                   Opacity="0.7"/>
+                        </Grid>
+                    </Border>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Variants (Applies to the 'Choose File' button part) -->
+        <Style Selector="^[Variant=Primary] /template/ Border#ButtonPart">
+             <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Primary] /template/ Border#ButtonPart > TextBlock">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Primary]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+         <Style Selector="^[Variant=Secondary] /template/ Border#ButtonPart">
+             <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Secondary] /template/ Border#ButtonPart > TextBlock">
+             <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Secondary]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Accent] /template/ Border#ButtonPart">
+             <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Accent] /template/ Border#ButtonPart > TextBlock">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentColor}" />
+        </Style>
+         <Style Selector="^[Variant=Accent]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+
+        <!-- Sizes -->
+        <Style Selector="^[Size=Large]">
+            <Setter Property="MinHeight" Value="64" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        <Style Selector="^[Size=Small]">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style Selector="^[Size=ExtraSmall]">
+            <Setter Property="MinHeight" Value="24" />
+            <Setter Property="FontSize" Value="10" />
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

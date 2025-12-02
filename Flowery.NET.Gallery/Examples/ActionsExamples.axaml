@@ -1,0 +1,315 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET"
+             xmlns:local="clr-namespace:Flowery.NET.Gallery.Examples"
+             x:Class="Flowery.NET.Gallery.Examples.ActionsExamples">
+
+    <ScrollViewer x:Name="MainScrollViewer" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Margin="24,0,24,32">
+
+            <!-- Button -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Button" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Colors" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel>
+                            <controls:DaisyButton Content="Default" Margin="4"/>
+                            <controls:DaisyButton Variant="Neutral" Content="Neutral" Margin="4"/>
+                            <controls:DaisyButton Variant="Primary" Content="Primary" Margin="4"/>
+                            <controls:DaisyButton Variant="Secondary" Content="Secondary" Margin="4"/>
+                            <controls:DaisyButton Variant="Accent" Content="Accent" Margin="4"/>
+                            <controls:DaisyButton Variant="Info" Content="Info" Margin="4"/>
+                            <controls:DaisyButton Variant="Success" Content="Success" Margin="4"/>
+                            <controls:DaisyButton Variant="Warning" Content="Warning" Margin="4"/>
+                            <controls:DaisyButton Variant="Error" Content="Error" Margin="4"/>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Styles" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel>
+                            <controls:DaisyButton Variant="Ghost" Content="Ghost" Margin="4"/>
+                            <controls:DaisyButton Variant="Link" Content="Link" Margin="4"/>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Outline" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel>
+                            <controls:DaisyButton ButtonStyle="Outline" Content="Default" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Outline" Variant="Primary" Content="Primary" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Outline" Variant="Secondary" Content="Secondary" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Outline" Variant="Accent" Content="Accent" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Outline" Variant="Info" Content="Info" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Outline" Variant="Success" Content="Success" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Outline" Variant="Warning" Content="Warning" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Outline" Variant="Error" Content="Error" Margin="4"/>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Dash" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel>
+                            <controls:DaisyButton ButtonStyle="Dash" Content="Default" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Dash" Variant="Primary" Content="Primary" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Dash" Variant="Secondary" Content="Secondary" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Dash" Variant="Accent" Content="Accent" Margin="4"/>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Soft" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel>
+                            <controls:DaisyButton ButtonStyle="Soft" Content="Default" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Soft" Variant="Primary" Content="Primary" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Soft" Variant="Secondary" Content="Secondary" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Soft" Variant="Accent" Content="Accent" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Soft" Variant="Info" Content="Info" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Soft" Variant="Success" Content="Success" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Soft" Variant="Warning" Content="Warning" Margin="4"/>
+                            <controls:DaisyButton ButtonStyle="Soft" Variant="Error" Content="Error" Margin="4"/>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Sizes" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel VerticalAlignment="Center">
+                            <controls:DaisyButton Size="ExtraSmall" Content="Extra Small" Margin="4"/>
+                            <controls:DaisyButton Size="Small" Content="Small" Margin="4"/>
+                            <controls:DaisyButton Size="Medium" Content="Medium" Margin="4"/>
+                            <controls:DaisyButton Size="Large" Content="Large" Margin="4"/>
+                            <controls:DaisyButton Size="ExtraLarge" Content="Extra Large" Margin="4"/>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Shapes" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel VerticalAlignment="Center">
+                            <controls:DaisyButton Shape="Wide" Content="Wide" Margin="4"/>
+                            <controls:DaisyButton Shape="Square" Variant="Primary" Margin="4">
+                                <PathIcon Data="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" Width="20" Height="20" />
+                            </controls:DaisyButton>
+                            <controls:DaisyButton Shape="Circle" Variant="Secondary" Margin="4">
+                                <PathIcon Data="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" Width="20" Height="20" />
+                            </controls:DaisyButton>
+                            <controls:DaisyButton Shape="Square" Size="Small" Variant="Accent" Margin="4">
+                                <PathIcon Data="M6 18L18 6M6 6l12 12" Width="16" Height="16" />
+                            </controls:DaisyButton>
+                            <controls:DaisyButton Shape="Circle" Size="Large" Variant="Info" Margin="4">
+                                <PathIcon Data="M12 4.5v15m7.5-7.5h-15" Width="24" Height="24" />
+                            </controls:DaisyButton>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="300">
+                        <TextBlock Text="Block (Full Width)" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <controls:DaisyButton Shape="Block" Variant="Primary" Content="Block Button" Margin="4"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="States" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <WrapPanel>
+                            <controls:DaisyButton IsActive="True" Content="Active" Margin="4"/>
+                            <controls:DaisyButton IsActive="True" Variant="Primary" Content="Active Primary" Margin="4"/>
+                            <controls:DaisyButton IsEnabled="False" Content="Disabled" Margin="4"/>
+                            <controls:DaisyButton IsEnabled="False" Variant="Primary" Content="Disabled Primary" Margin="4"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Dropdown -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Dropdown" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Basic Select" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <controls:DaisySelect PlaceholderText="Select option">
+                            <ComboBoxItem>Action 1</ComboBoxItem>
+                            <ComboBoxItem>Action 2</ComboBoxItem>
+                            <ComboBoxItem>Action 3</ComboBoxItem>
+                        </controls:DaisySelect>
+                    </StackPanel>
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Theme Dropdown" FontWeight="SemiBold" FontSize="14" Opacity="0.8"/>
+                        <controls:DaisyThemeDropdown Width="180"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- FAB / Speed Dial -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="FAB / Speed Dial" />
+                <TextBlock Text="Click the FAB buttons below to expand" FontSize="12" Opacity="0.7"/>
+                <WrapPanel Orientation="Horizontal">
+                    <Border Background="{DynamicResource DaisyBase200Brush}" CornerRadius="8" Padding="8" Margin="0,0,8,8" Width="85" Height="220">
+                        <Grid>
+                            <TextBlock Text="Vertical" FontSize="10" Opacity="0.6" VerticalAlignment="Top"/>
+                            <controls:DaisyFab TriggerContent="+" TriggerVariant="Primary" Size="Medium">
+                                <controls:DaisyButton Shape="Circle" Size="Medium" Content="A" />
+                                <controls:DaisyButton Shape="Circle" Size="Medium" Content="B" />
+                                <controls:DaisyButton Shape="Circle" Size="Medium" Content="C" />
+                            </controls:DaisyFab>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{DynamicResource DaisyBase200Brush}" CornerRadius="8" Padding="8" Margin="0,0,8,8" Width="85" Height="220">
+                        <Grid>
+                            <TextBlock Text="Icons" FontSize="10" Opacity="0.6" VerticalAlignment="Top"/>
+                            <controls:DaisyFab TriggerVariant="Secondary" Size="Medium">
+                                <controls:DaisyFab.TriggerContent>
+                                    <PathIcon Data="{StaticResource DaisyIconPlus}" Width="16" Height="16" />
+                                </controls:DaisyFab.TriggerContent>
+                                <controls:DaisyButton Shape="Circle" Size="Medium">
+                                    <PathIcon Data="{StaticResource DaisyIconHome}" Width="16" Height="16" />
+                                </controls:DaisyButton>
+                                <controls:DaisyButton Shape="Circle" Size="Medium">
+                                    <PathIcon Data="{StaticResource DaisyIconSettings}" Width="16" Height="16" />
+                                </controls:DaisyButton>
+                                <controls:DaisyButton Shape="Circle" Size="Medium">
+                                    <PathIcon Data="{StaticResource DaisyIconUser}" Width="16" Height="16" />
+                                </controls:DaisyButton>
+                            </controls:DaisyFab>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{DynamicResource DaisyBase200Brush}" CornerRadius="8" Padding="8" Margin="0,0,8,8" Width="85" Height="220">
+                        <Grid>
+                            <TextBlock Text="Flower" FontSize="10" Opacity="0.6" VerticalAlignment="Top"/>
+                            <controls:DaisyFab TriggerContent="F" TriggerVariant="Success" Layout="Flower" Size="Medium">
+                                <controls:DaisyButton Shape="Circle" Size="Medium" Content="A" />
+                                <controls:DaisyButton Shape="Circle" Size="Medium" Content="B" />
+                            </controls:DaisyFab>
+                        </Grid>
+                    </Border>
+
+                    <Border Background="{DynamicResource DaisyBase200Brush}" CornerRadius="8" Padding="8" Margin="0,0,8,8" Width="85" Height="220">
+                        <Grid>
+                            <TextBlock Text="Variants" FontSize="10" Opacity="0.6" VerticalAlignment="Top"/>
+                            <controls:DaisyFab TriggerContent="★" TriggerVariant="Warning" Size="Medium">
+                                <controls:DaisyButton Shape="Circle" Size="Medium" Content="1" Variant="Info" />
+                                <controls:DaisyButton Shape="Circle" Size="Medium" Content="2" Variant="Success" />
+                            </controls:DaisyFab>
+                        </Grid>
+                    </Border>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Modal -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Modal" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <controls:DaisyButton Content="Open Modal" x:Name="OpenModalBtn" Variant="Primary" Click="OpenModalBtn_Click"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Swap -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Swap" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="12" Margin="0,0,40,20" Width="300">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock Text="Text swap" FontSize="12" Opacity="0.7" VerticalAlignment="Center" Width="140"/>
+                            <controls:DaisySwap OffContent="OFF" OnContent="ON" FontSize="18" FontWeight="Bold" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock Text="Volume icons" FontSize="12" Opacity="0.7" VerticalAlignment="Center" Width="140"/>
+                            <controls:DaisySwap>
+                                <controls:DaisySwap.OffContent>
+                                    <PathIcon Width="32" Height="32" Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              Data="M3,9H7L12,4V20L7,15H3V9M16.59,12L14,9.41L15.41,8L18,10.59L20.59,8L22,9.41L19.41,12L22,14.59L20.59,16L18,13.41L15.41,16L14,14.59L16.59,12Z" />
+                                </controls:DaisySwap.OffContent>
+                                <controls:DaisySwap.OnContent>
+                                    <PathIcon Width="32" Height="32" Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              Data="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+                                </controls:DaisySwap.OnContent>
+                            </controls:DaisySwap>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock Text="Rotate effect (sun/moon)" FontSize="12" Opacity="0.7" VerticalAlignment="Center" Width="140"/>
+                            <controls:DaisySwap TransitionEffect="Rotate">
+                                <controls:DaisySwap.OffContent>
+                                    <PathIcon Width="28" Height="28" Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              Data="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+                                </controls:DaisySwap.OffContent>
+                                <controls:DaisySwap.OnContent>
+                                    <PathIcon Width="28" Height="28" Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              Data="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+                                </controls:DaisySwap.OnContent>
+                            </controls:DaisySwap>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock Text="Hamburger button" FontSize="12" Opacity="0.7" VerticalAlignment="Center" Width="140"/>
+                            <controls:DaisySwap TransitionEffect="Rotate">
+                                <controls:DaisySwap.OffContent>
+                                    <PathIcon Width="24" Height="24" Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              Data="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" />
+                                </controls:DaisySwap.OffContent>
+                                <controls:DaisySwap.OnContent>
+                                    <PathIcon Width="24" Height="24" Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              Data="M400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+                                </controls:DaisySwap.OnContent>
+                            </controls:DaisySwap>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock Text="Flip effect (emoji)" FontSize="12" Opacity="0.7" VerticalAlignment="Center" Width="140"/>
+                            <controls:DaisySwap TransitionEffect="Flip" OffContent="😇" OnContent="😈" FontSize="48" />
+                        </StackPanel>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Theme Controller -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Theme Controller" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="350">
+                        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto" RowSpacing="10" ColumnSpacing="10">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Toggle" FontSize="12" Opacity="0.7"/>
+                                <controls:DaisyThemeController Mode="Toggle" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" Grid.Column="1">
+                                <TextBlock Text="Checkbox" FontSize="12" Opacity="0.7"/>
+                                <controls:DaisyThemeController Mode="Checkbox" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" Grid.Row="1">
+                                <TextBlock Text="Swap" FontSize="12" Opacity="0.7"/>
+                                <controls:DaisyThemeController Mode="Swap" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" Grid.Row="1" Grid.Column="1">
+                                <TextBlock Text="Toggle with Icons" FontSize="12" Opacity="0.7"/>
+                                <controls:DaisyThemeController Mode="ToggleWithIcons" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" Grid.Row="2" Grid.ColumnSpan="2">
+                                <TextBlock Text="Toggle with Text" FontSize="12" Opacity="0.7"/>
+                                <controls:DaisyThemeController Mode="ToggleWithText"
+                                    UncheckedTheme="Light" CheckedTheme="Synthwave"
+                                    UncheckedLabel="Light" CheckedLabel="Synthwave" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

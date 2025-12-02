@@ -1,0 +1,82 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Width="400" Height="300" Background="{DynamicResource DaisyBase100Brush}">
+             <controls:DaisyCarousel>
+                 <Border Background="#F87171" CornerRadius="8">
+                    <TextBlock Text="Slide 1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+                 </Border>
+                 <Border Background="#34D399" CornerRadius="8">
+                    <TextBlock Text="Slide 2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+                 </Border>
+                 <Border Background="#60A5FA" CornerRadius="8">
+                    <TextBlock Text="Slide 3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+                 </Border>
+             </controls:DaisyCarousel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyCarousel}" TargetType="controls:DaisyCarousel">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="PageTransition">
+            <PageSlide Duration="0:0:0.3" Orientation="Horizontal" />
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid>
+                        <!-- Carousel Content -->
+                        <Border ClipToBounds="True" CornerRadius="8">
+                            <TransitioningContentControl Name="PART_TransitioningContentControl"
+                                                         Content="{TemplateBinding SelectedItem}"
+                                                         ContentTemplate="{TemplateBinding ItemTemplate}"
+                                                         PageTransition="{TemplateBinding PageTransition}"
+                                                         Margin="{TemplateBinding Padding}"
+                                                         HorizontalAlignment="Stretch"
+                                                         VerticalAlignment="Stretch" />
+                        </Border>
+
+                        <!-- Navigation Buttons -->
+                        <Button Name="PART_PreviousButton"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource DaisyNeutralBrush}"
+                                Foreground="{DynamicResource DaisyNeutralContentBrush}"
+                                Padding="12,8"
+                                Margin="8"
+                                CornerRadius="24"
+                                Opacity="0.8">
+                            <Path Data="M15,19 L8,12 L15,5"
+                                  Stroke="{DynamicResource DaisyNeutralContentBrush}"
+                                  StrokeThickness="2.5"
+                                  StrokeLineCap="Round"
+                                  Width="10" Height="16"
+                                  Stretch="Uniform"/>
+                        </Button>
+                        <Button Name="PART_NextButton"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource DaisyNeutralBrush}"
+                                Foreground="{DynamicResource DaisyNeutralContentBrush}"
+                                Padding="12,8"
+                                Margin="8"
+                                CornerRadius="24"
+                                Opacity="0.8">
+                            <Path Data="M9,5 L16,12 L9,19"
+                                  Stroke="{DynamicResource DaisyNeutralContentBrush}"
+                                  StrokeThickness="2.5"
+                                  StrokeLineCap="Round"
+                                  Width="10" Height="16"
+                                  Stretch="Uniform"/>
+                        </Button>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

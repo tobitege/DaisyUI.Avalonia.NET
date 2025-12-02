@@ -1,0 +1,563 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="10">
+                <controls:DaisyButton Content="Default" />
+                <controls:DaisyButton Variant="Primary" Content="Primary" />
+                <controls:DaisyButton Variant="Secondary" Content="Secondary" />
+                <controls:DaisyButton Variant="Accent" Content="Accent" />
+                <controls:DaisyButton Variant="Ghost" Content="Ghost" />
+                <controls:DaisyButton Variant="Link" Content="Link" />
+                <controls:DaisyButton ButtonStyle="Outline" Variant="Primary" Content="Outline Primary" />
+                <controls:DaisyButton ButtonStyle="Dash" Variant="Primary" Content="Dash Primary" />
+                <controls:DaisyButton ButtonStyle="Soft" Variant="Primary" Content="Soft Primary" />
+                <controls:DaisyButton Size="ExtraSmall" Content="Extra Small" />
+                <controls:DaisyButton Size="Small" Content="Small" />
+                <controls:DaisyButton Size="Medium" Content="Medium" />
+                <controls:DaisyButton Size="Large" Content="Large" />
+                <controls:DaisyButton Size="ExtraLarge" Content="Extra Large" />
+                <controls:DaisyButton Shape="Wide" Content="Wide" />
+                <controls:DaisyButton Shape="Square" Content="■" />
+                <controls:DaisyButton Shape="Circle" Content="●" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyButton}" TargetType="controls:DaisyButton">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinHeight" Value="48" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <Border x:Name="PART_Background"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
+                    <Rectangle x:Name="PART_DashBorder"
+                               IsVisible="False"
+                               Stroke="{TemplateBinding BorderBrush}"
+                               StrokeThickness="1"
+                               StrokeDashArray="4,2"
+                               RadiusX="8" RadiusY="8" />
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Padding="{TemplateBinding Padding}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      RecognizesAccessKey="True" />
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Default Transitions -->
+        <Style Selector="^ /template/ Border#PART_Background">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.2" />
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^ /template/ Panel">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <!-- Active / Pressed Scale Effect -->
+        <Style Selector="^:pressed /template/ Panel">
+             <Setter Property="RenderTransform" Value="scale(0.95)" />
+        </Style>
+
+        <!-- Variants -->
+
+        <!-- Neutral / Default -->
+        <Style Selector="^:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+        </Style>
+
+        <!-- Primary -->
+        <Style Selector="^[Variant=Primary]">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+
+        <Style Selector="^[IsOutline=True][Variant=Secondary]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="^[IsOutline=True][Variant=Secondary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[IsOutline=True][Variant=Secondary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentColor}" />
+        </Style>
+
+        <Style Selector="^[IsOutline=True][Variant=Accent]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="^[IsOutline=True][Variant=Accent]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[IsOutline=True][Variant=Accent]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Primary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryFocusBrush}" />
+        </Style>
+
+        <!-- Secondary -->
+        <Style Selector="^[Variant=Secondary]">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Secondary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryFocusBrush}" />
+        </Style>
+
+        <!-- Accent -->
+        <Style Selector="^[Variant=Accent]">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Accent]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentFocusBrush}" />
+        </Style>
+
+        <!-- Info -->
+        <Style Selector="^[Variant=Info]">
+            <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Info]:pointerover /template/ Border#PART_Background">
+             <!-- A slight darken for hover/focus simulation if explicit focus color not defined,
+                  but usually DaisyUI just darkens the color. For now reusing brush or we need opacity.
+                  DaisyUI actually has specific hover colors. I'll stick to the base color for now or add opacity. -->
+            <Setter Property="Opacity" Value="0.8" />
+        </Style>
+
+        <!-- Success -->
+        <Style Selector="^[Variant=Success]">
+            <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Success]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Opacity" Value="0.8" />
+        </Style>
+
+        <!-- Warning -->
+        <Style Selector="^[Variant=Warning]">
+            <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Warning]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Opacity" Value="0.8" />
+        </Style>
+
+        <!-- Error -->
+        <Style Selector="^[Variant=Error]">
+            <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[Variant=Error]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Opacity" Value="0.8" />
+        </Style>
+
+        <!-- Ghost -->
+        <Style Selector="^[Variant=Ghost]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^[Variant=Ghost]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        </Style>
+
+        <!-- Link -->
+        <Style Selector="^[Variant=Link]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="^[Variant=Link]:pointerover">
+            <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+        </Style>
+
+        <!-- Outline Support (Overrides previous backgrounds) -->
+        <Style Selector="^[IsOutline=True][Variant=Primary]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="^[IsOutline=True][Variant=Primary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[IsOutline=True][Variant=Primary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+
+        <!-- Sizes -->
+        <Style Selector="^[Size=ExtraSmall]">
+            <Setter Property="MinHeight" Value="24" />
+            <Setter Property="Padding" Value="8,0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+        <Style Selector="^[Size=Small]">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+        <!-- Medium is the default, no override needed -->
+        <Style Selector="^[Size=Large]">
+            <Setter Property="MinHeight" Value="64" />
+            <Setter Property="Padding" Value="24,0" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+        <Style Selector="^[Size=ExtraLarge]">
+            <Setter Property="MinHeight" Value="80" />
+            <Setter Property="Padding" Value="32,0" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="CornerRadius" Value="12" />
+        </Style>
+
+        <!-- Shape Modifiers -->
+        <Style Selector="^[Shape=Wide]">
+            <Setter Property="Padding" Value="64,0" />
+        </Style>
+        <Style Selector="^[Shape=Block]">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+        <Style Selector="^[Shape=Square]">
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+        <Style Selector="^[Shape=Square][Size=ExtraSmall]">
+            <Setter Property="Width" Value="24" />
+        </Style>
+        <Style Selector="^[Shape=Square][Size=Small]">
+            <Setter Property="Width" Value="32" />
+        </Style>
+        <Style Selector="^[Shape=Square][Size=Large]">
+            <Setter Property="Width" Value="64" />
+        </Style>
+        <Style Selector="^[Shape=Square][Size=ExtraLarge]">
+            <Setter Property="Width" Value="80" />
+        </Style>
+        <Style Selector="^[Shape=Circle]">
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="CornerRadius" Value="9999" />
+        </Style>
+        <Style Selector="^[Shape=Circle][Size=ExtraSmall]">
+            <Setter Property="Width" Value="24" />
+        </Style>
+        <Style Selector="^[Shape=Circle][Size=Small]">
+            <Setter Property="Width" Value="32" />
+        </Style>
+        <Style Selector="^[Shape=Circle][Size=Large]">
+            <Setter Property="Width" Value="64" />
+        </Style>
+        <Style Selector="^[Shape=Circle][Size=ExtraLarge]">
+            <Setter Property="Width" Value="80" />
+        </Style>
+
+        <!-- ButtonStyle: Outline (new property-based approach) -->
+        <Style Selector="^[ButtonStyle=Outline]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Primary]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Primary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Primary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Secondary]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Secondary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Secondary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Accent]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Accent]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Accent]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Info]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Info]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Info]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Success]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySuccessBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Success]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Success]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Warning]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyWarningBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Warning]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Warning]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Error]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyErrorBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Error]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Outline][Variant=Error]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+
+        <!-- ButtonStyle: Dash (dashed border) -->
+        <Style Selector="^[ButtonStyle=Dash]">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Stroke" Value="{DynamicResource DaisyBaseContentBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Primary]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Primary] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="Stroke" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Primary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Primary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Secondary]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Secondary] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="Stroke" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Secondary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Secondary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Accent]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Accent] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="Stroke" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Accent]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Accent]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Info]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Info] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="Stroke" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Info]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Info]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Success]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Success] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="Stroke" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Success]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Success]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Warning]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Warning] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="Stroke" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Warning]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Warning]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Error]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Error] /template/ Rectangle#PART_DashBorder">
+            <Setter Property="Stroke" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Error]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Dash][Variant=Error]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+
+        <!-- ButtonStyle: Soft (lighter background with colored text) -->
+        <Style Selector="^[ButtonStyle=Soft]">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Primary]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Primary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+            <Setter Property="Opacity" Value="0.2" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Primary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Secondary]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Secondary]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+            <Setter Property="Opacity" Value="0.2" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Secondary]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Accent]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Accent]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+            <Setter Property="Opacity" Value="0.2" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Accent]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Info]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Info]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+            <Setter Property="Opacity" Value="0.2" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Info]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Success]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Success]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+            <Setter Property="Opacity" Value="0.2" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Success]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Warning]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Warning]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+            <Setter Property="Opacity" Value="0.2" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Warning]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Error]">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Error]:pointerover /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+            <Setter Property="Opacity" Value="0.2" />
+        </Style>
+        <Style Selector="^[ButtonStyle=Soft][Variant=Error]:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentColor}" />
+        </Style>
+
+        <!-- IsActive state -->
+        <Style Selector="^[IsActive=True] /template/ Panel">
+            <Setter Property="RenderTransform" Value="scale(0.95)" />
+        </Style>
+
+        <!-- Disabled state -->
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Cursor" Value="Arrow" />
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

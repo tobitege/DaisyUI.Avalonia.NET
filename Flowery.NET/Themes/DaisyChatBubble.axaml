@@ -1,0 +1,153 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+             <StackPanel Spacing="10">
+                 <controls:DaisyChatBubble Header="User 1" Content="Hello!" Footer="Delivered" />
+                 <controls:DaisyChatBubble IsEnd="True" Header="User 2" Content="Hi there!" Variant="Primary" Footer="Seen" />
+                 <controls:DaisyChatBubble Header="User 1" Content="Info message" Variant="Info" />
+                 <controls:DaisyChatBubble IsEnd="True" Content="Success!" Variant="Success" />
+             </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyChatBubble}" TargetType="controls:DaisyChatBubble">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Padding" Value="16,8" />
+        <Setter Property="CornerRadius" Value="16,16,16,0" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+                    <!-- Image (Avatar) -->
+                    <Border x:Name="PART_ImageContainer"
+                            Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"
+                            Width="40" Height="40"
+                            CornerRadius="20"
+                            ClipToBounds="True"
+                            Margin="0,0,12,0"
+                            VerticalAlignment="Bottom"
+                            IsVisible="{TemplateBinding Image, Converter={x:Static ObjectConverters.IsNotNull}}">
+                        <Image Source="{TemplateBinding Image}" Stretch="UniformToFill" />
+                    </Border>
+
+                    <!-- Header -->
+                    <TextBlock x:Name="PART_Header"
+                               Grid.Row="0" Grid.Column="1"
+                               Text="{TemplateBinding Header}"
+                               FontSize="11"
+                               Opacity="0.7"
+                               Margin="0,0,0,4"
+                               HorizontalAlignment="Left"
+                               IsVisible="{TemplateBinding Header, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                    <!-- Bubble -->
+                    <Border x:Name="PART_Bubble"
+                            Grid.Row="1" Grid.Column="1"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            MinHeight="32"
+                            MinWidth="40"
+                            MaxWidth="400">
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                    </Border>
+
+                    <!-- Footer -->
+                    <TextBlock x:Name="PART_Footer"
+                               Grid.Row="2" Grid.Column="1"
+                               Text="{TemplateBinding Footer}"
+                               FontSize="11"
+                               Opacity="0.5"
+                               Margin="0,4,0,0"
+                               HorizontalAlignment="Left"
+                               IsVisible="{TemplateBinding Footer, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- End Variant (Right aligned) -->
+        <Style Selector="^[IsEnd=True]">
+             <Setter Property="HorizontalAlignment" Value="Right" />
+             <Setter Property="CornerRadius" Value="16,16,0,16" />
+        </Style>
+        <Style Selector="^[IsEnd=True] /template/ Border#PART_ImageContainer">
+             <Setter Property="Grid.Column" Value="1" />
+             <Setter Property="Margin" Value="12,0,0,0" />
+        </Style>
+        <Style Selector="^[IsEnd=True] /template/ TextBlock#PART_Header">
+             <Setter Property="Grid.Column" Value="0" />
+             <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style Selector="^[IsEnd=True] /template/ Border#PART_Bubble">
+             <Setter Property="Grid.Column" Value="0" />
+        </Style>
+        <Style Selector="^[IsEnd=True] /template/ TextBlock#PART_Footer">
+             <Setter Property="Grid.Column" Value="0" />
+             <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <!-- Color Variants -->
+        <Style Selector="^[Variant=Neutral] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisyNeutralBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Neutral]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyNeutralContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Primary] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Primary]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Secondary] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Secondary]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Accent] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Accent]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyAccentContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Info] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Info]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyInfoContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Success] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Success]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisySuccessContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Warning] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Warning]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyWarningContentBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Error] /template/ Border#PART_Bubble">
+             <Setter Property="Background" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Error]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyErrorContentBrush}" />
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

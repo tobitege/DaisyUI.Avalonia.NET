@@ -1,0 +1,79 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+             <StackPanel Spacing="10">
+                 <controls:DaisyRating Value="2.5" />
+                 <controls:DaisyRating Value="4" Size="Large" />
+             </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyRating}" TargetType="controls:DaisyRating">
+        <Setter Property="Background" Value="{DynamicResource DaisyWarningBrush}" /> <!-- Filled Star color -->
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBase300Brush}" /> <!-- Empty Star color -->
+        <Setter Property="Height" Value="24" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid Background="Transparent">
+                    <!-- Background Layer (Empty Stars) -->
+                    <ItemsControl Name="PART_BackgroundStars"
+                                  ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Maximum, Converter={x:Static controls:RatingConverters.RangeConverter}}"
+                                  IsHitTestVisible="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="4" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                 <Path Data="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                                       Fill="{Binding $parent[controls:DaisyRating].Foreground}"
+                                       Width="{Binding $parent[controls:DaisyRating].Height}"
+                                       Height="{Binding $parent[controls:DaisyRating].Height}"
+                                       Stretch="Uniform" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Foreground Layer (Filled Stars) -->
+                    <!-- We wrap this in a Border (PART_ForegroundStars) whose Width we manipulate in code -->
+                    <Border Name="PART_ForegroundStars"
+                            HorizontalAlignment="Left"
+                            ClipToBounds="True">
+                         <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Maximum, Converter={x:Static controls:RatingConverters.RangeConverter}}"
+                                       IsHitTestVisible="False">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="4" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                     <Path Data="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                                           Fill="{Binding $parent[controls:DaisyRating].Background}"
+                                           Width="{Binding $parent[controls:DaisyRating].Height}"
+                                           Height="{Binding $parent[controls:DaisyRating].Height}"
+                                           Stretch="Uniform" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[Size=Large]">
+             <Setter Property="Height" Value="32" />
+        </Style>
+        <Style Selector="^[Size=Small]">
+             <Setter Property="Height" Value="16" />
+        </Style>
+        <Style Selector="^[Size=ExtraSmall]">
+             <Setter Property="Height" Value="12" />
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

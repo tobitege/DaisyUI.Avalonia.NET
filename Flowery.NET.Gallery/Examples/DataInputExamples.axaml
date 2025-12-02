@@ -1,0 +1,152 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET"
+             xmlns:local="clr-namespace:Flowery.NET.Gallery.Examples"
+             x:Class="Flowery.NET.Gallery.Examples.DataInputExamples">
+
+    <ScrollViewer x:Name="MainScrollViewer" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Margin="24,0,24,32">
+
+            <!-- Checkbox -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Checkbox" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <controls:DaisyCheckBox Content="Default" />
+                        <controls:DaisyCheckBox Content="Primary" Variant="Primary" IsChecked="True"/>
+                        <controls:DaisyCheckBox Content="Secondary" Variant="Secondary" IsChecked="True"/>
+                        <controls:DaisyCheckBox Content="Accent" Variant="Accent" IsChecked="True"/>
+                        <controls:DaisyCheckBox Content="Success" Variant="Success" IsChecked="True"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- File Input -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="File Input" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="300">
+                        <controls:DaisyFileInput />
+                        <controls:DaisyFileInput Variant="Primary" FileName="photo.jpg" />
+                        <controls:DaisyFileInput Variant="Accent" Size="Small" />
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Input -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Input" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                        <controls:DaisyInput Watermark="Default (Bordered)" Margin="0,4"/>
+                        <controls:DaisyInput Variant="Ghost" Watermark="Ghost" Margin="0,4"/>
+                        <controls:DaisyInput Variant="Primary" Watermark="Primary" Margin="0,4"/>
+                        <controls:DaisyInput Variant="Error" Watermark="Error" Margin="0,4"/>
+                        <controls:DaisyInput Size="Small" Watermark="Small Input" Margin="0,4"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Radio -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Radio" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <controls:DaisyRadio Content="Default" GroupName="G1" />
+                        <controls:DaisyRadio Content="Primary" Variant="Primary" GroupName="G1" IsChecked="True"/>
+                        <controls:DaisyRadio Content="Secondary" Variant="Secondary" GroupName="G1"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Range -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Range" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                        <controls:DaisyRange Value="20" Maximum="100"/>
+                        <controls:DaisyRange Value="40" Maximum="100" Variant="Primary"/>
+                        <controls:DaisyRange Value="60" Maximum="100" Variant="Secondary"/>
+                        <controls:DaisyRange Value="80" Maximum="100" Variant="Accent" Size="ExtraSmall"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Rating -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Rating" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <controls:DaisyRating Value="2" Maximum="5" ToolTip.Tip="Interactive Rating" />
+                        <controls:DaisyRating Value="3.5" Size="Large" ToolTip.Tip="Partial Fill (3.5)" />
+                        <controls:DaisyRating Value="1" Size="ExtraSmall" IsReadOnly="True" ToolTip.Tip="Read Only" />
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Select -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Select" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <controls:DaisySelect PlaceholderText="Pick a pizza" SelectedIndex="0">
+                            <ComboBoxItem>Pepperoni</ComboBoxItem>
+                            <ComboBoxItem>Margherita</ComboBoxItem>
+                            <ComboBoxItem>Hawaiian</ComboBoxItem>
+                        </controls:DaisySelect>
+                        <controls:DaisySelect Variant="Primary" PlaceholderText="Primary">
+                            <ComboBoxItem>Option 1</ComboBoxItem>
+                            <ComboBoxItem>Option 2</ComboBoxItem>
+                        </controls:DaisySelect>
+                        <controls:DaisySelect Variant="Ghost" PlaceholderText="Ghost">
+                            <ComboBoxItem>Option 1</ComboBoxItem>
+                            <ComboBoxItem>Option 2</ComboBoxItem>
+                        </controls:DaisySelect>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- TextArea -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="TextArea" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                        <controls:DaisyTextArea Watermark="Bio" Height="80"/>
+                        <controls:DaisyTextArea Variant="Primary" Watermark="Primary" Height="80"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Toggle -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Toggle" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <controls:DaisyToggle Content="Default" />
+                        <controls:DaisyToggle Content="Primary" Variant="Primary" IsChecked="True"/>
+                        <controls:DaisyToggle Content="Secondary" Variant="Secondary" IsChecked="True"/>
+                        <controls:DaisyToggle Content="Large" Size="Large" Variant="Accent" IsChecked="True"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

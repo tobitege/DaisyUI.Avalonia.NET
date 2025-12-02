@@ -1,0 +1,61 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Width="400" Height="250">
+             <controls:DaisyDiff>
+                 <controls:DaisyDiff.Image1>
+                     <Border Background="Red">
+                         <TextBlock Text="BEFORE" Foreground="White" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                     </Border>
+                 </controls:DaisyDiff.Image1>
+                 <controls:DaisyDiff.Image2>
+                     <Border Background="Blue">
+                         <TextBlock Text="AFTER" Foreground="White" FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                     </Border>
+                 </controls:DaisyDiff.Image2>
+             </controls:DaisyDiff>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyDiff}" TargetType="controls:DaisyDiff">
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid Name="PART_Root" ClipToBounds="True">
+                    <!-- Base Image (Image 2 - Full width, underneath) -->
+                    <ContentPresenter Content="{TemplateBinding Image2}" />
+
+                    <!-- Top Image (Image 1 - Clipped by container width) -->
+                    <Border Name="PART_TopImageContainer" HorizontalAlignment="Left" ClipToBounds="True">
+                        <ContentPresenter Name="PART_Image1Presenter" Content="{TemplateBinding Image1}" />
+                    </Border>
+
+                    <!-- Draggable Grip Handle -->
+                    <Canvas>
+                        <Border Name="PART_Grip"
+                                Canvas.Top="0"
+                                Width="32"
+                                Margin="-16,0,0,0"
+                                Cursor="SizeWestEast"
+                                Background="Transparent">
+                            <Grid>
+                                <!-- Vertical line -->
+                                <Border HorizontalAlignment="Center" Width="3" Background="White"
+                                        CornerRadius="1" />
+                                <!-- Circle handle -->
+                                <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Width="32" Height="32" CornerRadius="16"
+                                        Background="White" BorderBrush="#CCC" BorderThickness="1">
+                                    <TextBlock Text="⟷" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               FontSize="14" Foreground="#666"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </Canvas>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+</ResourceDictionary>

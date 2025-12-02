@@ -17,11 +17,10 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Build
-        run: dotnet build DaisyUI.Avalonia.NET/DaisyUI.Avalonia.NET.csproj -c Release
+        run: dotnet build Flowery.NET/Flowery.NET.csproj -c Release
 
       - name: Pack
-        run: dotnet pack DaisyUI.Avalonia.NET/DaisyUI.Avalonia.NET.csproj -c Release -o ./nupkg --no-build
+        run: dotnet pack Flowery.NET/Flowery.NET.csproj -c Release -o ./nupkg --no-build
 
       - name: Push to NuGet.org
         run: dotnet nuget push ./nupkg/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
-

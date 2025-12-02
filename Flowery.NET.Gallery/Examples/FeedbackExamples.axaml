@@ -1,0 +1,131 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET"
+             xmlns:local="clr-namespace:Flowery.NET.Gallery.Examples"
+             x:Class="Flowery.NET.Gallery.Examples.FeedbackExamples">
+
+    <ScrollViewer x:Name="MainScrollViewer" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="24" Margin="24,0,24,32">
+
+            <!-- Alert -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Alert" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="400">
+                        <controls:DaisyAlert Content="Info: New software update available." Variant="Info" Margin="0,4"/>
+                        <controls:DaisyAlert Content="Success: Your purchase has been confirmed!" Variant="Success" Margin="0,4"/>
+                        <controls:DaisyAlert Content="Warning: Invalid email address." Variant="Warning" Margin="0,4"/>
+                        <controls:DaisyAlert Content="Error: Something went wrong." Variant="Error" Margin="0,4"/>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Loading -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Loading" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <StackPanel Orientation="Horizontal" Spacing="20">
+                            <controls:DaisyLoading Variant="Spinner" />
+                            <controls:DaisyLoading Variant="Dots" Width="40" />
+                            <controls:DaisyLoading Variant="Ring" Size="Large" Foreground="{DynamicResource DaisyPrimaryBrush}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Progress (Linear) -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Progress (Linear)" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <controls:DaisyProgress Value="40" />
+                        <controls:DaisyProgress Value="70" Variant="Primary" />
+                        <controls:DaisyProgress Value="100" Variant="Accent" Size="Small" />
+                        <controls:DaisyProgress IsIndeterminate="True" Variant="Secondary" />
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Progress (Radial) -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Radial Progress" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <controls:DaisyRadialProgress Value="25" />
+                            <controls:DaisyRadialProgress Value="50" Variant="Primary" Thickness="3" />
+                            <controls:DaisyRadialProgress Value="75" Variant="Secondary" Size="Large" />
+                        </StackPanel>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Skeleton -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Skeleton" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <controls:DaisySkeleton Width="200" Height="20" />
+                        <controls:DaisySkeleton Width="150" Height="20" />
+                        <controls:DaisySkeleton Width="50" Height="50" CornerRadius="25" />
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Toast -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Toast" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <Border Background="{DynamicResource DaisyBase200Brush}" Width="300" Height="250" ClipToBounds="True" CornerRadius="8">
+                            <Grid>
+                                <TextBlock Text="Toast Demo (auto-cycling)" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.5"/>
+                                <controls:DaisyToast x:Name="DemoToast" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
+            <!-- Tooltip -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader Title="Tooltip" />
+                <WrapPanel Orientation="Horizontal">
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <Button Content="Hover me (Default)" ToolTip.Tip="I am a tooltip" />
+                        <Button Content="Hover me (Primary)">
+                            <ToolTip.Tip>
+                                <ToolTip Classes="primary" Content="Primary Tooltip" />
+                            </ToolTip.Tip>
+                        </Button>
+                        <Button Content="Hover me (Secondary)">
+                            <ToolTip.Tip>
+                                <ToolTip Classes="secondary" Content="Secondary Tooltip" />
+                            </ToolTip.Tip>
+                        </Button>
+                        <Button Content="Hover me (Accent)">
+                            <ToolTip.Tip>
+                                <ToolTip Classes="accent" Content="Accent Tooltip" />
+                            </ToolTip.Tip>
+                        </Button>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

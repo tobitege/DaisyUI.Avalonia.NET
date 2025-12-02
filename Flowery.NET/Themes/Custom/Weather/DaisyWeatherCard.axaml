@@ -1,0 +1,96 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:weather="clr-namespace:Flowery.Controls.Custom.Weather;assembly=Flowery.NET"
+                    xmlns:models="clr-namespace:Flowery.Controls.Custom.Weather.Models;assembly=Flowery.NET"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{DynamicResource DaisyBase300Brush}" Width="500">
+            <weather:DaisyWeatherCard
+                Temperature="8"
+                FeelsLike="5"
+                Condition="PartlyCloudy"
+                Sunrise="07:33"
+                Sunset="17:20"
+                UvIndex="0" UvMax="1"
+                WindSpeed="9" WindMax="13"
+                Humidity="78" HumidityMax="86"
+                ShowForecast="False" />
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type weather:DaisyWeatherCard}" TargetType="weather:DaisyWeatherCard">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="10" Color="Black" Opacity="0.1" OffsetX="0" OffsetY="2" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Padding="{TemplateBinding Padding}">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto">
+                        <!-- Loading Overlay -->
+                        <Border Grid.RowSpan="4"
+                                Background="{DynamicResource DaisyBase100Brush}"
+                                Opacity="0.9"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                IsVisible="{TemplateBinding IsLoading}"
+                                ZIndex="100">
+                            <controls:DaisyLoading HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+
+                        <!-- Error Message -->
+                        <controls:DaisyAlert Grid.Row="0" Grid.RowSpan="4"
+                                             Variant="Error"
+                                             IsVisible="{Binding ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                             ZIndex="99">
+                            <TextBlock Text="{TemplateBinding ErrorMessage}" TextWrapping="Wrap" />
+                        </controls:DaisyAlert>
+
+                        <!-- Current Weather Section -->
+                        <weather:DaisyWeatherCurrent Grid.Row="0"
+                                                     Temperature="{TemplateBinding Temperature}"
+                                                     FeelsLike="{TemplateBinding FeelsLike}"
+                                                     Condition="{TemplateBinding Condition}"
+                                                     Date="{TemplateBinding Date}"
+                                                     Sunrise="{TemplateBinding Sunrise}"
+                                                     Sunset="{TemplateBinding Sunset}"
+                                                     TemperatureUnit="{TemplateBinding TemperatureUnit}"
+                                                     ShowSunTimes="{TemplateBinding ShowSunTimes}"
+                                                     IsVisible="{TemplateBinding ShowCurrent}" />
+
+                        <!-- Divider -->
+                        <controls:DaisyDivider Grid.Row="1" Margin="0,12"
+                                               IsVisible="{Binding ShowForecast, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                        <!-- Forecast Section -->
+                        <weather:DaisyWeatherForecast Grid.Row="2"
+                                                      ItemsSource="{TemplateBinding Forecast}"
+                                                      TemperatureUnit="{TemplateBinding TemperatureUnit}"
+                                                      IsVisible="{TemplateBinding ShowForecast}" />
+
+                        <!-- Metrics Section -->
+                        <Grid Grid.Row="3" Margin="0,12,0,0"
+                              IsVisible="{TemplateBinding ShowMetrics}">
+                            <weather:DaisyWeatherMetrics UvIndex="{TemplateBinding UvIndex}"
+                                                         UvMax="{TemplateBinding UvMax}"
+                                                         WindSpeed="{TemplateBinding WindSpeed}"
+                                                         WindMax="{TemplateBinding WindMax}"
+                                                         WindUnit="{TemplateBinding WindUnit}"
+                                                         Humidity="{TemplateBinding Humidity}"
+                                                         HumidityMax="{TemplateBinding HumidityMax}" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+</ResourceDictionary>

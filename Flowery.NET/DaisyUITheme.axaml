@@ -1,0 +1,75 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Flowery.DaisyUITheme">
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="/Themes/Colors.axaml" />
+                <ResourceInclude Source="/Themes/DaisyIcons.axaml" />
+                <ResourceInclude Source="/Themes/DaisyButton.axaml" />
+                <ResourceInclude Source="/Themes/DaisyInput.axaml" />
+                <ResourceInclude Source="/Themes/DaisyCheckBox.axaml" />
+                <ResourceInclude Source="/Themes/DaisyToggle.axaml" />
+                <ResourceInclude Source="/Themes/DaisyRadio.axaml" />
+                <ResourceInclude Source="/Themes/DaisyRange.axaml" />
+                <ResourceInclude Source="/Themes/DaisyBadge.axaml" />
+                <ResourceInclude Source="/Themes/DaisyAlert.axaml" />
+                <ResourceInclude Source="/Themes/DaisyCard.axaml" />
+                <ResourceInclude Source="/Themes/DaisySelect.axaml" />
+                <ResourceInclude Source="/Themes/DaisyTextArea.axaml" />
+                <ResourceInclude Source="/Themes/DaisyRating.axaml" />
+                <ResourceInclude Source="/Themes/DaisyFileInput.axaml" />
+                <ResourceInclude Source="/Themes/DaisyNavbar.axaml" />
+                <ResourceInclude Source="/Themes/DaisyMenu.axaml" />
+                <ResourceInclude Source="/Themes/DaisyDrawer.axaml" />
+                <ResourceInclude Source="/Themes/DaisyBreadcrumbs.axaml" />
+                <ResourceInclude Source="/Themes/DaisySteps.axaml" />
+                <ResourceInclude Source="/Themes/DaisyPagination.axaml" />
+                <ResourceInclude Source="/Themes/DaisyDivider.axaml" />
+                <ResourceInclude Source="/Themes/DaisyHero.axaml" />
+                <ResourceInclude Source="/Themes/DaisyIndicator.axaml" />
+                <ResourceInclude Source="/Themes/DaisyMask.axaml" />
+                <ResourceInclude Source="/Themes/DaisyMockup.axaml" />
+                <ResourceInclude Source="/Themes/DaisyProgress.axaml" />
+                <ResourceInclude Source="/Themes/DaisyRadialProgress.axaml" />
+                <ResourceInclude Source="/Themes/DaisyLoading.axaml" />
+                <ResourceInclude Source="/Themes/DaisyModal.axaml" />
+                <ResourceInclude Source="/Themes/DaisySkeleton.axaml" />
+                <ResourceInclude Source="/Themes/DaisyToast.axaml" />
+                <ResourceInclude Source="/Themes/DaisyAvatar.axaml" />
+                <ResourceInclude Source="/Themes/DaisyKbd.axaml" />
+                <ResourceInclude Source="/Themes/DaisyStat.axaml" />
+                <ResourceInclude Source="/Themes/DaisyCountdown.axaml" />
+                <ResourceInclude Source="/Themes/DaisyChatBubble.axaml" />
+                <ResourceInclude Source="/Themes/DaisyCollapse.axaml" />
+                <ResourceInclude Source="/Themes/DaisyAccordion.axaml" />
+                <ResourceInclude Source="/Themes/DaisyTimeline.axaml" />
+                <ResourceInclude Source="/Themes/DaisyCarousel.axaml" />
+                <ResourceInclude Source="/Themes/DaisyHoverGallery.axaml" />
+                <ResourceInclude Source="/Themes/DaisyDiff.axaml" />
+                <ResourceInclude Source="/Themes/DaisyTable.axaml" />
+                <ResourceInclude Source="/Themes/DaisySwap.axaml" />
+                <ResourceInclude Source="/Themes/DaisyThemeSwap.axaml" />
+                <ResourceInclude Source="/Themes/DaisyThemeController.axaml" />
+                <ResourceInclude Source="/Themes/DaisyThemeRadio.axaml" />
+                <!-- Custom controls (non-standard DaisyUI extensions) -->
+                <ResourceInclude Source="/Themes/Custom/DaisyModifierKeys.axaml" />
+                <!-- Weather widgets -->
+                <ResourceInclude Source="/Themes/Custom/Weather/WeatherIcons.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherCurrent.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherForecast.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherMetrics.axaml" />
+                <ResourceInclude Source="/Themes/Custom/Weather/DaisyWeatherCard.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+    <!-- Styles (Not ResourceDictionaries) -->
+    <StyleInclude Source="/Themes/DaisyTabs.axaml" />
+    <StyleInclude Source="/Themes/DaisyThemeDropdown.axaml" />
+    <StyleInclude Source="/Themes/DaisyJoin.axaml" />
+    <StyleInclude Source="/Themes/DaisyStack.axaml" />
+    <StyleInclude Source="/Themes/DaisyToolTip.axaml" />
+    <StyleInclude Source="/Themes/DaisyFab.axaml" />
+    <StyleInclude Source="/Themes/DaisyComponentSidebar.axaml" />
+</Styles>

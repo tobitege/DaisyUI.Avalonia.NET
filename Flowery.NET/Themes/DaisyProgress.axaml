@@ -1,0 +1,95 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Width="400">
+             <StackPanel Spacing="10">
+                 <controls:DaisyProgress Value="40" />
+                 <controls:DaisyProgress Value="60" Variant="Primary" />
+                 <controls:DaisyProgress Value="80" Variant="Accent" Size="Large" />
+                 <controls:DaisyProgress IsIndeterminate="True" Variant="Secondary" />
+             </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyProgress}" TargetType="controls:DaisyProgress">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Height" Value="8" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        ClipToBounds="True">
+                    <Grid>
+                        <Border Name="PART_Indicator"
+                                HorizontalAlignment="Left"
+                                Background="{TemplateBinding Foreground}">
+                             <!-- The width is set by ProgressBar logic automatically -->
+                        </Border>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Variants -->
+        <Style Selector="^[Variant=Primary]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Secondary]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Accent]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyAccentBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Info]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Success]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Warning]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Error]">
+             <Setter Property="Foreground" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+
+        <!-- Sizes -->
+        <Style Selector="^[Size=Large]">
+            <Setter Property="Height" Value="16" />
+            <Setter Property="CornerRadius" Value="8" />
+        </Style>
+        <Style Selector="^[Size=Small]">
+            <Setter Property="Height" Value="4" />
+            <Setter Property="CornerRadius" Value="2" />
+        </Style>
+        <Style Selector="^[Size=ExtraSmall]">
+            <Setter Property="Height" Value="2" />
+            <Setter Property="CornerRadius" Value="1" />
+        </Style>
+
+        <!-- Indeterminate State -->
+        <Style Selector="^[IsIndeterminate=True] /template/ Border#PART_Indicator">
+             <!-- Use 0 width and animate visual or use standard Avalonia Indeterminate support (which swaps template).
+                  Since we used a custom template without the standard IndeterminateRoot, we can just apply a simple animation
+                  to the Indicator itself if we force it to be visible.
+                  However, standard ProgressBar logic might behave differently.
+                  Let's just use a simple pulse for now or skip logic.
+                  For now: Simple opacity pulse to show something is happening. -->
+             <Style.Animations>
+                 <Animation Duration="0:0:1" IterationCount="Infinite">
+                     <KeyFrame KeyTime="0:0:0"><Setter Property="Opacity" Value="0.5"/></KeyFrame>
+                     <KeyFrame KeyTime="0:0:0.5"><Setter Property="Opacity" Value="1"/></KeyFrame>
+                     <KeyFrame KeyTime="0:0:1"><Setter Property="Opacity" Value="0.5"/></KeyFrame>
+                 </Animation>
+             </Style.Animations>
+             <Setter Property="Width" Value="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}" /> <!-- Full width for pulse -->
+        </Style>
+
+    </ControlTheme>
+</ResourceDictionary>

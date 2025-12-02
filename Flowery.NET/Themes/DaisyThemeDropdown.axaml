@@ -1,0 +1,139 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{DynamicResource DaisyBase200Brush}" Height="400">
+            <StackPanel Spacing="10" Width="220">
+                <controls:DaisyThemeDropdown />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Styles.Resources>
+        <!-- Item template for theme preview (matches DaisyUI 2x2 dot grid) -->
+        <DataTemplate x:Key="ThemeItemTemplate" DataType="controls:ThemePreviewInfo">
+            <Grid ColumnDefinitions="Auto,*" Height="28">
+                <!-- 2x2 color dot grid with theme's base background -->
+                <Border Grid.Column="0"
+                        Background="{Binding Base100}"
+                        CornerRadius="6"
+                        Padding="4"
+                        VerticalAlignment="Center">
+                    <Grid ColumnDefinitions="8,2,8" RowDefinitions="8,2,8">
+                        <Ellipse Grid.Row="0" Grid.Column="0" Width="8" Height="8" Fill="{Binding BaseContent}" />
+                        <Ellipse Grid.Row="0" Grid.Column="2" Width="8" Height="8" Fill="{Binding Primary}" />
+                        <Ellipse Grid.Row="2" Grid.Column="0" Width="8" Height="8" Fill="{Binding Secondary}" />
+                        <Ellipse Grid.Row="2" Grid.Column="2" Width="8" Height="8" Fill="{Binding Accent}" />
+                    </Grid>
+                </Border>
+                <!-- Theme name -->
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Name}"
+                           VerticalAlignment="Center"
+                           Margin="10,0,0,0"
+                           FontSize="14"/>
+            </Grid>
+        </DataTemplate>
+
+        <ControlTheme x:Key="{x:Type controls:DaisyThemeDropdown}" TargetType="controls:DaisyThemeDropdown">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="12,8,30,8" />
+            <Setter Property="MinHeight" Value="44" />
+            <Setter Property="MinWidth" Value="180" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="ItemTemplate" Value="{StaticResource ThemeItemTemplate}" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Border x:Name="Background"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                MinHeight="{TemplateBinding MinHeight}"/>
+
+                        <ContentPresenter x:Name="ContentPresenter"
+                                          Grid.Column="0"
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding ItemTemplate}"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+
+                        <!-- Chevron -->
+                        <Path x:Name="Chevron"
+                              Grid.Column="1"
+                              Width="10" Height="6"
+                              Stretch="Uniform"
+                              Data="M1,1 L5,5 L9,1"
+                              Stroke="{DynamicResource DaisyBaseContentBrush}"
+                              StrokeThickness="2"
+                              Fill="Transparent"
+                              Margin="0,0,12,0"
+                              VerticalAlignment="Center"
+                              IsHitTestVisible="False"/>
+
+                        <Popup x:Name="PART_Popup"
+                               WindowManagerAddShadowHint="False"
+                               IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
+                               PlacementTarget="{Binding ElementName=Background}"
+                               IsLightDismissEnabled="True"
+                               InheritsTransform="True">
+                            <Border x:Name="PopupBorder"
+                                    Background="{DynamicResource DaisyBase200Brush}"
+                                    BorderBrush="{DynamicResource DaisyNeutralBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Padding="4"
+                                    Margin="0,4,0,0"
+                                    MinWidth="200">
+                                <ScrollViewer MaxHeight="400">
+                                    <ItemsPresenter Name="PART_ItemsPresenter"
+                                                    ItemsPanel="{TemplateBinding ItemsPanel}" />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+
+            <!-- Hover State -->
+            <Style Selector="^:pointerover /template/ Border#Background">
+                 <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+            </Style>
+
+            <!-- Focus State -->
+            <Style Selector="^:focus /template/ Border#Background">
+                 <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+                 <Setter Property="BorderThickness" Value="2" />
+            </Style>
+
+        </ControlTheme>
+    </Styles.Resources>
+
+    <!-- Style for ComboBoxItem inside DaisyThemeDropdown -->
+    <Style Selector="controls|DaisyThemeDropdown ComboBoxItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="controls|DaisyThemeDropdown ComboBoxItem:pointerover">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+    </Style>
+    <Style Selector="controls|DaisyThemeDropdown ComboBoxItem:selected">
+        <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentBrush}" />
+    </Style>
+
+</Styles>

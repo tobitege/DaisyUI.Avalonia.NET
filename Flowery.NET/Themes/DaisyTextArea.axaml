@@ -1,0 +1,19 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20">
+             <controls:DaisyTextArea Watermark="Bio" Height="100" Width="300"/>
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Inherits most styles from DaisyInput, but we need to redefine the theme key -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTextArea}" TargetType="controls:DaisyTextArea" BasedOn="{StaticResource {x:Type controls:DaisyInput}}">
+        <Setter Property="MinHeight" Value="80" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+
+        <!-- We can override specific padding or behaviors here if needed -->
+    </ControlTheme>
+</ResourceDictionary>
