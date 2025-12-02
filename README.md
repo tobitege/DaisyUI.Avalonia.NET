@@ -15,6 +15,13 @@
 
 This library provides native Avalonia controls that mimic the utility-first, semantic class naming of DaisyUI, making it easy to build beautiful, themed UIs in Avalonia. A NuGet package will hopefully be available soon, too.
 
+> [!NOTE]
+> **🚧 Active Development — Expect Breaking Changes 🚧**
+>
+> This will be under heavy development with a lot of changes across many files, while I'll keep
+> refining and adding missing features to existing controls or even add custom new ones, like the
+> weather widgets. Pin to a specific commit if you need stability!
+
 ## Features
 
 - **Native Controls**: C# classes inheriting from Avalonia primitives (e.g., `DaisyButton : Button`).
