@@ -108,29 +108,27 @@ public partial class MainWindow : Window
 
     public void OnOpenModalRequested(object? sender, EventArgs e)
     {
-        var modal = this.FindControl<DaisyModal>("DemoModal");
-        if (modal == null) return;
+        if (DemoModal == null) return;
 
         // Reset to default corner radii
-        modal.TopLeftRadius = 16;
-        modal.TopRightRadius = 16;
-        modal.BottomLeftRadius = 16;
-        modal.BottomRightRadius = 16;
+        DemoModal.TopLeftRadius = 16;
+        DemoModal.TopRightRadius = 16;
+        DemoModal.BottomLeftRadius = 16;
+        DemoModal.BottomRightRadius = 16;
         SetModalTitle("Hello!");
-        modal.IsOpen = true;
+        DemoModal.IsOpen = true;
     }
 
     public void OnOpenModalWithRadiiRequested(object? sender, ModalRadiiEventArgs e)
     {
-        var modal = this.FindControl<DaisyModal>("DemoModal");
-        if (modal == null) return;
+        if (DemoModal == null) return;
 
-        modal.TopLeftRadius = e.TopLeft;
-        modal.TopRightRadius = e.TopRight;
-        modal.BottomLeftRadius = e.BottomLeft;
-        modal.BottomRightRadius = e.BottomRight;
+        DemoModal.TopLeftRadius = e.TopLeft;
+        DemoModal.TopRightRadius = e.TopRight;
+        DemoModal.BottomLeftRadius = e.BottomLeft;
+        DemoModal.BottomRightRadius = e.BottomRight;
         SetModalTitle(e.Title);
-        modal.IsOpen = true;
+        DemoModal.IsOpen = true;
     }
 
     private void SetModalTitle(string title)
@@ -142,8 +140,7 @@ public partial class MainWindow : Window
 
     public void CloseModalBtn_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var modal = this.FindControl<DaisyModal>("DemoModal");
-        if (modal != null) modal.IsOpen = false;
+        if (DemoModal != null) DemoModal.IsOpen = false;
     }
 
     public void OpenGitHub_Click(object? sender, global::Avalonia.Interactivity.RoutedEventArgs e)
