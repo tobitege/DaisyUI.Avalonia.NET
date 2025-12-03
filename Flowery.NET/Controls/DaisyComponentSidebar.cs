@@ -330,6 +330,7 @@ namespace Flowery.Controls
                         new SidebarItem { Id = "kbd", Name = "Kbd", TabHeader = "Data Display" },
                         new SidebarItem { Id = "list", Name = "List", TabHeader = "Data Display" },
                         new SidebarItem { Id = "stat", Name = "Stat", TabHeader = "Data Display" },
+                        new SidebarItem { Id = "status", Name = "Status", TabHeader = "Data Display" },
                         new SidebarItem { Id = "table", Name = "Table", TabHeader = "Data Display" },
                         new SidebarItem { Id = "text-rotate", Name = "Text Rotate", TabHeader = "Data Display" },
                         new SidebarItem { Id = "timeline", Name = "Timeline", TabHeader = "Data Display" }

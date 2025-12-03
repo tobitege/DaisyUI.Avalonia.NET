@@ -604,6 +604,125 @@
 
             <controls:DaisyDivider />
 
+            <!-- Status -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader SectionId="status" Title="Status" />
+                <TextBlock Text="Status is a small icon to visually show the current status of an element, like online, offline, error, etc." Opacity="0.7" Margin="0,0,0,8" />
+                <WrapPanel Orientation="Horizontal">
+                    <!-- Sizes -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Sizes" FontWeight="SemiBold" Opacity="0.7" />
+                        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Size="ExtraSmall" />
+                                <TextBlock Text="XS" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Size="Small" />
+                                <TextBlock Text="SM" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Size="Medium" />
+                                <TextBlock Text="MD" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Size="Large" />
+                                <TextBlock Text="LG" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Size="ExtraLarge" />
+                                <TextBlock Text="XL" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Brand Colors -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Brand Colors" FontWeight="SemiBold" Opacity="0.7" />
+                        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Primary" />
+                                <TextBlock Text="Primary" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Secondary" />
+                                <TextBlock Text="Secondary" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Accent" />
+                                <TextBlock Text="Accent" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Neutral" />
+                                <TextBlock Text="Neutral" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- State Colors -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="State Colors" FontWeight="SemiBold" Opacity="0.7" />
+                        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Info" />
+                                <TextBlock Text="Info" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Success" />
+                                <TextBlock Text="Success" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Warning" />
+                                <TextBlock Text="Warning" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Error" />
+                                <TextBlock Text="Error" FontSize="10" Opacity="0.5" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Ping Animation -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Ping Animation" FontWeight="SemiBold" Opacity="0.7" />
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <controls:DaisyStatusIndicator Color="Error" IsPing="True" />
+                            <TextBlock Text="Server is down" Opacity="0.8" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Bounce Animation -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Bounce Animation" FontWeight="SemiBold" Opacity="0.7" />
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <controls:DaisyStatusIndicator Color="Info" IsBounce="True" />
+                            <TextBlock Text="Unread messages" Opacity="0.8" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Usage Examples -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20">
+                        <TextBlock Text="Usage Examples" FontWeight="SemiBold" Opacity="0.7" />
+                        <StackPanel Spacing="12">
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Success" Size="Small" />
+                                <TextBlock Text="Online" Opacity="0.8" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Neutral" Size="Small" />
+                                <TextBlock Text="Offline" Opacity="0.8" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <controls:DaisyStatusIndicator Color="Warning" Size="Small" IsPing="True" />
+                                <TextBlock Text="Connecting..." Opacity="0.8" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
             <!-- Table -->
             <StackPanel Spacing="12">
                 <local:SectionHeader SectionId="table" Title="Table" />
