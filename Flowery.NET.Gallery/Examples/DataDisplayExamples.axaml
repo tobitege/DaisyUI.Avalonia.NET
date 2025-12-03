@@ -727,30 +727,438 @@
             <StackPanel Spacing="12">
                 <local:SectionHeader SectionId="table" Title="Table" />
                 <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="450">
+
+                    <!-- Basic Table -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="500">
+                        <TextBlock Text="Basic Table" FontWeight="SemiBold" Opacity="0.7" />
                         <controls:DaisyTable>
-                            <Grid ColumnDefinitions="1*, 2*, 1*">
-                                <TextBlock Text="ID" FontWeight="Bold"/>
-                                <TextBlock Text="Name" FontWeight="Bold" Grid.Column="1"/>
-                                <TextBlock Text="Job" FontWeight="Bold" Grid.Column="2"/>
-                            </Grid>
-                            <Grid ColumnDefinitions="1*, 2*, 1*">
-                                <TextBlock Text="1" />
-                                <TextBlock Text="Cy Ganderton" Grid.Column="1"/>
-                                <TextBlock Text="Quality Control Specialist" Grid.Column="2"/>
-                            </Grid>
-                            <Grid ColumnDefinitions="1*, 2*, 1*">
-                                <TextBlock Text="2" />
-                                <TextBlock Text="Hart Hagerty" Grid.Column="1"/>
-                                <TextBlock Text="Desktop Support Technician" Grid.Column="2"/>
-                            </Grid>
-                            <Grid ColumnDefinitions="1*, 2*, 1*">
-                                <TextBlock Text="3" />
-                                <TextBlock Text="Brice Swyre" Grid.Column="1"/>
-                                <TextBlock Text="Tax Accountant" Grid.Column="2"/>
-                            </Grid>
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Blue" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Purple" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Red" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
                         </controls:DaisyTable>
                     </StackPanel>
+
+                    <!-- Table with Active Row -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="500">
+                        <TextBlock Text="With Active Row" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable>
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow IsActive="True">
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Blue" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Purple" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Red" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
+                    <!-- Zebra Stripe Table -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="500">
+                        <TextBlock Text="Zebra Stripes" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable Zebra="True">
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Blue" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Purple" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Red" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="4" />
+                                    <controls:DaisyTableCell Content="Marjy Ferencz" />
+                                    <controls:DaisyTableCell Content="Office Assistant I" />
+                                    <controls:DaisyTableCell Content="Crimson" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
+                    <!-- Hover Highlight Table -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="500">
+                        <TextBlock Text="Hover Highlight (hover rows)" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable>
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow HighlightOnHover="True">
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Blue" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow HighlightOnHover="True">
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Purple" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow HighlightOnHover="True">
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Red" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
+                    <!-- Extra Small Table -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="600">
+                        <TextBlock Text="Extra Small (table-xs)" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable Size="ExtraSmall">
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="40" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Company" />
+                                    <controls:DaisyTableHeaderCell Content="Location" />
+                                    <controls:DaisyTableHeaderCell Content="Last Login" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Littel, Schaden" />
+                                    <controls:DaisyTableCell Content="Canada" />
+                                    <controls:DaisyTableCell Content="12/16/2020" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Zemlak, Daniel" />
+                                    <controls:DaisyTableCell Content="United States" />
+                                    <controls:DaisyTableCell Content="12/5/2020" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Carroll Group" />
+                                    <controls:DaisyTableCell Content="China" />
+                                    <controls:DaisyTableCell Content="8/15/2020" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="4" />
+                                    <controls:DaisyTableCell Content="Marjy Ferencz" />
+                                    <controls:DaisyTableCell Content="Office Assistant I" />
+                                    <controls:DaisyTableCell Content="Rowe-Schoen" />
+                                    <controls:DaisyTableCell Content="Russia" />
+                                    <controls:DaisyTableCell Content="3/25/2021" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="5" />
+                                    <controls:DaisyTableCell Content="Yancy Tear" />
+                                    <controls:DaisyTableCell Content="Community Outreach" />
+                                    <controls:DaisyTableCell Content="Wyman-Ledner" />
+                                    <controls:DaisyTableCell Content="Brazil" />
+                                    <controls:DaisyTableCell Content="5/22/2020" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
+                    <!-- Small Table -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="500">
+                        <TextBlock Text="Small (table-sm)" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable Size="Small">
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Blue" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Purple" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Red" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
+                    <!-- Large Table -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="500">
+                        <TextBlock Text="Large (table-lg)" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable Size="Large">
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="60" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Blue" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Purple" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Red" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
+                    <!-- Table with Footer -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="500">
+                        <TextBlock Text="With Header and Footer" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable>
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="1" />
+                                    <controls:DaisyTableCell Content="Cy Ganderton" />
+                                    <controls:DaisyTableCell Content="Quality Control Specialist" />
+                                    <controls:DaisyTableCell Content="Blue" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="2" />
+                                    <controls:DaisyTableCell Content="Hart Hagerty" />
+                                    <controls:DaisyTableCell Content="Desktop Support Technician" />
+                                    <controls:DaisyTableCell Content="Purple" />
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableCell Content="3" />
+                                    <controls:DaisyTableCell Content="Brice Swyre" />
+                                    <controls:DaisyTableCell Content="Tax Accountant" />
+                                    <controls:DaisyTableCell Content="Red" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                            <controls:DaisyTableFoot>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableFoot>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
+                    <!-- Table with Visual Elements -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="650">
+                        <TextBlock Text="With Visual Elements" FontWeight="SemiBold" Opacity="0.7" />
+                        <controls:DaisyTable>
+                            <controls:DaisyTableHead>
+                                <controls:DaisyTableRow>
+                                    <controls:DaisyTableHeaderCell ColumnWidth="50">
+                                        <controls:DaisyCheckBox />
+                                    </controls:DaisyTableHeaderCell>
+                                    <controls:DaisyTableHeaderCell Content="Name" />
+                                    <controls:DaisyTableHeaderCell Content="Job" />
+                                    <controls:DaisyTableHeaderCell Content="Favorite Color" />
+                                    <controls:DaisyTableHeaderCell ColumnWidth="80" Content="" />
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableHead>
+                            <controls:DaisyTableBody>
+                                <controls:DaisyTableRow HighlightOnHover="True">
+                                    <controls:DaisyTableCell>
+                                        <controls:DaisyCheckBox />
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell>
+                                        <StackPanel Orientation="Horizontal" Spacing="12">
+                                            <controls:DaisyAvatar Size="Small">
+                                                <controls:DaisyMask Variant="Squircle" Width="40" Height="40">
+                                                    <Border Background="{DynamicResource DaisyPrimaryBrush}">
+                                                        <TextBlock Text="HH" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                   Foreground="{DynamicResource DaisyPrimaryContentBrush}" FontWeight="Bold" />
+                                                    </Border>
+                                                </controls:DaisyMask>
+                                            </controls:DaisyAvatar>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Hart Hagerty" FontWeight="Bold" />
+                                                <TextBlock Text="United States" FontSize="11" Opacity="0.5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell>
+                                        <StackPanel>
+                                            <TextBlock Text="Zemlak, Daniel and Leannon" />
+                                            <controls:DaisyBadge Variant="Ghost" Size="Small" Content="Desktop Support Technician" />
+                                        </StackPanel>
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell Content="Purple" />
+                                    <controls:DaisyTableCell>
+                                        <controls:DaisyButton Variant="Ghost" Size="ExtraSmall" Content="details" />
+                                    </controls:DaisyTableCell>
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow HighlightOnHover="True">
+                                    <controls:DaisyTableCell>
+                                        <controls:DaisyCheckBox />
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell>
+                                        <StackPanel Orientation="Horizontal" Spacing="12">
+                                            <controls:DaisyAvatar Size="Small">
+                                                <controls:DaisyMask Variant="Squircle" Width="40" Height="40">
+                                                    <Border Background="{DynamicResource DaisySecondaryBrush}">
+                                                        <TextBlock Text="BS" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                   Foreground="{DynamicResource DaisySecondaryContentBrush}" FontWeight="Bold" />
+                                                    </Border>
+                                                </controls:DaisyMask>
+                                            </controls:DaisyAvatar>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Brice Swyre" FontWeight="Bold" />
+                                                <TextBlock Text="China" FontSize="11" Opacity="0.5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell>
+                                        <StackPanel>
+                                            <TextBlock Text="Carroll Group" />
+                                            <controls:DaisyBadge Variant="Ghost" Size="Small" Content="Tax Accountant" />
+                                        </StackPanel>
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell Content="Red" />
+                                    <controls:DaisyTableCell>
+                                        <controls:DaisyButton Variant="Ghost" Size="ExtraSmall" Content="details" />
+                                    </controls:DaisyTableCell>
+                                </controls:DaisyTableRow>
+                                <controls:DaisyTableRow HighlightOnHover="True">
+                                    <controls:DaisyTableCell>
+                                        <controls:DaisyCheckBox />
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell>
+                                        <StackPanel Orientation="Horizontal" Spacing="12">
+                                            <controls:DaisyAvatar Size="Small">
+                                                <controls:DaisyMask Variant="Squircle" Width="40" Height="40">
+                                                    <Border Background="{DynamicResource DaisyAccentBrush}">
+                                                        <TextBlock Text="MF" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                   Foreground="{DynamicResource DaisyAccentContentBrush}" FontWeight="Bold" />
+                                                    </Border>
+                                                </controls:DaisyMask>
+                                            </controls:DaisyAvatar>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock Text="Marjy Ferencz" FontWeight="Bold" />
+                                                <TextBlock Text="Russia" FontSize="11" Opacity="0.5" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell>
+                                        <StackPanel>
+                                            <TextBlock Text="Rowe-Schoen" />
+                                            <controls:DaisyBadge Variant="Ghost" Size="Small" Content="Office Assistant I" />
+                                        </StackPanel>
+                                    </controls:DaisyTableCell>
+                                    <controls:DaisyTableCell Content="Crimson" />
+                                    <controls:DaisyTableCell>
+                                        <controls:DaisyButton Variant="Ghost" Size="ExtraSmall" Content="details" />
+                                    </controls:DaisyTableCell>
+                                </controls:DaisyTableRow>
+                            </controls:DaisyTableBody>
+                        </controls:DaisyTable>
+                    </StackPanel>
+
                 </WrapPanel>
             </StackPanel>
 

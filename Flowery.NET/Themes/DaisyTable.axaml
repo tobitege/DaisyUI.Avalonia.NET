@@ -3,26 +3,178 @@
                     xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
 
     <Design.PreviewWith>
-        <Border Padding="20">
-             <controls:DaisyTable>
-                 <Grid ColumnDefinitions="*, *">
-                     <TextBlock Text="Row 1 Col 1" />
-                     <TextBlock Text="Row 1 Col 2" />
-                 </Grid>
-                 <Grid ColumnDefinitions="*, *">
-                     <TextBlock Text="Row 2 Col 1" />
-                     <TextBlock Text="Row 2 Col 2" />
-                 </Grid>
-             </controls:DaisyTable>
+        <Border Padding="20" Background="{DynamicResource DaisyBase200Brush}" Width="600">
+            <StackPanel Spacing="20">
+                <!-- Basic Table -->
+                <controls:DaisyTable>
+                    <controls:DaisyTableHead>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableHeaderCell ColumnWidth="50" Content="#" />
+                            <controls:DaisyTableHeaderCell Content="Name" />
+                            <controls:DaisyTableHeaderCell Content="Job" />
+                            <controls:DaisyTableHeaderCell Content="Color" />
+                        </controls:DaisyTableRow>
+                    </controls:DaisyTableHead>
+                    <controls:DaisyTableBody>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableCell Content="1" />
+                            <controls:DaisyTableCell Content="Cy Ganderton" />
+                            <controls:DaisyTableCell Content="Quality Control" />
+                            <controls:DaisyTableCell Content="Blue" />
+                        </controls:DaisyTableRow>
+                        <controls:DaisyTableRow IsActive="True">
+                            <controls:DaisyTableCell Content="2" />
+                            <controls:DaisyTableCell Content="Hart Hagerty" />
+                            <controls:DaisyTableCell Content="Desktop Support" />
+                            <controls:DaisyTableCell Content="Purple" />
+                        </controls:DaisyTableRow>
+                        <controls:DaisyTableRow HighlightOnHover="True">
+                            <controls:DaisyTableCell Content="3" />
+                            <controls:DaisyTableCell Content="Brice Swyre" />
+                            <controls:DaisyTableCell Content="Tax Accountant" />
+                            <controls:DaisyTableCell Content="Red" />
+                        </controls:DaisyTableRow>
+                    </controls:DaisyTableBody>
+                </controls:DaisyTable>
+
+                <!-- Zebra Table (Small) -->
+                <controls:DaisyTable Zebra="True" Size="Small">
+                    <controls:DaisyTableHead>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableHeaderCell Content="#" ColumnWidth="40" />
+                            <controls:DaisyTableHeaderCell Content="Name" />
+                            <controls:DaisyTableHeaderCell Content="Job" />
+                        </controls:DaisyTableRow>
+                    </controls:DaisyTableHead>
+                    <controls:DaisyTableBody>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableCell Content="1" />
+                            <controls:DaisyTableCell Content="Cy Ganderton" />
+                            <controls:DaisyTableCell Content="Quality Control" />
+                        </controls:DaisyTableRow>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableCell Content="2" />
+                            <controls:DaisyTableCell Content="Hart Hagerty" />
+                            <controls:DaisyTableCell Content="Desktop Support" />
+                        </controls:DaisyTableRow>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableCell Content="3" />
+                            <controls:DaisyTableCell Content="Brice Swyre" />
+                            <controls:DaisyTableCell Content="Tax Accountant" />
+                        </controls:DaisyTableRow>
+                    </controls:DaisyTableBody>
+                </controls:DaisyTable>
+
+                <!-- Extra Small Table -->
+                <controls:DaisyTable Size="ExtraSmall">
+                    <controls:DaisyTableHead>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableHeaderCell Content="#" ColumnWidth="30" />
+                            <controls:DaisyTableHeaderCell Content="Name" />
+                            <controls:DaisyTableHeaderCell Content="Company" />
+                            <controls:DaisyTableHeaderCell Content="Location" />
+                        </controls:DaisyTableRow>
+                    </controls:DaisyTableHead>
+                    <controls:DaisyTableBody>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableCell Content="1" />
+                            <controls:DaisyTableCell Content="Cy Ganderton" />
+                            <controls:DaisyTableCell Content="Littel, Schaden" />
+                            <controls:DaisyTableCell Content="Canada" />
+                        </controls:DaisyTableRow>
+                        <controls:DaisyTableRow>
+                            <controls:DaisyTableCell Content="2" />
+                            <controls:DaisyTableCell Content="Hart Hagerty" />
+                            <controls:DaisyTableCell Content="Zemlak, Daniel" />
+                            <controls:DaisyTableCell Content="United States" />
+                        </controls:DaisyTableRow>
+                    </controls:DaisyTableBody>
+                </controls:DaisyTable>
+            </StackPanel>
         </Border>
     </Design.PreviewWith>
 
-    <ControlTheme x:Key="{x:Type controls:DaisyTable}" TargetType="controls:DaisyTable">
-        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
-        <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="BorderBrush" Value="{DynamicResource DaisyBase200Brush}" />
-        <Setter Property="BorderThickness" Value="1" />
+    <!-- Converters -->
+    <controls:TableSizeToPaddingConverter x:Key="TableSizeToPaddingConverter" />
+    <controls:TableSizeToFontSizeConverter x:Key="TableSizeToFontSizeConverter" />
 
+    <!-- DaisyTableCell theme -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTableCell}" TargetType="controls:DaisyTableCell">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Padding="{Binding $parent[controls:DaisyTable].Size, Converter={StaticResource TableSizeToPaddingConverter}}">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      FontSize="{Binding $parent[controls:DaisyTable].Size, Converter={StaticResource TableSizeToFontSizeConverter}}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <!-- DaisyTableHeaderCell theme -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTableHeaderCell}" TargetType="controls:DaisyTableHeaderCell">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="Opacity" Value="0.7" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Padding="{Binding $parent[controls:DaisyTable].Size, Converter={StaticResource TableSizeToPaddingConverter}}"
+                        Background="Transparent">
+                    <ContentPresenter Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      FontWeight="{TemplateBinding FontWeight}"
+                                      FontSize="{Binding $parent[controls:DaisyTable].Size, Converter={StaticResource TableSizeToFontSizeConverter}}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <!-- DaisyTableRow theme -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTableRow}" TargetType="controls:DaisyTableRow">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DaisyBase200Brush}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <controls:DaisyTableRowPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border x:Name="RowBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Active state -->
+        <Style Selector="^[IsActive=True]">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        </Style>
+
+        <!-- Highlight on hover -->
+        <Style Selector="^[HighlightOnHover=True]:pointerover">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+        </Style>
+    </ControlTheme>
+
+    <!-- DaisyTableHead theme -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTableHead}" TargetType="controls:DaisyTableHead">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -30,15 +182,66 @@
                 </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
-        <!-- Row styling via ItemTemplate wrapping content in a Border -->
-        <Setter Property="ItemTemplate">
-            <DataTemplate>
-                <Border Padding="16,12"
-                        BorderBrush="{DynamicResource DaisyBase200Brush}"
-                        BorderThickness="0,0,0,1">
-                    <ContentPresenter Content="{Binding}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}">
+                    <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
                 </Border>
-            </DataTemplate>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <!-- DaisyTableBody theme -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTableBody}" TargetType="controls:DaisyTableBody">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}">
+                    <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <!-- DaisyTableFoot theme -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTableFoot}" TargetType="controls:DaisyTableFoot">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}">
+                    <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </ControlTheme>
+
+    <!-- DaisyTable theme -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTable}" TargetType="controls:DaisyTable">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DaisyBase200Brush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
         </Setter>
         <Setter Property="Template">
             <ControlTemplate>
@@ -52,4 +255,5 @@
             </ControlTemplate>
         </Setter>
     </ControlTheme>
+
 </ResourceDictionary>
