@@ -92,6 +92,8 @@ jobs:
     needs: build-gallery
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')  # Only on tag push, not manual
+    permissions:
+      contents: write
 
     steps:
       # Download all artifacts from the build jobs

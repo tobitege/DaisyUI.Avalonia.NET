@@ -11,6 +11,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
@@ -22,17 +24,17 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Build library
-        run: dotnet build Flowery.NET/Flowery.NET.csproj -c Release
+        run: dotnet build Flowery.NET/Flowery.NET.csproj -c Release -o ./build-output
 
       - name: Create NuGet package
-        run: dotnet pack Flowery.NET/Flowery.NET.csproj -c Release -o ./artifacts --no-build
+        run: dotnet pack Flowery.NET/Flowery.NET.csproj -c Release -o ./artifacts
 
       # Copy the compiled DLL to artifacts folder
       - name: Copy DLL to artifacts
         run: |
           mkdir -p ./artifacts/lib
-          cp Flowery.NET/bin/Release/netstandard2.0/Flowery.NET.dll ./artifacts/lib/
-          cp Flowery.NET/bin/Release/netstandard2.0/Flowery.NET.pdb ./artifacts/lib/
+          cp ./build-output/Flowery.NET.dll ./artifacts/lib/
+          cp ./build-output/Flowery.NET.pdb ./artifacts/lib/
 
       # Create a zip of the DLL for easy download
       - name: Zip library files
