@@ -1,21 +1,23 @@
 name: Create Release with Artifacts
 
-# This workflow runs AFTER nuget.yml completes successfully
-# It creates a GitHub Release with downloadable artifacts
+# This workflow runs AFTER Gallery build completes (Gallery is the slowest)
+# By the time Gallery finishes, NuGet is already published
+# This creates the GitHub Release with ALL artifacts
 
 on:
   workflow_run:
-    workflows: ["Build and Publish NuGet"]
+    workflows: ["Build Gallery App"]
     types:
       - completed
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    # Only run if the NuGet workflow succeeded and was triggered by a tag
+    # Only run if Gallery workflow succeeded and was triggered by a tag
     if: ${{ github.event.workflow_run.conclusion == 'success' && startsWith(github.event.workflow_run.head_branch, 'v') }}
     permissions:
       contents: write
+      actions: read
 
     steps:
       - name: Checkout code
@@ -48,7 +50,30 @@ jobs:
           zip ../Flowery.NET-lib.zip *
           cd ../..
 
-      # Create GitHub Release with all artifacts (NuGet already published by nuget.yml)
+      # Download Gallery artifacts from the Gallery workflow run
+      - name: Download Gallery artifacts
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          run_id: ${{ github.event.workflow_run.id }}
+          path: ./gallery-artifacts
+          skip_unpack: false
+
+      - name: List all artifacts
+        run: |
+          echo "=== Library artifacts ==="
+          ls -la ./artifacts/
+          echo "=== Gallery artifacts ==="
+          find ./gallery-artifacts -type f
+
+      # Move Gallery artifacts to main artifacts folder
+      - name: Collect Gallery artifacts
+        run: |
+          find ./gallery-artifacts -name "*.zip" -exec cp {} ./artifacts/ \;
+          find ./gallery-artifacts -name "*.tar.gz" -exec cp {} ./artifacts/ \;
+          echo "=== Final artifacts ==="
+          ls -la ./artifacts/
+
+      # Create GitHub Release with ALL artifacts
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
@@ -56,7 +81,27 @@ jobs:
           files: |
             ./artifacts/*.nupkg
             ./artifacts/Flowery.NET-lib.zip
+            ./artifacts/*.zip
+            ./artifacts/*.tar.gz
           generate_release_notes: true
           draft: false
+          body: |
+            ## 📦 Library
+
+            | Asset | Description |
+            |-------|-------------|
+            | `Flowery.NET.*.nupkg` | NuGet package (also on [nuget.org](https://www.nuget.org/packages/Flowery.NET)) |
+            | `Flowery.NET-lib.zip` | Compiled DLL and PDB |
+
+            ## 🌸 Gallery Demo App
+
+            Self-contained executables - no .NET installation required!
+
+            | Platform | Download |
+            |----------|----------|
+            | Windows x64 | `Flowery.Gallery-Windows-x64.zip` |
+            | Linux x64 | `Flowery.Gallery-Linux-x64.tar.gz` |
+            | macOS Intel | `Flowery.Gallery-macOS-x64.tar.gz` |
+            | macOS Apple Silicon | `Flowery.Gallery-macOS-arm64.tar.gz` |
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,19 +1,27 @@
 name: Build Gallery App
 
 # This workflow builds the Gallery demo app for Windows, Linux, and macOS
-# It runs AFTER the main release is created, then adds Gallery artifacts to it
+# - On every push to main: builds to verify everything compiles
+# - On tag push: builds AND the Release workflow creates GitHub release with artifacts
 
 on:
-  workflow_run:
-    workflows: ["Create Release with Artifacts"]
-    types:
-      - completed
-  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to build Gallery for (e.g., v1.0.3)'
+        required: false
+        type: string
 
 jobs:
   build-gallery:
-    # Only run if the Release workflow succeeded (or if manually triggered)
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         include:
@@ -47,7 +55,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+          ref: ${{ inputs.tag || github.ref }}
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -91,47 +99,3 @@ jobs:
             ./${{ matrix.artifact_name }}.zip
             ./${{ matrix.artifact_name }}.tar.gz
           if-no-files-found: ignore
-
-  # This job adds Gallery artifacts to the existing GitHub Release
-  create-release:
-    needs: build-gallery
-    runs-on: ubuntu-latest
-    # Only run when triggered by workflow_run (tag-based release), not manual dispatch
-    if: ${{ github.event_name == 'workflow_run' && startsWith(github.event.workflow_run.head_branch, 'v') }}
-    permissions:
-      contents: write
-
-    steps:
-      # Download all artifacts from the build jobs
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ./release-artifacts
-          merge-multiple: true
-
-      - name: List artifacts
-        run: ls -la ./release-artifacts/
-
-      # Add Gallery apps to the existing GitHub Release (created by release.yml)
-      - name: Add Gallery artifacts to Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.event.workflow_run.head_branch }}
-          files: ./release-artifacts/*
-          # Don't overwrite existing release notes, just add files
-          append_body: true
-          body: |
-
-            ---
-            ## 🌸 Gallery Demo App
-
-            | Platform | Download |
-            |----------|----------|
-            | Windows x64 | `Flowery.Gallery-Windows-x64.zip` |
-            | Linux x64 | `Flowery.Gallery-Linux-x64.tar.gz` |
-            | macOS Intel | `Flowery.Gallery-macOS-x64.tar.gz` |
-            | macOS Apple Silicon | `Flowery.Gallery-macOS-arm64.tar.gz` |
-
-            **No .NET installation required** - these are self-contained executables.
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
