@@ -49,6 +49,36 @@ DaisyCountdown is a templated numeric timer that can show live clock units (hour
                          Loop="False" />
 ```
 
+## Accessibility Support
+
+DaisyCountdown includes built-in accessibility for screen readers via the `AccessibleText` property. The control uses a live region to announce value changes, and the automation peer provides context about the current value and unit.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `AccessibleText` | `string` | `"Countdown"` | Context text announced by screen readers (e.g., "Time remaining: 30 seconds"). |
+
+### How It Works
+
+1. **Live Region**: The control sets `AutomationLiveSetting.Polite` so screen readers announce value changes without interrupting other content.
+2. **Unit Awareness**: When `ClockUnit` is set, the announcement includes the unit (e.g., "Countdown: 45 seconds").
+3. **Custom Context**: Use `AccessibleText` to provide meaningful context.
+
+### Accessibility Examples
+
+```xml
+<!-- Default: announces "Countdown: 30" -->
+<controls:DaisyCountdown Value="30" />
+
+<!-- With unit: announces "Countdown: 45 seconds" -->
+<controls:DaisyCountdown ClockUnit="Seconds" Digits="2" />
+
+<!-- Custom context: announces "Time remaining: 10" -->
+<controls:DaisyCountdown Value="10" AccessibleText="Time remaining" IsCountingDown="True" />
+
+<!-- Custom context with unit: announces "Session expires in: 5 minutes" -->
+<controls:DaisyCountdown ClockUnit="Minutes" AccessibleText="Session expires in" Digits="2" />
+```
+
 ## Tips & Best Practices
 
 - Use `Digits="2"` for clock displays to maintain consistent width; `Digits="3"` for longer counts (e.g., days).
@@ -56,3 +86,4 @@ DaisyCountdown is a templated numeric timer that can show live clock units (hour
 - In loop mode, set `LoopFrom` to your desired reset point (commonly 59 or 99).
 - For accessibility/legibility, keep the monospace font; if you override it, choose another fixed-width family.
 - Remember to stop timers (`IsCountingDown=False`) if you hide/dispose the control; the template also stops the timer when detached from the visual tree.
+- Use `AccessibleText` to describe what the countdown represents (e.g., "Time until launch" or "Seconds remaining").

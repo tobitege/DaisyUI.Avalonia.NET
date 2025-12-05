@@ -1,10 +1,9 @@
 using System;
 using Avalonia;
+using Avalonia.Automation.Peers;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using Avalonia.Interactivity;
-using Avalonia.Layout;
 
 namespace Flowery.Controls
 {
@@ -21,15 +20,25 @@ namespace Flowery.Controls
         Precise
     }
 
+    /// <summary>
+    /// A star rating control styled after DaisyUI's Rating component.
+    /// Includes accessibility support for screen readers via the AccessibleText attached property.
+    /// </summary>
     public class DaisyRating : RangeBase
     {
+        private const string DefaultAccessibleText = "Rating";
+
         protected override Type StyleKeyOverride => typeof(DaisyRating);
 
         private Control? _foregroundPart;
         private Control? _backgroundPart;
 
-        // Spacing between stars (must match the template's StackPanel Spacing)
         private const double StarSpacing = 4.0;
+
+        static DaisyRating()
+        {
+            DaisyAccessibility.SetupAccessibility<DaisyRating>(DefaultAccessibleText);
+        }
 
         public DaisyRating()
         {
@@ -49,7 +58,6 @@ namespace Flowery.Controls
             if (starCount <= 0) return 0;
 
             var starSize = Height;
-            // Total = (starCount * starSize) + ((starCount - 1) * spacing)
             return (starCount * starSize) + ((starCount - 1) * StarSpacing);
         }
 
@@ -84,6 +92,16 @@ namespace Flowery.Controls
             set => SetValue(PrecisionProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets the accessible text announced by screen readers.
+        /// Default is "Rating". The star count is automatically appended (e.g., "Rating: 3 of 5 stars").
+        /// </summary>
+        public string? AccessibleText
+        {
+            get => DaisyAccessibility.GetAccessibleText(this);
+            set => DaisyAccessibility.SetAccessibleText(this, value);
+        }
+
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
@@ -108,17 +126,6 @@ namespace Flowery.Controls
         private void UpdateVisuals()
         {
             if (_foregroundPart == null || _backgroundPart == null) return;
-
-            // Ideally we wait for layout to know the width, but for now we can try to rely on the container size logic.
-            // If we use a Grid for layout, we can set the Width of the foreground container wrapper.
-            // Actually, we need to know the 'full' width to calculate the percentage.
-            // But if we put them in a grid, they have the same size.
-            // We just need to clip the foreground.
-
-            // NOTE: In Avalonia, if we change Width of a container, we trigger layout.
-            // We want to Clip.
-
-            // Let's rely on the Bounds change to update the Clip Rect.
             InvalidateArrange();
         }
 
@@ -140,7 +147,6 @@ namespace Flowery.Controls
             if (percent < 0) percent = 0;
             if (percent > 1) percent = 1;
 
-            // Use the actual stars width, not the control's bounds
             var starsWidth = GetStarsWidth();
             var clipWidth = starsWidth * percent;
 
@@ -180,7 +186,6 @@ namespace Flowery.Controls
 
         private void UpdateValueFromPoint(Point p)
         {
-            // Use actual stars width instead of control bounds
             var starsWidth = GetStarsWidth();
             if (starsWidth <= 0) return;
 
@@ -191,7 +196,6 @@ namespace Flowery.Controls
             var range = Maximum - Minimum;
             var rawValue = (percent * range) + Minimum;
 
-            // Snap value based on Precision setting
             var newValue = SnapValue(rawValue);
 
             SetCurrentValue(ValueProperty, newValue);
@@ -202,18 +206,65 @@ namespace Flowery.Controls
             switch (Precision)
             {
                 case RatingPrecision.Half:
-                    // Snap to nearest 0.5
                     return Math.Ceiling(rawValue * 2) / 2.0;
 
                 case RatingPrecision.Precise:
-                    // Snap to nearest 0.1
                     return Math.Ceiling(rawValue * 10) / 10.0;
 
                 case RatingPrecision.Full:
                 default:
-                    // Snap to whole number
                     return Math.Ceiling(rawValue);
             }
         }
+
+        protected override AutomationPeer OnCreateAutomationPeer()
+        {
+            return new DaisyRatingAutomationPeer(this);
+        }
+    }
+
+    /// <summary>
+    /// AutomationPeer for DaisyRating that exposes it as a slider to assistive technologies.
+    /// Announces the current star count out of the maximum.
+    /// </summary>
+    internal class DaisyRatingAutomationPeer : ControlAutomationPeer
+    {
+        private const string DefaultAccessibleText = "Rating";
+
+        public DaisyRatingAutomationPeer(DaisyRating owner) : base(owner)
+        {
+        }
+
+        protected override AutomationControlType GetAutomationControlTypeCore()
+        {
+            return AutomationControlType.Slider;
+        }
+
+        protected override string GetClassNameCore()
+        {
+            return "DaisyRating";
+        }
+
+        protected override string? GetNameCore()
+        {
+            var rating = (DaisyRating)Owner;
+            var text = DaisyAccessibility.GetEffectiveAccessibleText(rating, DefaultAccessibleText);
+            var valueText = FormatValue(rating.Value, rating.Precision);
+            var maxText = FormatValue(rating.Maximum, RatingPrecision.Full);
+            return $"{text}: {valueText} of {maxText} stars";
+        }
+
+        private static string FormatValue(double value, RatingPrecision precision)
+        {
+            return precision switch
+            {
+                RatingPrecision.Precise => value.ToString("F1"),
+                RatingPrecision.Half => value.ToString("F1"),
+                _ => ((int)value).ToString()
+            };
+        }
+
+        protected override bool IsContentElementCore() => true;
+        protected override bool IsControlElementCore() => true;
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using Avalonia;
-using Avalonia.Automation;
 using Avalonia.Automation.Peers;
 using Avalonia.Controls.Primitives;
 
@@ -95,16 +94,17 @@ namespace Flowery.Controls
     /// <summary>
     /// A Loading control styled after DaisyUI's Loading component.
     /// Shows an animation to indicate that something is loading.
-    /// Includes proper accessibility support for screen readers.
+    /// Includes accessibility support for screen readers via the AccessibleText attached property.
     /// </summary>
     public class DaisyLoading : TemplatedControl
     {
+        private const string DefaultAccessibleText = "Loading";
+
         protected override Type StyleKeyOverride => typeof(DaisyLoading);
 
         static DaisyLoading()
         {
-            // Set default accessible name for screen readers
-            AutomationProperties.NameProperty.OverrideDefaultValue<DaisyLoading>("Loading");
+            DaisyAccessibility.SetupAccessibility<DaisyLoading>(DefaultAccessibleText);
         }
 
         /// <summary>
@@ -153,30 +153,13 @@ namespace Flowery.Controls
         }
 
         /// <summary>
-        /// Defines the <see cref="AccessibleText"/> property.
-        /// </summary>
-        public static readonly StyledProperty<string> AccessibleTextProperty =
-            AvaloniaProperty.Register<DaisyLoading, string>(nameof(AccessibleText), "Loading");
-
-        /// <summary>
         /// Gets or sets the accessible text announced by screen readers.
         /// Default is "Loading". Set to a more specific message like "Loading data" or "Please wait".
         /// </summary>
-        public string AccessibleText
+        public string? AccessibleText
         {
-            get => GetValue(AccessibleTextProperty);
-            set => SetValue(AccessibleTextProperty, value);
-        }
-
-        protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-        {
-            base.OnPropertyChanged(change);
-
-            // Update automation name when AccessibleText changes
-            if (change.Property == AccessibleTextProperty)
-            {
-                AutomationProperties.SetName(this, change.GetNewValue<string>() ?? "Loading");
-            }
+            get => DaisyAccessibility.GetAccessibleText(this);
+            set => DaisyAccessibility.SetAccessibleText(this, value);
         }
 
         protected override AutomationPeer OnCreateAutomationPeer()
@@ -190,6 +173,8 @@ namespace Flowery.Controls
     /// </summary>
     internal class DaisyLoadingAutomationPeer : ControlAutomationPeer
     {
+        private const string DefaultAccessibleText = "Loading";
+
         public DaisyLoadingAutomationPeer(DaisyLoading owner) : base(owner)
         {
         }
@@ -207,7 +192,7 @@ namespace Flowery.Controls
         protected override string? GetNameCore()
         {
             var loading = (DaisyLoading)Owner;
-            return loading.AccessibleText;
+            return DaisyAccessibility.GetEffectiveAccessibleText(loading, DefaultAccessibleText);
         }
 
         protected override bool IsContentElementCore() => true;

@@ -13,6 +13,42 @@ DaisyStatusIndicator shows a status dot with optional animations: ping (expandin
 | `Size` | ExtraSmall, Small, Medium (default), Large, ExtraLarge (adjusts diameter). |
 | `IsPing` | Shows an expanding fade-out ripple behind the dot. |
 | `IsBounce` | Bounces the main dot vertically. |
+| `AccessibleText` | Custom text for screen readers. When null, auto-derived from Color (see below). |
+
+## Accessibility Support
+
+DaisyStatusIndicator includes built-in accessibility for screen readers. Since status indicators convey meaning purely through color, the control automatically provides semantic text based on the `Color` property.
+
+### Default Accessible Text by Color
+
+| Color | Default Text | Typical Use Case |
+|-------|--------------|------------------|
+| Success | "Online" | User/service availability |
+| Error | "Error" | Error states, offline |
+| Warning | "Warning" | Caution states |
+| Info | "Information" | Informational markers |
+| Primary | "Active" | Active/selected state |
+| Secondary | "Secondary" | Secondary state |
+| Accent | "Highlighted" | Highlighted items |
+| Neutral | "Status" | Generic status |
+
+### Custom Accessible Text
+
+Override the automatic text with the `AccessibleText` property:
+
+```xml
+<!-- Auto: announces "Online" -->
+<controls:DaisyStatusIndicator Color="Success" />
+
+<!-- Custom: announces "User is available" -->
+<controls:DaisyStatusIndicator Color="Success" AccessibleText="User is available" />
+
+<!-- Custom: announces "Server offline" -->
+<controls:DaisyStatusIndicator Color="Error" AccessibleText="Server offline" />
+
+<!-- Custom: announces "3 unread messages" -->
+<controls:DaisyStatusIndicator Color="Primary" AccessibleText="3 unread messages" />
+```
 
 ## Quick Examples
 

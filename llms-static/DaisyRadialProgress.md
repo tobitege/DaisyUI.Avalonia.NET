@@ -31,9 +31,31 @@ Uses `DaisyProgressVariant`: Default, Primary, Secondary, Accent, Info, Success,
 <controls:DaisyRadialProgress Minimum="0" Maximum="250" Value="125" Thickness="6" />
 ```
 
+## Accessibility Support
+
+DaisyRadialProgress includes built-in accessibility for screen readers via the `AccessibleText` property. The automation peer automatically announces the current percentage along with the accessible text.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `AccessibleText` | `string` | `"Progress"` | Context text announced by screen readers (e.g., "Upload progress, 70%"). |
+
+### Accessibility Examples
+
+```xml
+<!-- Default: announces "Progress, 70%" -->
+<controls:DaisyRadialProgress Value="70" />
+
+<!-- Contextual: announces "Upload progress, 30%" -->
+<controls:DaisyRadialProgress Value="30" AccessibleText="Upload progress" Variant="Primary" />
+
+<!-- Contextual: announces "Battery level, 100%" -->
+<controls:DaisyRadialProgress Value="100" AccessibleText="Battery level" Variant="Success" Size="Large" />
+```
+
 ## Tips & Best Practices
 
 - Keep `Minimum < Maximum`; default is 0–100.
 - Adjust `Thickness` to match size; thicker strokes on Large keep the ring balanced.
 - If you need custom center content (icon/text), replace the default label via a control template override.
 - For indeterminate circular loaders, use `DaisyLoading` variants instead; this control is determinate.
+- Use `AccessibleText` to provide context about what the progress represents (e.g., "Storage used" or "Task completion").

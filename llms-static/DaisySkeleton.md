@@ -33,9 +33,34 @@ DaisySkeleton provides loading placeholders with a pulsing animation. It can ren
 <controls:DaisySkeleton IsTextMode="True" Content="AI is thinking..." />
 ```
 
+## Accessibility Support
+
+DaisySkeleton includes built-in accessibility for screen readers via the `AccessibleText` property. The control is exposed as a progress indicator to assistive technologies.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `AccessibleText` | `string` | `"Loading placeholder"` | Text announced by screen readers to describe what is loading. |
+
+### Accessibility Examples
+
+```xml
+<!-- Default: announces "Loading placeholder" -->
+<controls:DaisySkeleton Height="32" Width="32" />
+
+<!-- Contextual: announces "Loading user avatar" -->
+<controls:DaisySkeleton Height="48" Width="48" CornerRadius="24" AccessibleText="Loading user avatar" />
+
+<!-- Contextual: announces "Loading article content" -->
+<controls:DaisySkeleton Height="20" AccessibleText="Loading article content" />
+
+<!-- Text mode with context -->
+<controls:DaisySkeleton IsTextMode="True" Content="AI is thinking..." AccessibleText="AI generating response" />
+```
+
 ## Tips & Best Practices
 
 - Match skeleton sizes to the real content to prevent layout shifts when data loads.
 - Use `CornerRadius` to mirror the final shape (e.g., round for avatars, small radius for text lines).
 - Text mode works best when you supply representative placeholder text with similar length to the final content.
 - Keep skeleton colors neutral; rely on the built-in pulse rather than bright accents.
+- Use `AccessibleText` to describe what content is being loaded (e.g., "Loading profile picture" or "Loading comments").

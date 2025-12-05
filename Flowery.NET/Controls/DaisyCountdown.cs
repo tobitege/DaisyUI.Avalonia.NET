@@ -1,5 +1,7 @@
 using System;
 using Avalonia;
+using Avalonia.Automation;
+using Avalonia.Automation.Peers;
 using Avalonia.Controls.Primitives;
 using Avalonia.Threading;
 
@@ -13,11 +15,23 @@ namespace Flowery.Controls
         Seconds
     }
 
+    /// <summary>
+    /// A countdown control that displays a numeric value with optional countdown animation.
+    /// Includes accessibility support for screen readers via the AccessibleText attached property.
+    /// </summary>
     public class DaisyCountdown : TemplatedControl
     {
+        private const string DefaultAccessibleText = "Countdown";
+
         protected override Type StyleKeyOverride => typeof(DaisyCountdown);
 
         private DispatcherTimer? _timer;
+
+        static DaisyCountdown()
+        {
+            DaisyAccessibility.SetupAccessibility<DaisyCountdown>(DefaultAccessibleText);
+            AutomationProperties.LiveSettingProperty.OverrideDefaultValue<DaisyCountdown>(AutomationLiveSetting.Polite);
+        }
 
         public static readonly StyledProperty<int> ValueProperty =
             AvaloniaProperty.Register<DaisyCountdown, int>(nameof(Value), 0, coerce: CoerceValue);
@@ -93,6 +107,16 @@ namespace Flowery.Controls
         {
             get => _displayValue;
             private set => SetAndRaise(DisplayValueProperty, ref _displayValue, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the accessible text announced by screen readers.
+        /// Default is "Countdown". The current value and unit are automatically appended.
+        /// </summary>
+        public string? AccessibleText
+        {
+            get => DaisyAccessibility.GetAccessibleText(this);
+            set => DaisyAccessibility.SetAccessibleText(this, value);
         }
 
         public event EventHandler? CountdownCompleted;
@@ -246,5 +270,55 @@ namespace Flowery.Controls
             base.OnDetachedFromVisualTree(e);
             StopTimer();
         }
+
+        protected override AutomationPeer OnCreateAutomationPeer()
+        {
+            return new DaisyCountdownAutomationPeer(this);
+        }
+    }
+
+    /// <summary>
+    /// AutomationPeer for DaisyCountdown that exposes it as a text element to assistive technologies.
+    /// Uses live region to announce value changes.
+    /// </summary>
+    internal class DaisyCountdownAutomationPeer : ControlAutomationPeer
+    {
+        private const string DefaultAccessibleText = "Countdown";
+
+        public DaisyCountdownAutomationPeer(DaisyCountdown owner) : base(owner)
+        {
+        }
+
+        protected override AutomationControlType GetAutomationControlTypeCore()
+        {
+            return AutomationControlType.Text;
+        }
+
+        protected override string GetClassNameCore()
+        {
+            return "DaisyCountdown";
+        }
+
+        protected override string? GetNameCore()
+        {
+            var countdown = (DaisyCountdown)Owner;
+            var text = DaisyAccessibility.GetEffectiveAccessibleText(countdown, DefaultAccessibleText);
+            var unitText = countdown.ClockUnit switch
+            {
+                CountdownClockUnit.Hours => "hours",
+                CountdownClockUnit.Minutes => "minutes",
+                CountdownClockUnit.Seconds => "seconds",
+                _ => ""
+            };
+
+            if (!string.IsNullOrEmpty(unitText))
+            {
+                return $"{text}: {countdown.Value} {unitText}";
+            }
+            return $"{text}: {countdown.Value}";
+        }
+
+        protected override bool IsContentElementCore() => true;
+        protected override bool IsControlElementCore() => true;
     }
 }

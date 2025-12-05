@@ -34,9 +34,31 @@ DaisyProgress is a styled progress bar with **8 color variants**, **4 size prese
 <controls:DaisyProgress IsIndeterminate="True" Variant="Secondary" />
 ```
 
+## Accessibility Support
+
+DaisyProgress includes built-in accessibility for screen readers via the `AccessibleText` property. The automation peer automatically announces the current percentage along with the accessible text.
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `AccessibleText` | `string` | `"Progress"` | Context text announced by screen readers (e.g., "Uploading file, 45%"). |
+
+### Accessibility Examples
+
+```xml
+<!-- Default: announces "Progress, 40%" -->
+<controls:DaisyProgress Value="40" />
+
+<!-- Contextual: announces "Uploading file, 60%" -->
+<controls:DaisyProgress Value="60" AccessibleText="Uploading file" />
+
+<!-- Contextual: announces "Download progress, 80%" -->
+<controls:DaisyProgress Value="80" AccessibleText="Download progress" Variant="Primary" />
+```
+
 ## Tips & Best Practices
 
 - Choose semantic variants to match the task (e.g., `Success` for completion, `Warning` for slow steps).
 - For very small spaces, use `Size="Small"` or `ExtraSmall` to keep bars unobtrusive.
 - If using indeterminate mode, ensure it communicates ongoing work without a definite end time; determinate values are better for known-length tasks.
 - Wrap in a container with explicit width; the indicator scales to parent width via the `ProgressBar` layout.
+- Use `AccessibleText` to provide context about what is loading (e.g., "Saving document" instead of generic "Progress").

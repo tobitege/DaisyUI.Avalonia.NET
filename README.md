@@ -125,7 +125,11 @@ The best way to explore the controls is to run the included **Gallery App**. It 
 ### Feedback & Utils
 
 - **Indicator** (`DaisyIndicator`): Utility to place a badge on the corner of another element.
-- **Loading** (`DaisyLoading`): Animated loading indicators with 11 variants (Spinner, Dots, Ring, Ball, Bars, Infinity, plus terminal-inspired Orbit, Snake, Pulse, Wave, Bounce).
+- **Loading** (`DaisyLoading`): Animated loading indicators with **27 variants** across 4 categories:
+  - *Classic*: Spinner, Dots, Ring, Ball, Bars, Infinity
+  - *Terminal-inspired*: Orbit, Snake, Pulse, Wave, Bounce
+  - *Matrix/Colon-dot*: Matrix, MatrixInward, MatrixOutward, MatrixVertical
+  - *Special effects*: MatrixRain, Hourglass, SignalSweep, BitFlip, PacketBurst, CometTrail, Heartbeat, TunnelZoom, GlitchReveal, RippleMatrix, CursorBlink, CountdownSpinner
 - **Mask** (`DaisyMask`): Applies shapes (Squircle, Heart, Hexagon, etc.) to content.
 - **Mockup** (`DaisyMockup`): Frames for Code, Window, or Browser.
 - **Progress** (`DaisyProgress`): Linear progress bar.
@@ -133,6 +137,24 @@ The best way to explore the controls is to run the included **Gallery App**. It 
 - **Skeleton** (`DaisySkeleton`): Animated placeholder for loading states.
 - **Toast** (`DaisyToast`): Container for stacking alerts (fixed positioning).
 - **Tooltip**: Themed standard Avalonia `ToolTip`.
+
+### Accessibility
+
+Controls that convey state visually (loading indicators, progress bars, status dots) include built-in screen reader support via the `AccessibleText` property:
+
+```xml
+<!-- Screen reader announces "Loading your profile" -->
+<daisy:DaisyLoading Variant="Spinner" AccessibleText="Loading your profile" />
+
+<!-- Auto-announces "Online" based on color; or customize -->
+<daisy:DaisyStatusIndicator Color="Success" />
+<daisy:DaisyStatusIndicator Color="Error" AccessibleText="Server offline" />
+
+<!-- Announces "Upload progress, 45%" -->
+<daisy:DaisyProgress Value="45" AccessibleText="Upload progress" />
+```
+
+Supported controls: `DaisyLoading`, `DaisyProgress`, `DaisyRadialProgress`, `DaisyStatusIndicator`, `DaisyCountdown`, `DaisySkeleton`, `DaisyRating`.
 
 ### Custom Controls (Avalonia-specific)
 
