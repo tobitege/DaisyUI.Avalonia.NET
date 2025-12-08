@@ -8,6 +8,7 @@
                 <ResourceInclude Source="/Themes/DaisyIcons.axaml" />
                 <ResourceInclude Source="/Themes/DaisyButton.axaml" />
                 <ResourceInclude Source="/Themes/DaisyInput.axaml" />
+                <ResourceInclude Source="/Themes/DaisyNumericUpDown.axaml" />
                 <ResourceInclude Source="/Themes/DaisyCheckBox.axaml" />
                 <ResourceInclude Source="/Themes/DaisyToggle.axaml" />
                 <ResourceInclude Source="/Themes/DaisyRadio.axaml" />

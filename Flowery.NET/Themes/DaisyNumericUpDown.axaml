@@ -1,0 +1,340 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{DynamicResource DaisyBase100Brush}">
+            <StackPanel Spacing="10" Width="300">
+                <controls:DaisyNumericUpDown Watermark="Bordered (Default)" Value="42" />
+                <controls:DaisyNumericUpDown Variant="Ghost" Watermark="Ghost" Value="10" />
+                <controls:DaisyNumericUpDown Variant="Primary" Watermark="Primary" Value="100" />
+                <controls:DaisyNumericUpDown Variant="Secondary" Watermark="Secondary" Value="50" />
+                <controls:DaisyNumericUpDown Variant="Error" Watermark="Error" Value="0" />
+                <controls:DaisyNumericUpDown ShowButtons="False" Watermark="No Buttons" Value="25" />
+                <controls:DaisyNumericUpDown Size="Small" Watermark="Small" Value="5" />
+                <controls:DaisyNumericUpDown Size="Large" Watermark="Large" Value="999" />
+                <controls:DaisyNumericUpDown ShowClearButton="True" Watermark="With Clear Button" Value="123" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <ControlTheme x:Key="{x:Type controls:DaisyNumericUpDown}" TargetType="controls:DaisyNumericUpDown">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinHeight" Value="48" />
+        <Setter Property="MinWidth" Value="120" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FormatString" Value="0" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DataValidationErrors>
+                    <Panel>
+                        <Border x:Name="PART_Background"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                MinHeight="{TemplateBinding MinHeight}" />
+
+                        <!-- Hidden dummy TextBox to satisfy base NumericUpDown requirement -->
+                        <TextBox x:Name="PART_TextBox" IsVisible="False" />
+
+                        <Grid ColumnDefinitions="Auto,*,Auto,Auto"
+                              TextElement.Foreground="{DynamicResource DaisyBaseContentBrush}">
+                            <TextBlock x:Name="PART_Prefix"
+                                       Grid.Column="0"
+                                       Text="{TemplateBinding Prefix}"
+                                       VerticalAlignment="Center"
+                                       Margin="12,0,4,0"
+                                       Opacity="0.7"
+                                       IsVisible="{TemplateBinding Prefix, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                            <TextBox x:Name="PART_DaisyTextBox"
+                                     Grid.Column="1"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     Padding="{TemplateBinding Padding}"
+                                     Watermark="{TemplateBinding Watermark}"
+                                     FontSize="{TemplateBinding FontSize}"
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                     IsReadOnly="{TemplateBinding IsReadOnly}"
+                                     FocusAdorner="{x:Null}"
+                                     CaretBrush="{DynamicResource DaisyBaseContentBrush}"
+                                     SelectionBrush="{DynamicResource DaisyPrimaryBrush}"
+                                     SelectionForegroundBrush="{DynamicResource DaisyPrimaryContentBrush}">
+                            <TextBox.Theme>
+                                <ControlTheme TargetType="TextBox">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                    <Setter Property="Template">
+                                        <ControlTemplate>
+                                            <ScrollViewer HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                                                          VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+                                                <Panel>
+                                                    <TextBlock x:Name="PART_Watermark"
+                                                               Text="{TemplateBinding Watermark}"
+                                                               Opacity="0.5"
+                                                               IsVisible="{TemplateBinding Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+                                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                               Margin="{TemplateBinding Padding}" />
+                                                    <TextPresenter x:Name="PART_TextPresenter"
+                                                                   Text="{TemplateBinding Text, Mode=TwoWay}"
+                                                                   CaretIndex="{TemplateBinding CaretIndex}"
+                                                                   SelectionStart="{TemplateBinding SelectionStart}"
+                                                                   SelectionEnd="{TemplateBinding SelectionEnd}"
+                                                                   TextAlignment="{TemplateBinding TextAlignment}"
+                                                                   TextWrapping="{TemplateBinding TextWrapping}"
+                                                                   PasswordChar="{TemplateBinding PasswordChar}"
+                                                                   RevealPassword="{TemplateBinding RevealPassword}"
+                                                                   SelectionBrush="{TemplateBinding SelectionBrush}"
+                                                                   SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                                                   CaretBrush="{TemplateBinding CaretBrush}"
+                                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                   Margin="{TemplateBinding Padding}" />
+                                                </Panel>
+                                            </ScrollViewer>
+                                        </ControlTemplate>
+                                    </Setter>
+                                </ControlTheme>
+                            </TextBox.Theme>
+                        </TextBox>
+                            <TextBlock x:Name="PART_Suffix"
+                                       Grid.Column="2"
+                                       Text="{TemplateBinding Suffix}"
+                                       VerticalAlignment="Center"
+                                       Margin="4,0,4,0"
+                                       Opacity="0.7"
+                                       IsVisible="{TemplateBinding Suffix, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                            <Grid x:Name="PART_SpinnerPanel"
+                                  Grid.Column="3"
+                                  RowDefinitions="*,*"
+                                  Margin="0,4,4,4"
+                                  IsVisible="{TemplateBinding ShowButtons}">
+                                <RepeatButton x:Name="PART_IncreaseButton"
+                                              Grid.Row="0"
+                                              Focusable="False"
+                                              Background="Transparent"
+                                              Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              BorderThickness="0"
+                                              Padding="8,0"
+                                              MinWidth="28"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalAlignment="Stretch"
+                                              HorizontalContentAlignment="Center"
+                                              VerticalContentAlignment="Center">
+                                    <PathIcon Width="12" Height="12"
+                                              Data="{StaticResource DaisyIconChevronUp}" />
+                                </RepeatButton>
+                                <RepeatButton x:Name="PART_DecreaseButton"
+                                              Grid.Row="1"
+                                              Focusable="False"
+                                              Background="Transparent"
+                                              Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                              BorderThickness="0"
+                                              Padding="8,0"
+                                              MinWidth="28"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalAlignment="Stretch"
+                                              HorizontalContentAlignment="Center"
+                                              VerticalContentAlignment="Center">
+                                    <PathIcon Width="12" Height="12"
+                                              Data="{StaticResource DaisyIconChevronDown}" />
+                                </RepeatButton>
+                            </Grid>
+                        </Grid>
+
+                        <!-- Clear button overlay (doesn't affect layout) -->
+                        <Button x:Name="PART_ClearButton"
+                                Focusable="False"
+                                Background="{DynamicResource DaisyBase200Brush}"
+                                Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                BorderThickness="0"
+                                CornerRadius="4"
+                                Padding="6,4"
+                                Margin="0,0,6,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                IsVisible="False"
+                                ToolTip.Tip="Clear (reset to 0)">
+                            <PathIcon Width="10" Height="10"
+                                      Data="{StaticResource DaisyIconClose}" />
+                        </Button>
+                    </Panel>
+                </DataValidationErrors>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- Spinner button hover states -->
+        <Style Selector="^ /template/ RepeatButton:pointerover">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^ /template/ RepeatButton:pressed">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+        </Style>
+
+        <!-- States -->
+        <Style Selector="^:pointerover /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+        </Style>
+
+        <Style Selector="^:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+        <!-- Disabled state -->
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+        </Style>
+
+        <!-- Input error flash -->
+        <Style Selector="^:input-error /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyErrorBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+
+        <!-- Variants -->
+
+        <Style Selector="^[Variant=Bordered]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Bordered] /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyNeutralBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Bordered]:pointerover /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Bordered]:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Ghost]">
+             <Setter Property="BorderThickness" Value="0" />
+             <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="^[Variant=Ghost]:pointerover /template/ Border#PART_Background">
+             <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+        </Style>
+        <Style Selector="^[Variant=Ghost]:focus-within /template/ Border#PART_Background">
+             <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+             <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="^[Variant=Primary]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Primary]:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryFocusBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Secondary]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisySecondaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Secondary]:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisySecondaryFocusBrush}" />
+        </Style>
+
+         <Style Selector="^[Variant=Error]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Error]:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Success]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Success]:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Warning]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Warning]:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Info]">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Info]:focus-within /template/ Border#PART_Background">
+             <Setter Property="BorderBrush" Value="{DynamicResource DaisyInfoBrush}" />
+        </Style>
+
+        <!-- Sizes -->
+        <Style Selector="^[Size=Large]">
+            <Setter Property="MinHeight" Value="64" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+        <Style Selector="^[Size=Small]">
+            <Setter Property="MinHeight" Value="32" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style Selector="^[Size=ExtraSmall]">
+            <Setter Property="MinHeight" Value="24" />
+            <Setter Property="FontSize" Value="10" />
+        </Style>
+
+        <!-- Clear button: visible only when focused and ShowClearButton=True -->
+        <Style Selector="^[ShowClearButton=True]:focus-within /template/ Button#PART_ClearButton">
+            <Setter Property="IsVisible" Value="True" />
+        </Style>
+        <!-- Clear button scales with size (no spin buttons) -->
+        <Style Selector="^[Size=ExtraSmall] /template/ Button#PART_ClearButton">
+            <Setter Property="Margin" Value="0,0,3,0" />
+            <Setter Property="Padding" Value="3,2" />
+        </Style>
+        <Style Selector="^[Size=ExtraSmall] /template/ Button#PART_ClearButton PathIcon">
+            <Setter Property="Width" Value="6" />
+            <Setter Property="Height" Value="6" />
+        </Style>
+        <Style Selector="^[Size=Small] /template/ Button#PART_ClearButton">
+            <Setter Property="Margin" Value="0,0,4,0" />
+            <Setter Property="Padding" Value="4,3" />
+        </Style>
+        <Style Selector="^[Size=Small] /template/ Button#PART_ClearButton PathIcon">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Height" Value="8" />
+        </Style>
+        <Style Selector="^[Size=Large] /template/ Button#PART_ClearButton">
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Padding" Value="8,6" />
+        </Style>
+        <Style Selector="^[Size=Large] /template/ Button#PART_ClearButton PathIcon">
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="12" />
+        </Style>
+        <!-- Extra right margin when spin buttons are visible -->
+        <Style Selector="^[ShowButtons=True] /template/ Button#PART_ClearButton">
+            <Setter Property="Margin" Value="0,0,40,0" />
+        </Style>
+        <Style Selector="^[ShowButtons=True][Size=ExtraSmall] /template/ Button#PART_ClearButton">
+            <Setter Property="Margin" Value="0,0,28,0" />
+        </Style>
+        <Style Selector="^[ShowButtons=True][Size=Small] /template/ Button#PART_ClearButton">
+            <Setter Property="Margin" Value="0,0,32,0" />
+        </Style>
+        <Style Selector="^[ShowButtons=True][Size=Large] /template/ Button#PART_ClearButton">
+            <Setter Property="Margin" Value="0,0,48,0" />
+        </Style>
+        <Style Selector="^ /template/ Button#PART_ClearButton:pointerover">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^ /template/ Button#PART_ClearButton:pressed">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

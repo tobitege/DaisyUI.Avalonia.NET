@@ -299,6 +299,7 @@ python Utils/generate_docs.py
 | Documentation not merging | Ensure filename matches class name exactly |
 | .NET Standard 2.0 errors | Avoid `HashCode.Combine`, `Math.Clamp`, `unsafe` code, `Brushes.White` |
 | **TemplateBinding crash** | `TemplateBinding` does NOT support `Mode=TwoWay`. Use code-behind to sync values instead |
+| **Multiple template selectors** | ControlTheme styles cannot have multiple `/template/` in one selector. Target the control directly or use global styles |
 
 ### TemplateBinding Two-Way Binding Issue
 
@@ -346,4 +347,55 @@ private void UpdateTemplateControls()
     if (_hexInput != null) _hexInput.Text = HexValue;
     if (_redInput != null) _redInput.Value = Red;
 }
+```
+
+### Multiple Template Selectors Issue
+
+**CRITICAL**: Inside a `ControlTheme`, style selectors cannot contain multiple `/template/` segments. This throws at runtime:
+
+```
+System.InvalidOperationException: 'ControlTemplate styles cannot contain multiple template selectors.'
+```
+
+**Wrong (causes crash):**
+
+```xml
+<ControlTheme x:Key="..." TargetType="controls:MyControl">
+    <!-- This crashes - two /template/ segments -->
+    <Style Selector="^ /template/ RepeatButton:pointerover /template/ PathIcon">
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
+</ControlTheme>
+```
+
+**Correct approaches:**
+
+**Option 1:** Target the control's visual state directly without reaching into nested templates:
+
+```xml
+<ControlTheme x:Key="..." TargetType="controls:MyControl">
+    <!-- Target the RepeatButton itself, let IT style its children -->
+    <Style Selector="^ /template/ RepeatButton:pointerover">
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
+</ControlTheme>
+```
+
+**Option 2:** Use a separate ControlTheme for the nested control (e.g., style RepeatButton separately).
+
+**Option 3:** If you need deep styling, change `<ResourceDictionary>` to `<Styles>`, put the ControlTheme inside `<Styles.Resources>`, and place the complex selector as a global `<Style>` outside the ControlTheme:
+
+```xml
+<Styles xmlns="https://github.com/avaloniaui" ...>
+    <Styles.Resources>
+        <ControlTheme x:Key="..." TargetType="controls:MyControl">
+            <!-- Basic styles here -->
+        </ControlTheme>
+    </Styles.Resources>
+    
+    <!-- Global style with multiple /template/ selectors - OUTSIDE ControlTheme -->
+    <Style Selector="controls|MyControl /template/ RepeatButton:pointerover /template/ PathIcon">
+        <Setter Property="Foreground" Value="Red" />
+    </Style>
+</Styles>
 ```

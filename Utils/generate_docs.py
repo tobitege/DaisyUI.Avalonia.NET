@@ -986,6 +986,7 @@ class DocumentationGenerator:
             'checkbox': 'DaisyCheckBox',
             'fileinput': 'DaisyFileInput',
             'input': 'DaisyInput',
+            'numericupdown': 'DaisyNumericUpDown',
             'radio': 'DaisyRadio',
             'range': 'DaisyRange',
             'rating': 'DaisyRating',

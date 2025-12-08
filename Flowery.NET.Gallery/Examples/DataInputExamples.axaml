@@ -75,6 +75,121 @@
 
             <controls:DaisyDivider />
 
+            <!-- NumericUpDown -->
+            <StackPanel Spacing="12">
+                <local:SectionHeader SectionId="numericupdown" Title="NumericUpDown" />
+                <WrapPanel Orientation="Horizontal">
+                    <!-- Color Variants -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Color Variants" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown Watermark="Bordered (Default)" Value="42" ShowClearButton="True"
+                            ToolTip.Tip="Bordered: Neutral border, highlights with primary color on focus" />
+                        <controls:DaisyNumericUpDown Variant="Ghost" Watermark="Ghost" Value="10"
+                            ToolTip.Tip="Ghost: No border, shows subtle background on focus" />
+                        <controls:DaisyNumericUpDown Variant="Primary" Watermark="Primary" Value="100"
+                            ToolTip.Tip="Primary: Uses primary theme color for the border" />
+                        <controls:DaisyNumericUpDown Variant="Secondary" Watermark="Secondary" Value="50"
+                            ToolTip.Tip="Secondary: Uses secondary theme color for the border" />
+                    </StackPanel>
+                    <!-- Status Variants -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Status Variants" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown Variant="Info" Watermark="Info" Value="123" ShowClearButton="True"
+                            ToolTip.Tip="Info: Blue border for informational inputs" />
+                        <controls:DaisyNumericUpDown Variant="Success" Watermark="Success" Value="100"
+                            ToolTip.Tip="Success: Green border for valid/success states" />
+                        <controls:DaisyNumericUpDown Variant="Warning" Watermark="Warning" Value="50"
+                            ToolTip.Tip="Warning: Yellow border for warning states" />
+                        <controls:DaisyNumericUpDown Variant="Error" Watermark="Error" Value="0"
+                            ToolTip.Tip="Error: Red border for validation errors" />
+                    </StackPanel>
+                    <!-- Sizes -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Sizes" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown Size="ExtraSmall" Watermark="Extra Small" Value="1" ShowClearButton="True"
+                            ToolTip.Tip="ExtraSmall: 24px height, compact for dense UIs" />
+                        <controls:DaisyNumericUpDown Size="Small" Watermark="Small" Value="5"
+                            ToolTip.Tip="Small: 32px height, good for secondary inputs" />
+                        <controls:DaisyNumericUpDown Size="Medium" Watermark="Medium (Default)" Value="25"
+                            ToolTip.Tip="Medium: 48px height, default size for general use" />
+                        <controls:DaisyNumericUpDown Size="Large" Watermark="Large" Value="999"
+                            ToolTip.Tip="Large: 64px height, prominent inputs or touch targets" />
+                    </StackPanel>
+                    <!-- Constraints & Buttons -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Constraints &amp; Buttons" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown ShowButtons="False" Watermark="No Spin Buttons" Value="25" ShowClearButton="True"
+                            ToolTip.Tip="ShowButtons=False: Hides the up/down spin buttons" />
+                        <controls:DaisyNumericUpDown Minimum="0" Maximum="100" Increment="5" Value="50" Watermark="Min/Max/Step"
+                            ToolTip.Tip="Constrained: Min=0, Max=100, Increment=5" />
+                        <controls:DaisyNumericUpDown Minimum="-50" Maximum="50" Value="0" Watermark="Negative Range"
+                            ToolTip.Tip="Negative values supported: Min=-50, Max=50" />
+                        <controls:DaisyNumericUpDown IsReadOnly="True" Value="42" Watermark="Read Only"
+                            ToolTip.Tip="IsReadOnly=True: Value displayed but not editable" />
+                    </StackPanel>
+                    <!-- Prefix & Suffix -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Prefix &amp; Suffix" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown Prefix="$" FormatString="N2" Value="19.99" Watermark="Currency ($)" ShowClearButton="True"
+                            ToolTip.Tip="Prefix='$': Fixed symbol on left, doesn't interfere with editing" />
+                        <controls:DaisyNumericUpDown Suffix="%" Minimum="0" Maximum="100" Value="75" Watermark="Percent (%)"
+                            ToolTip.Tip="Suffix='%': Fixed percent symbol on the right" />
+                        <controls:DaisyNumericUpDown Suffix="kg" FormatString="N1" Value="72.5" Watermark="Weight (kg)"
+                            ToolTip.Tip="Suffix='kg': Unit suffix for measurements" />
+                        <controls:DaisyNumericUpDown Prefix="€" FormatString="N2" Value="49.50" Watermark="Euro (€)"
+                            ToolTip.Tip="Prefix='€': Euro currency prefix" />
+                    </StackPanel>
+                    <!-- Thousand Separators -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Thousand Separators" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown ShowThousandSeparators="True" Value="1234567" Watermark="Millions" ShowClearButton="True"
+                            ToolTip.Tip="ShowThousandSeparators: Displays 1,234,567" />
+                        <controls:DaisyNumericUpDown ShowThousandSeparators="True" Value="9999" Watermark="Thousands"
+                            ToolTip.Tip="ShowThousandSeparators: Displays 9,999" />
+                        <controls:DaisyNumericUpDown ShowThousandSeparators="True" FormatString="N2" Value="12345.67" Watermark="With Decimals"
+                            ToolTip.Tip="Thousand separators work with decimals too" />
+                    </StackPanel>
+                    <!-- Hexadecimal -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Hexadecimal" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" Value="255" Watermark="Hex (0xFF)" ShowClearButton="True"
+                            ToolTip.Tip="Hexadecimal: Displays 0xFF, input allows 0-9 and A-F" />
+                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" ShowBasePrefix="False" Value="255" Watermark="Hex no prefix (FF)"
+                            ToolTip.Tip="ShowBasePrefix=False: Displays FF without 0x prefix" />
+                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" HexCase="Lower" Value="171" Watermark="Hex lowercase (0xab)"
+                            ToolTip.Tip="HexCase=Lower: Displays 0xab, auto-cases input to lowercase" />
+                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" Value="65535" Watermark="16-bit (0xFFFF)"
+                            ToolTip.Tip="Hexadecimal: 16-bit value displayed as 0xFFFF" />
+                    </StackPanel>
+                    <!-- Binary & Octal -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Binary &amp; Octal" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown NumberBase="Binary" Value="10" Watermark="Binary (0b1010)" ShowClearButton="True"
+                            ToolTip.Tip="Binary: Displays 0b1010, input allows only 0 and 1" />
+                        <controls:DaisyNumericUpDown NumberBase="Binary" ShowBasePrefix="False" Value="255" Watermark="Binary no prefix"
+                            ToolTip.Tip="Binary without prefix: 11111111" />
+                        <controls:DaisyNumericUpDown NumberBase="Octal" Value="493" Watermark="Octal (0o755)"
+                            ToolTip.Tip="Octal: Displays 0o755, input allows 0-7 (Unix permissions!)" />
+                        <controls:DaisyNumericUpDown NumberBase="Octal" Value="438" Watermark="Octal (0o666)"
+                            ToolTip.Tip="Octal: Unix file permission 666" />
+                    </StackPanel>
+                    <!-- Special Formats -->
+                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                        <TextBlock Text="Special Formats" FontSize="12" Opacity="0.7"/>
+                        <controls:DaisyNumericUpDown NumberBase="ColorHex" Value="16734003" Watermark="Color (#FF5733)" ShowClearButton="True"
+                            ToolTip.Tip="ColorHex: Displays #FF5733, 6-digit padded, max 7 chars" />
+                        <controls:DaisyNumericUpDown NumberBase="ColorHex" Value="65280" Watermark="Color (#00FF00)"
+                            ToolTip.Tip="ColorHex: Green color, auto-pads to 6 digits" />
+                        <controls:DaisyNumericUpDown NumberBase="IPAddress" Value="3232235777" Watermark="IP (192.168.1.1)"
+                            ToolTip.Tip="IPAddress: Validates octets 0-255, per-octet increment" />
+                        <controls:DaisyNumericUpDown NumberBase="IPAddress" Value="2130706433" Watermark="Localhost (127.0.0.1)"
+                            ToolTip.Tip="IPAddress: localhost address" />
+                    </StackPanel>
+                </WrapPanel>
+            </StackPanel>
+
+            <controls:DaisyDivider />
+
             <!-- Radio -->
             <StackPanel Spacing="12">
                 <local:SectionHeader SectionId="radio" Title="Radio" />
