@@ -23,6 +23,7 @@ DaisyAccordion is an ItemsControl for stacked, single-open sections built from `
 ## Content Structure
 
 DaisyAccordion expects `DaisyAccordionItem` children with a header and body content:
+
 - Header comes from `Header` and is rendered as a clickable toggle.
 - Body shows only when `IsExpanded=True` and inherits the item padding.
 

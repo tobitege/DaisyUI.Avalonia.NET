@@ -620,10 +620,47 @@ class MarkdownGenerator:
         extra_file = self.extras_dir / f"{control_name}.md"
         if extra_file.exists():
             content = extra_file.read_text(encoding='utf-8')
-            # Remove HTML comments (metadata comments)
-            content = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
+            # Remove HTML comments ONLY outside code blocks (metadata comments)
+            content = self._strip_html_comments_outside_code(content)
+            # Demote "# Overview" to "## Overview" since we add "# ControlName" header
+            content = re.sub(r'^# Overview\b', '## Overview', content, flags=re.MULTILINE)
             return content.strip()
         return ""
+
+    def _strip_html_comments_outside_code(self, content: str) -> str:
+        """
+        Remove HTML comments (<!-- ... -->) but preserve them inside code blocks.
+        Code blocks are delimited by ``` markers.
+        """
+        result = []
+        in_code_block = False
+        lines = content.split('\n')
+
+        i = 0
+        while i < len(lines):
+            line = lines[i]
+
+            # Check for code block delimiter
+            if line.strip().startswith('```'):
+                in_code_block = not in_code_block
+                result.append(line)
+                i += 1
+                continue
+
+            if in_code_block:
+                # Inside code block - preserve everything including comments
+                result.append(line)
+            else:
+                # Outside code block - strip HTML comments
+                # Handle single-line comments
+                cleaned = re.sub(r'<!--.*?-->', '', line)
+                # Only add non-empty lines (or preserve intentional blank lines)
+                if cleaned.strip() or not line.strip():
+                    result.append(cleaned)
+
+            i += 1
+
+        return '\n'.join(result)
 
     def _load_images(self, control_name: str) -> list[str]:
         """

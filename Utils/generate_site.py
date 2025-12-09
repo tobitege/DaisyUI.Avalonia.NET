@@ -40,6 +40,35 @@ from pathlib import Path
 from typing import Optional
 
 
+def strip_html_comments_outside_code(content: str) -> str:
+    """
+    Remove HTML comments (<!-- ... -->) but preserve them inside code blocks.
+    Code blocks are delimited by ``` markers.
+    """
+    result = []
+    in_code_block = False
+    lines = content.split('\n')
+
+    for line in lines:
+        # Check for code block delimiter
+        if line.strip().startswith('```'):
+            in_code_block = not in_code_block
+            result.append(line)
+            continue
+
+        if in_code_block:
+            # Inside code block - preserve everything including comments
+            result.append(line)
+        else:
+            # Outside code block - strip HTML comments
+            cleaned = re.sub(r'<!--.*?-->', '', line)
+            # Only add non-empty lines (or preserve intentional blank lines)
+            if cleaned.strip() or not line.strip():
+                result.append(cleaned)
+
+    return '\n'.join(result)
+
+
 class MarkdownToHtml:
     """Simple markdown to HTML converter."""
 
@@ -70,8 +99,15 @@ class MarkdownToHtml:
             return f'<img src="{src}" alt="{alt}" style="max-width:800px;width:100%;height:auto;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.15);">'
         html = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', convert_image, html)
 
-        # Links - convert [text](url) to <a>
-        html = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)
+        # Links - convert [text](url) to <a>, and .md to .html for local links
+        def convert_link(m):
+            text = m.group(1)
+            url = m.group(2)
+            # Convert .md to .html for local links (not http/https)
+            if not url.startswith(('http://', 'https://')) and url.endswith('.md'):
+                url = url[:-3] + '.html'
+            return f'<a href="{url}">{text}</a>'
+        html = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', convert_link, html)
 
         # Headers
         html = re.sub(r'^### (.+)$', r'<h3>\1</h3>', html, flags=re.MULTILINE)
@@ -303,15 +339,19 @@ class SiteGenerator:
             print("      No categories folder found (run generate_docs.py first)")
 
         # Copy images from llms-static/ to docs/
-        print("\n[3/5] Copying images...")
+        print("\n[3/6] Copying images...")
         self._copy_images()
 
+        # Copy standalone guides from llms-static/ to docs/
+        print("\n[4/6] Copying guides...")
+        self._copy_guides()
+
         # Generate CSS
-        print("\n[4/5] Generating stylesheet...")
+        print("\n[5/6] Generating stylesheet...")
         self._write_css()
 
         # Generate HTML pages
-        print("\n[5/5] Generating HTML pages...")
+        print("\n[6/6] Generating HTML pages...")
         self._generate_shell()
         self._generate_home()
         self._generate_control_pages()
@@ -347,6 +387,36 @@ class SiteGenerator:
                     copied += 1
 
         print(f"      Copied {copied} image(s)")
+
+    def _copy_guides(self):
+        """Copy standalone guide markdown files from llms-static/ to docs/ and convert to HTML."""
+        if not self.curated_dir:
+            return
+
+        # List of standalone guide files to copy (not control docs)
+        guide_files = ['MigrationExample.md']
+        copied = 0
+
+        for guide_name in guide_files:
+            guide_file = self.curated_dir / guide_name
+            if guide_file.exists():
+                # Read and convert to HTML
+                md_content = guide_file.read_text(encoding='utf-8')
+                md_content = strip_html_comments_outside_code(md_content)
+                html_content = self.converter.convert(md_content)
+
+                # Add breadcrumb navigation
+                breadcrumbs = '<div class="breadcrumbs"><a href="home.html">Home</a></div>'
+                final_content = breadcrumbs + html_content
+
+                # Generate HTML page
+                html_name = guide_name.replace('.md', '.html')
+                page = self._page_template(guide_name.replace('.md', ''), final_content, depth=0)
+                (self.output_dir / html_name).write_text(page, encoding='utf-8')
+                copied += 1
+
+        if copied > 0:
+            print(f"      Copied {copied} guide(s)")
 
     def _write_css(self):
         """Write the stylesheet (read from external template file)."""
@@ -573,7 +643,7 @@ class SiteGenerator:
             try:
                 content = ctrl['file'].read_text(encoding='utf-8')
                 # Look for first paragraph after "# Overview" or first non-header line
-                content_clean = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
+                content_clean = strip_html_comments_outside_code(content)
                 # Find first meaningful paragraph
                 for line in content_clean.split('\n'):
                     line = line.strip()
@@ -596,7 +666,7 @@ class SiteGenerator:
                 desc = f"{name.replace('Daisy', '')} helper"
                 try:
                     content = ctrl['file'].read_text(encoding='utf-8')
-                    content_clean = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
+                    content_clean = strip_html_comments_outside_code(content)
                     for line in content_clean.split('\n'):
                         line = line.strip()
                         if line and not line.startswith('#') and not line.startswith('|') and not line.startswith('-'):
@@ -750,8 +820,8 @@ class SiteGenerator:
 
         for ctrl in self.controls:
             md_content = ctrl['file'].read_text(encoding='utf-8')
-            # Strip HTML comments from curated docs
-            md_content = re.sub(r'<!--.*?-->', '', md_content, flags=re.DOTALL)
+            # Strip HTML comments from curated docs (but preserve them inside code blocks)
+            md_content = strip_html_comments_outside_code(md_content)
 
             # Insert images if no image markdown referencing images/ folder exists
             # (curated docs from llms-static/ don't have images from llms-static/images/ added)

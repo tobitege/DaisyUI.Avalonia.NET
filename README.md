@@ -375,6 +375,8 @@ bool isDark = DaisyThemeManager.IsDarkTheme("Dracula");
 
 ### Custom Theme Applicator (v1.0.9+)
 
+> 📖 **[Full Migration Example](docs/MigrationExample.html)** - Step-by-step guide for integrating Flowery.NET into existing apps with custom resources.
+
 If your app has a custom theming architecture (e.g., in-place `ThemeDictionary` updates, persisting theme settings, or chaining additional actions), you can override the default theme application behavior by setting `CustomThemeApplicator`:
 
 ```csharp

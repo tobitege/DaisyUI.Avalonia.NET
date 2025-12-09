@@ -72,6 +72,8 @@ DaisyThemeManager.ApplyTheme(target);
 
 > Available since v1.0.9
 
+> 📖 **[Full Migration Example](../MigrationExample.md)** - Step-by-step guide for integrating Flowery.NET into existing apps with custom resources.
+
 For apps that need custom theme application logic (e.g., in-place ThemeDictionary updates, persisting settings), set the `CustomThemeApplicator` delegate at startup:
 
 ```csharp
