@@ -94,7 +94,10 @@ public static class DecimalExtensions
 
         hex = hex.Trim();
         if (hex.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
-            hex = hex[2..];
+            hex = hex.Substring(2);
+
+        if (hex.Length == 0)
+            throw new ArgumentException("Hex string contains no digits", nameof(hex));
 
         return Convert.ToInt64(hex, 16);
     }
@@ -113,7 +116,7 @@ public static class DecimalExtensions
 
         try
         {
-            result = FromHexString(hex);
+            result = FromHexString(hex!);
             return true;
         }
         catch
@@ -136,7 +139,10 @@ public static class DecimalExtensions
 
         binary = binary.Trim();
         if (binary.StartsWith("0b", StringComparison.OrdinalIgnoreCase))
-            binary = binary[2..];
+            binary = binary.Substring(2);
+
+        if (binary.Length == 0)
+            throw new ArgumentException("Binary string contains no digits", nameof(binary));
 
         return Convert.ToInt64(binary, 2);
     }
@@ -155,7 +161,7 @@ public static class DecimalExtensions
 
         try
         {
-            result = FromBinaryString(binary);
+            result = FromBinaryString(binary!);
             return true;
         }
         catch
@@ -178,7 +184,10 @@ public static class DecimalExtensions
 
         octal = octal.Trim();
         if (octal.StartsWith("0o", StringComparison.OrdinalIgnoreCase))
-            octal = octal[2..];
+            octal = octal.Substring(2);
+
+        if (octal.Length == 0)
+            throw new ArgumentException("Octal string contains no digits", nameof(octal));
 
         return Convert.ToInt64(octal, 8);
     }
@@ -197,7 +206,7 @@ public static class DecimalExtensions
 
         try
         {
-            result = FromOctalString(octal);
+            result = FromOctalString(octal!);
             return true;
         }
         catch
@@ -246,7 +255,7 @@ public static class DecimalExtensions
 
         try
         {
-            result = FromColorHexString(colorHex);
+            result = FromColorHexString(colorHex!);
             return true;
         }
         catch
@@ -297,7 +306,7 @@ public static class DecimalExtensions
 
         try
         {
-            result = FromIPAddressString(ipAddress);
+            result = FromIPAddressString(ipAddress!);
             return true;
         }
         catch
