@@ -6,6 +6,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-12-10
+
+### Added
+
+- DaisyTokens.axaml: Centralized design tokens for consistent sizing across controls (heights, fonts, padding, corner radii)
+- DesignTokens.md: Documentation for design token system in llms-static/
+- DaisyTabs: TabWidthMode property with Auto/Equal/Fixed modes to prevent layout shift
+- DecimalExtensions: Static conversion methods for Hex/Binary/Octal/ColorHex/IP (for ViewModel use without control instance)
+- Semantic content color resources (DaisyPrimaryContentBrush, DaisySecondaryContentBrush, etc.)
+
+### Changed
+
+- DaisyButton, DaisyInput, DaisySelect, DaisyNumericUpDown, DaisyTabs, DaisyBadge, DaisyFileInput: Refactored to use DynamicResource tokens
+- Single-line controls now use fixed Height instead of MinHeight for accurate Size variant rendering
+
+### Fixed
+
+- DaisyButton/DaisyInput/DaisySelect/DaisyNumericUpDown/DaisyKbd/DaisyPagination: Size variants now display correct heights (MinHeight in nested Avalonia style selectors wasn't overriding base values)
+- DaisyTabs: Fixed layout shift in Boxed and Lifted variants caused by FontWeight changes on selection
+- DaisyInput: Watermark now respects VerticalContentAlignment property
+- DaisyToolTip: Use semantic content brushes for variant foreground colors
+- DaisyBadge/DaisyButton: Fixed foreground color handling with semantic content resources
+
 ## [1.1.0] - 2025-12-09
 
 ### Added
@@ -138,6 +161,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Custom controls: ComponentSidebar, ModifierKeys
 - Gallery demo application
 
+[1.2.0]: https://github.com/tobitege/Flowery.NET/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/tobitege/Flowery.NET/compare/v1.0.9...v1.1.0
 [1.0.9]: https://github.com/tobitege/Flowery.NET/compare/v1.0.8...v1.0.9
 [1.0.8]: https://github.com/tobitege/Flowery.NET/compare/v1.0.7...v1.0.8
