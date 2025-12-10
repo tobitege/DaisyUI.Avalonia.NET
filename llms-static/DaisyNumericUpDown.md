@@ -195,26 +195,26 @@ The control provides helper methods to get the value in different notations at r
 
 ```csharp
 // Get value as hex string
-string? hex = myInput.ToHexString();              // "0xFF"
-string? hexNoPrefix = myInput.ToHexString(false); // "FF"
+string? hex = myInput.ToHexString();                 // "0xFF"
+string? hexNoPrefix = myInput.ToHexString(false);    // "FF"
 
 // Get value as binary string
-string? bin = myInput.ToBinaryString();           // "0b11111111"
+string? bin = myInput.ToBinaryString();              // "0b11111111"
 string? binNoPrefix = myInput.ToBinaryString(false); // "11111111"
 
 // Get value as octal string
-string? oct = myInput.ToOctalString();            // "0o755"
-string? octNoPrefix = myInput.ToOctalString(false); // "755"
+string? oct = myInput.ToOctalString();               // "0o755"
+string? octNoPrefix = myInput.ToOctalString(false);  // "755"
 
 // Get value as color hex string (6-digit padded)
-string? color = myInput.ToColorHexString();       // "#FF5733"
+string? color = myInput.ToColorHexString();          // "#FF5733"
 string? colorNoPrefix = myInput.ToColorHexString(false); // "FF5733"
 
 // Get value as IPv4 address string
-string? ip = myInput.ToIPAddressString();         // "192.168.1.1"
+string? ip = myInput.ToIPAddressString();             // "192.168.1.1"
 
 // Get value formatted according to current NumberBase setting
-string? formatted = myInput.ToFormattedString();  // Uses current NumberBase
+string? formatted = myInput.ToFormattedString();      // Uses current NumberBase
 ```
 
 | Method | Returns | Example |
@@ -225,6 +225,54 @@ string? formatted = myInput.ToFormattedString();  // Uses current NumberBase
 | `ToOctalString(includePrefix)` | Octal string | `"0o755"` |
 | `ToColorHexString(includePrefix)` | 6-digit padded color hex | `"#FF5733"` |
 | `ToFormattedString(includePrefix)` | String based on current `NumberBase` | Varies |
+
+## Static Extension Methods (for ViewModels)
+
+For scenarios where you need to convert values in a ViewModel without access to the control instance, use `DecimalExtensions`:
+
+```csharp
+using Flowery.Extensions;
+
+// Convert decimal to various notations
+decimal value = 255m;
+string hex = value.ToHexString();             // "0xFF"
+string binary = value.ToBinaryString();       // "0b11111111"
+string octal = value.ToOctalString();         // "0o377"
+
+decimal colorValue = 16734003m;
+string color = colorValue.ToColorHexString(); // "#FF5733"
+
+decimal ipValue = 3232235777m;
+string ip = ipValue.ToIPAddressString();      // "192.168.1.1"
+
+// Parse strings back to decimal
+decimal fromHex = DecimalExtensions.FromHexString("0xFF");              // 255
+decimal fromBinary = DecimalExtensions.FromBinaryString("0b1010");      // 10
+decimal fromOctal = DecimalExtensions.FromOctalString("0o755");         // 493
+decimal fromColor = DecimalExtensions.FromColorHexString("#FF5733");  // 16734003
+decimal fromIp = DecimalExtensions.FromIPAddressString("192.168.1.1");  // 3232235777
+
+// Safe parsing with TryFrom* variants
+if (DecimalExtensions.TryFromColorHexString("#ABC", out decimal parsed))
+{
+    // parsed = 11189196 (#AABBCC expanded from #ABC)
+}
+```
+
+| Method | Direction | Example |
+|--------|-----------|---------|
+| `value.ToHexString(includePrefix, uppercase)` | decimal → string | `255m.ToHexString()` → `"0xFF"` |
+| `value.ToBinaryString(includePrefix)` | decimal → string | `10m.ToBinaryString()` → `"0b1010"` |
+| `value.ToOctalString(includePrefix)` | decimal → string | `493m.ToOctalString()` → `"0o755"` |
+| `value.ToColorHexString(includePrefix, uppercase)` | decimal → string | `16734003m.ToColorHexString()` → `"#FF5733"` |
+| `value.ToIPAddressString()` | decimal → string | `3232235777m.ToIPAddressString()` → `"192.168.1.1"` |
+| `DecimalExtensions.FromHexString(hex)` | string → decimal | `FromHexString("0xFF")` → `255` |
+| `DecimalExtensions.FromBinaryString(bin)` | string → decimal | `FromBinaryString("0b1010")` → `10` |
+| `DecimalExtensions.FromOctalString(oct)` | string → decimal | `FromOctalString("0o755")` → `493` |
+| `DecimalExtensions.FromColorHexString(color)` | string → decimal | `FromColorHexString("#FF5733")` → `16734003` |
+| `DecimalExtensions.FromIPAddressString(ip)` | string → decimal | `FromIPAddressString("192.168.1.1")` → `3232235777` |
+
+> **Note:** All `From*` methods have corresponding `TryFrom*` variants that return `bool` and use an `out` parameter for safe parsing.
 
 ## Tips & Best Practices
 
