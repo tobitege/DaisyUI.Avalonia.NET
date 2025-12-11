@@ -4,314 +4,447 @@
              xmlns:local="clr-namespace:Flowery.NET.Gallery.Examples"
              x:Class="Flowery.NET.Gallery.Examples.DataInputExamples">
 
-    <ScrollViewer x:Name="MainScrollViewer" HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Spacing="24" Margin="24,0,24,32">
+    <Panel>
+        <ScrollViewer x:Name="MainScrollViewer" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Spacing="24" Margin="24,0,24,32">
 
-            <!-- Checkbox -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="checkbox" Title="Checkbox" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Color Variants" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyCheckBox Content="Default" />
-                        <controls:DaisyCheckBox Content="Primary" Variant="Primary" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Secondary" Variant="Secondary" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Accent" Variant="Accent" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Neutral" Variant="Neutral" IsChecked="True"/>
+                <!-- Checkbox -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="checkbox" Title="Checkbox" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Color Variants" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyCheckBox Content="Default" />
+                            <controls:DaisyCheckBox Content="Primary" Variant="Primary"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Secondary" Variant="Secondary"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Accent" Variant="Accent"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Neutral" Variant="Neutral"
+                                IsChecked="True" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Status Variants" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyCheckBox Content="Success" Variant="Success"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Warning" Variant="Warning"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Info" Variant="Info" IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Error" Variant="Error" IsChecked="True" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Sizes" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyCheckBox Content="Extra Small" Size="ExtraSmall"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Small" Size="Small" IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Medium (default)" Size="Medium"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Large" Size="Large" IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Extra Large" Size="ExtraLarge"
+                                IsChecked="True" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Disabled States" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyCheckBox Content="Disabled unchecked" IsEnabled="False" />
+                            <controls:DaisyCheckBox Content="Disabled checked" IsEnabled="False"
+                                IsChecked="True" />
+                            <controls:DaisyCheckBox Content="Disabled Primary" Variant="Primary"
+                                IsEnabled="False" IsChecked="True" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- File Input -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="file-input" Title="File Input" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="300">
+                            <controls:DaisyFileInput />
+                            <controls:DaisyFileInput Variant="Primary" FileName="photo.jpg" />
+                            <controls:DaisyFileInput Variant="Accent" Size="Small" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- Input -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="input" Title="Input" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                            <TextBlock Text="Variants" FontSize="12" />
+                            <controls:DaisyInput Watermark="Default (Bordered)" Margin="0,4" />
+                            <controls:DaisyInput Variant="Ghost" Watermark="Ghost" Margin="0,4" />
+                            <controls:DaisyInput Variant="Filled" Watermark="Filled" Margin="0,4" />
+                            <controls:DaisyInput Variant="Primary" Watermark="Primary" Margin="0,4" />
+                            <controls:DaisyInput Variant="Error" Watermark="Error" Margin="0,4" />
+                        </StackPanel>
+                        <StackPanel Spacing="20" Margin="0,0,40,10" Width="250">
+                            <TextBlock Text="Labels &amp; Required" FontSize="12" />
+                            <controls:DaisyInput Label="Email" IsRequired="True"
+                                Watermark="Enter email..." />
+                            <controls:DaisyInput Label="Notes" IsOptional="True"
+                                Watermark="Optional notes..." />
+                            <controls:DaisyInput Label="Password" HelperText="Must be 8+ characters"
+                                Watermark="Enter password..." />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                            <TextBlock Text="With Icons" FontSize="12" />
+                            <controls:DaisyInput StartIcon="{StaticResource DaisyIconHome}"
+                                Watermark="Address" Margin="0,4" />
+                            <controls:DaisyInput EndIcon="{StaticResource DaisyIconSearch}"
+                                Watermark="Search..." Margin="0,4" />
+                            <controls:DaisyInput StartIcon="{StaticResource DaisyIconUser}"
+                                EndIcon="{StaticResource DaisyIconCheck}"
+                                Watermark="Username" Variant="Success" Margin="0,4" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                            <TextBlock Text="Sizes" FontSize="12" />
+                            <controls:DaisyInput Size="ExtraSmall" Watermark="Extra Small"
+                                Margin="0,4" />
+                            <controls:DaisyInput Size="Small" Watermark="Small" Margin="0,4" />
+                            <controls:DaisyInput Size="Medium" Watermark="Medium (default)"
+                                Margin="0,4" />
+                            <controls:DaisyInput Size="Large" Watermark="Large" Margin="0,4" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- NumericUpDown -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="numericupdown" Title="NumericUpDown" />
+                    <WrapPanel Orientation="Horizontal">
+                        <!-- Color Variants -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Color Variants" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown Watermark="Bordered (Default)" Value="42"
+                                ShowClearButton="True"
+                                ToolTip.Tip="Bordered: Neutral border, highlights with primary color on focus" />
+                            <controls:DaisyNumericUpDown Variant="Ghost" Watermark="Ghost"
+                                Value="10"
+                                ToolTip.Tip="Ghost: No border, shows subtle background on focus" />
+                            <controls:DaisyNumericUpDown Variant="Primary" Watermark="Primary"
+                                Value="100"
+                                ToolTip.Tip="Primary: Uses primary theme color for the border" />
+                            <controls:DaisyNumericUpDown Variant="Secondary" Watermark="Secondary"
+                                Value="50"
+                                ToolTip.Tip="Secondary: Uses secondary theme color for the border" />
+                        </StackPanel>
+                        <!-- Status Variants -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Status Variants" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown Variant="Info" Watermark="Info" Value="123"
+                                ShowClearButton="True"
+                                ToolTip.Tip="Info: Blue border for informational inputs" />
+                            <controls:DaisyNumericUpDown Variant="Success" Watermark="Success"
+                                Value="100"
+                                ToolTip.Tip="Success: Green border for valid/success states" />
+                            <controls:DaisyNumericUpDown Variant="Warning" Watermark="Warning"
+                                Value="50"
+                                ToolTip.Tip="Warning: Yellow border for warning states" />
+                            <controls:DaisyNumericUpDown Variant="Error" Watermark="Error" Value="0"
+                                ToolTip.Tip="Error: Red border for validation errors" />
+                        </StackPanel>
+                        <!-- Sizes -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Sizes" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown Size="ExtraSmall" Watermark="Extra Small"
+                                Value="1" ShowClearButton="True"
+                                ToolTip.Tip="ExtraSmall: 24px height, compact for dense UIs" />
+                            <controls:DaisyNumericUpDown Size="Small" Watermark="Small" Value="5"
+                                ToolTip.Tip="Small: 32px height, good for secondary inputs" />
+                            <controls:DaisyNumericUpDown Size="Medium" Watermark="Medium (Default)"
+                                Value="25"
+                                ToolTip.Tip="Medium: 48px height, default size for general use" />
+                            <controls:DaisyNumericUpDown Size="Large" Watermark="Large" Value="999"
+                                ToolTip.Tip="Large: 64px height, prominent inputs or touch targets" />
+                        </StackPanel>
+                        <!-- Constraints & Buttons -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Constraints &amp; Buttons" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown ShowButtons="False"
+                                Watermark="No Spin Buttons" Value="25" ShowClearButton="True"
+                                ToolTip.Tip="ShowButtons=False: Hides the up/down spin buttons" />
+                            <controls:DaisyNumericUpDown Minimum="0" Maximum="100" Increment="5"
+                                Value="50" Watermark="Min/Max/Step"
+                                ToolTip.Tip="Constrained: Min=0, Max=100, Increment=5" />
+                            <controls:DaisyNumericUpDown Minimum="-50" Maximum="50" Value="0"
+                                Watermark="Negative Range"
+                                ToolTip.Tip="Negative values supported: Min=-50, Max=50" />
+                            <controls:DaisyNumericUpDown IsReadOnly="True" Value="42"
+                                Watermark="Read Only"
+                                ToolTip.Tip="IsReadOnly=True: Value displayed but not editable" />
+                        </StackPanel>
+                        <!-- Prefix & Suffix -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Prefix &amp; Suffix" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown Prefix="$" FormatString="N2" Value="19.99"
+                                Watermark="Currency ($)" ShowClearButton="True"
+                                ToolTip.Tip="Prefix='$': Fixed symbol on left, doesn't interfere with editing" />
+                            <controls:DaisyNumericUpDown Suffix="%" Minimum="0" Maximum="100"
+                                Value="75" Watermark="Percent (%)"
+                                ToolTip.Tip="Suffix='%': Fixed percent symbol on the right" />
+                            <controls:DaisyNumericUpDown Suffix="kg" FormatString="N1" Value="72.5"
+                                Watermark="Weight (kg)"
+                                ToolTip.Tip="Suffix='kg': Unit suffix for measurements" />
+                            <controls:DaisyNumericUpDown Prefix="€" FormatString="N2" Value="49.50"
+                                Watermark="Euro (€)"
+                                ToolTip.Tip="Prefix='€': Euro currency prefix" />
+                        </StackPanel>
+                        <!-- Thousand Separators -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Thousand Separators" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown ShowThousandSeparators="True"
+                                Value="1234567" Watermark="Millions" ShowClearButton="True"
+                                ToolTip.Tip="ShowThousandSeparators: Displays 1,234,567" />
+                            <controls:DaisyNumericUpDown ShowThousandSeparators="True" Value="9999"
+                                Watermark="Thousands"
+                                ToolTip.Tip="ShowThousandSeparators: Displays 9,999" />
+                            <controls:DaisyNumericUpDown ShowThousandSeparators="True"
+                                FormatString="N2" Value="12345.67" Watermark="With Decimals"
+                                ToolTip.Tip="Thousand separators work with decimals too" />
+                        </StackPanel>
+                        <!-- Hexadecimal -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Hexadecimal" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown NumberBase="Hexadecimal" Value="255"
+                                Watermark="Hex (0xFF)" ShowClearButton="True"
+                                ToolTip.Tip="Hexadecimal: Displays 0xFF, input allows 0-9 and A-F" />
+                            <controls:DaisyNumericUpDown NumberBase="Hexadecimal"
+                                ShowBasePrefix="False" Value="255" Watermark="Hex no prefix (FF)"
+                                ToolTip.Tip="ShowBasePrefix=False: Displays FF without 0x prefix" />
+                            <controls:DaisyNumericUpDown NumberBase="Hexadecimal" HexCase="Lower"
+                                Value="171" Watermark="Hex lowercase (0xab)"
+                                ToolTip.Tip="HexCase=Lower: Displays 0xab, auto-cases input to lowercase" />
+                            <controls:DaisyNumericUpDown NumberBase="Hexadecimal" Value="65535"
+                                Watermark="16-bit (0xFFFF)"
+                                ToolTip.Tip="Hexadecimal: 16-bit value displayed as 0xFFFF" />
+                        </StackPanel>
+                        <!-- Binary & Octal -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Binary &amp; Octal" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown NumberBase="Binary" Value="10"
+                                Watermark="Binary (0b1010)" ShowClearButton="True"
+                                ToolTip.Tip="Binary: Displays 0b1010, input allows only 0 and 1" />
+                            <controls:DaisyNumericUpDown NumberBase="Binary" ShowBasePrefix="False"
+                                Value="255" Watermark="Binary no prefix"
+                                ToolTip.Tip="Binary without prefix: 11111111" />
+                            <controls:DaisyNumericUpDown NumberBase="Octal" Value="493"
+                                Watermark="Octal (0o755)"
+                                ToolTip.Tip="Octal: Displays 0o755, input allows 0-7 (Unix permissions!)" />
+                            <controls:DaisyNumericUpDown NumberBase="Octal" Value="438"
+                                Watermark="Octal (0o666)"
+                                ToolTip.Tip="Octal: Unix file permission 666" />
+                        </StackPanel>
+                        <!-- Special Formats -->
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Special Formats" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyNumericUpDown NumberBase="ColorHex" Value="16734003"
+                                Watermark="Color (#FF5733)" ShowClearButton="True"
+                                ToolTip.Tip="ColorHex: Displays #FF5733, 6-digit padded, max 7 chars" />
+                            <controls:DaisyNumericUpDown NumberBase="ColorHex" Value="65280"
+                                Watermark="Color (#00FF00)"
+                                ToolTip.Tip="ColorHex: Green color, auto-pads to 6 digits" />
+                            <controls:DaisyNumericUpDown NumberBase="IPAddress" Value="3232235777"
+                                Watermark="IP (192.168.1.1)"
+                                ToolTip.Tip="IPAddress: Validates octets 0-255, per-octet increment" />
+                            <controls:DaisyNumericUpDown NumberBase="IPAddress" Value="2130706433"
+                                Watermark="Localhost (127.0.0.1)"
+                                ToolTip.Tip="IPAddress: localhost address" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- Radio -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="radio" Title="Radio" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <controls:DaisyRadio Content="Default" GroupName="G1" />
+                            <controls:DaisyRadio Content="Primary" Variant="Primary" GroupName="G1"
+                                IsChecked="True" />
+                            <controls:DaisyRadio Content="Secondary" Variant="Secondary"
+                                GroupName="G1" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- Range -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="range" Title="Range" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                            <TextBlock Text="Basic Variants" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyRange Value="20" Maximum="100" />
+                            <controls:DaisyRange Value="40" Maximum="100" Variant="Primary" />
+                            <controls:DaisyRange Value="60" Maximum="100" Variant="Secondary" />
+                            <controls:DaisyRange Value="80" Maximum="100" Variant="Accent"
+                                Size="ExtraSmall" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                            <TextBlock Text="Custom Thumb Properties" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyRange Value="50" Maximum="100" ThumbSize="32" />
+                            <controls:DaisyRange Value="70" Maximum="100" ThumbSize="20" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
+                            <TextBlock Text="With Progress Fill" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyRange Value="45" Maximum="100" ShowProgress="True"
+                                Variant="Primary" />
+                            <controls:DaisyRange Value="75" Maximum="100" ShowProgress="True"
+                                Variant="Secondary" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- Rating -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="rating" Title="Rating" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Full Stars" FontWeight="SemiBold" Margin="0,0,0,4" />
+                            <controls:DaisyRating Value="2" Maximum="5"
+                                ToolTip.Tip="Interactive Rating (Full)" />
+                            <TextBlock Text="Half Stars" FontWeight="SemiBold" Margin="0,8,0,4" />
+                            <controls:DaisyRating Value="3.5" Size="Large" Precision="Half"
+                                ToolTip.Tip="Half Star Precision (3.5)" />
+                            <TextBlock Text="Read Only" FontWeight="SemiBold" Margin="0,8,0,4" />
+                            <controls:DaisyRating Value="1" Size="ExtraSmall" IsReadOnly="True"
+                                ToolTip.Tip="Read Only" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- Select -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="select" Title="Select" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <controls:DaisySelect PlaceholderText="Pick a pizza" SelectedIndex="0">
+                                <ComboBoxItem>Pepperoni</ComboBoxItem>
+                                <ComboBoxItem>Margherita</ComboBoxItem>
+                                <ComboBoxItem>Hawaiian</ComboBoxItem>
+                            </controls:DaisySelect>
+                            <controls:DaisySelect Variant="Primary" PlaceholderText="Primary">
+                                <ComboBoxItem>Option 1</ComboBoxItem>
+                                <ComboBoxItem>Option 2</ComboBoxItem>
+                            </controls:DaisySelect>
+                            <controls:DaisySelect Variant="Ghost" PlaceholderText="Ghost">
+                                <ComboBoxItem>Option 1</ComboBoxItem>
+                                <ComboBoxItem>Option 2</ComboBoxItem>
+                            </controls:DaisySelect>
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- TextArea -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="textarea" Title="TextArea" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="280">
+                            <TextBlock Text="Variants" FontSize="12" />
+                            <controls:DaisyTextArea Watermark="Default (Bordered)" MinHeight="70" />
+                            <controls:DaisyTextArea Variant="Filled" Watermark="Filled variant"
+                                MinHeight="70" />
+                            <controls:DaisyTextArea Variant="Primary" Watermark="Primary"
+                                MinHeight="70" />
+                            <controls:DaisyTextArea Variant="Error" HelperText="Invalid input"
+                                Watermark="Error state" MinHeight="70" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="280">
+                            <TextBlock Text="Labels &amp; Helper Text" FontSize="12" />
+                            <controls:DaisyTextArea Label="Bio" IsRequired="True"
+                                Watermark="Tell us about yourself..." MinHeight="70" />
+                            <controls:DaisyTextArea Label="Notes" IsOptional="True"
+                                HelperText="Optional field" Watermark="Additional notes..."
+                                MinHeight="70" />
+                            <controls:DaisyTextArea Label="Feedback" HintText="Your opinion matters"
+                                HelperText="We read all feedback" Watermark="Type here..."
+                                MinHeight="70" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="280">
+                            <TextBlock Text="Character Counter" FontSize="12" />
+                            <controls:DaisyTextArea Label="Tweet" ShowCharacterCount="True"
+                                MaxLength="280" Watermark="What's happening?" MinHeight="70" />
+                            <controls:DaisyTextArea Label="Comment" ShowCharacterCount="True"
+                                MaxLength="500" HelperText="Be respectful"
+                                Watermark="Leave a comment..." MinHeight="70" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="280">
+                            <TextBlock Text="Action Button" FontSize="12" />
+                            <controls:DaisyTextArea x:Name="FeedbackTextArea" Label="Feedback"
+                                ActionButtonContent="Submit Feedback"
+                                ActionButtonClicked="OnFeedbackButtonClicked"
+                                Watermark="Type your feedback here..." MinHeight="80" />
+                        </StackPanel>
+                    </WrapPanel>
+                    <!-- Auto-Grow placed outside WrapPanel to allow unrestricted growth -->
+                    <StackPanel Spacing="10" Margin="0,16,0,0" Width="300">
+                        <TextBlock Text="Auto-Grow (type to see it expand)" FontSize="12" />
+                        <controls:DaisyTextArea Label="Description" IsAutoGrow="True"
+                            Watermark="This textarea grows as you type..." MinHeight="50" />
                     </StackPanel>
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Status Variants" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyCheckBox Content="Success" Variant="Success" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Warning" Variant="Warning" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Info" Variant="Info" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Error" Variant="Error" IsChecked="True"/>
-                    </StackPanel>
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Sizes" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyCheckBox Content="Extra Small" Size="ExtraSmall" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Small" Size="Small" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Medium (default)" Size="Medium" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Large" Size="Large" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Extra Large" Size="ExtraLarge" IsChecked="True"/>
-                    </StackPanel>
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Disabled States" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyCheckBox Content="Disabled unchecked" IsEnabled="False"/>
-                        <controls:DaisyCheckBox Content="Disabled checked" IsEnabled="False" IsChecked="True"/>
-                        <controls:DaisyCheckBox Content="Disabled Primary" Variant="Primary" IsEnabled="False" IsChecked="True"/>
-                    </StackPanel>
-                </WrapPanel>
+                </StackPanel>
+
+                <controls:DaisyDivider />
+
+                <!-- Toggle -->
+                <StackPanel Spacing="12">
+                    <local:SectionHeader SectionId="toggle" Title="Toggle" />
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Basic Variants" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyToggle Content="Default" />
+                            <controls:DaisyToggle Content="Primary" Variant="Primary"
+                                IsChecked="True" />
+                            <controls:DaisyToggle Content="Secondary" Variant="Secondary"
+                                IsChecked="True" />
+                            <controls:DaisyToggle Content="Large" Size="Large" Variant="Accent"
+                                IsChecked="True" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Sizes" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyToggle Content="Extra Small" Size="ExtraSmall"
+                                IsChecked="True" />
+                            <controls:DaisyToggle Content="Small" Size="Small" IsChecked="True" />
+                            <controls:DaisyToggle Content="Medium (Default)" IsChecked="True" />
+                            <controls:DaisyToggle Content="Large" Size="Large" IsChecked="True" />
+                        </StackPanel>
+                        <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
+                            <TextBlock Text="Custom Padding" FontSize="12" Opacity="0.7" />
+                            <controls:DaisyToggle Content="Default Padding" Variant="Info"
+                                IsChecked="True" />
+                            <controls:DaisyToggle Content="Tight Padding (1)" TogglePadding="1"
+                                Variant="Success" IsChecked="True" />
+                            <controls:DaisyToggle Content="Loose Padding (4)" TogglePadding="4"
+                                Variant="Warning" IsChecked="True" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+
             </StackPanel>
+        </ScrollViewer>
 
-            <controls:DaisyDivider />
-
-            <!-- File Input -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="file-input" Title="File Input" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="300">
-                        <controls:DaisyFileInput />
-                        <controls:DaisyFileInput Variant="Primary" FileName="photo.jpg" />
-                        <controls:DaisyFileInput Variant="Accent" Size="Small" />
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- Input -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="input" Title="Input" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
-                        <controls:DaisyInput Watermark="Default (Bordered)" Margin="0,4"/>
-                        <controls:DaisyInput Variant="Ghost" Watermark="Ghost" Margin="0,4"/>
-                        <controls:DaisyInput Variant="Primary" Watermark="Primary" Margin="0,4"/>
-                        <controls:DaisyInput Variant="Error" Watermark="Error" Margin="0,4"/>
-                        <controls:DaisyInput Size="Small" Watermark="Small Input" Margin="0,4"/>
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- NumericUpDown -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="numericupdown" Title="NumericUpDown" />
-                <WrapPanel Orientation="Horizontal">
-                    <!-- Color Variants -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Color Variants" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown Watermark="Bordered (Default)" Value="42" ShowClearButton="True"
-                            ToolTip.Tip="Bordered: Neutral border, highlights with primary color on focus" />
-                        <controls:DaisyNumericUpDown Variant="Ghost" Watermark="Ghost" Value="10"
-                            ToolTip.Tip="Ghost: No border, shows subtle background on focus" />
-                        <controls:DaisyNumericUpDown Variant="Primary" Watermark="Primary" Value="100"
-                            ToolTip.Tip="Primary: Uses primary theme color for the border" />
-                        <controls:DaisyNumericUpDown Variant="Secondary" Watermark="Secondary" Value="50"
-                            ToolTip.Tip="Secondary: Uses secondary theme color for the border" />
-                    </StackPanel>
-                    <!-- Status Variants -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Status Variants" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown Variant="Info" Watermark="Info" Value="123" ShowClearButton="True"
-                            ToolTip.Tip="Info: Blue border for informational inputs" />
-                        <controls:DaisyNumericUpDown Variant="Success" Watermark="Success" Value="100"
-                            ToolTip.Tip="Success: Green border for valid/success states" />
-                        <controls:DaisyNumericUpDown Variant="Warning" Watermark="Warning" Value="50"
-                            ToolTip.Tip="Warning: Yellow border for warning states" />
-                        <controls:DaisyNumericUpDown Variant="Error" Watermark="Error" Value="0"
-                            ToolTip.Tip="Error: Red border for validation errors" />
-                    </StackPanel>
-                    <!-- Sizes -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Sizes" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown Size="ExtraSmall" Watermark="Extra Small" Value="1" ShowClearButton="True"
-                            ToolTip.Tip="ExtraSmall: 24px height, compact for dense UIs" />
-                        <controls:DaisyNumericUpDown Size="Small" Watermark="Small" Value="5"
-                            ToolTip.Tip="Small: 32px height, good for secondary inputs" />
-                        <controls:DaisyNumericUpDown Size="Medium" Watermark="Medium (Default)" Value="25"
-                            ToolTip.Tip="Medium: 48px height, default size for general use" />
-                        <controls:DaisyNumericUpDown Size="Large" Watermark="Large" Value="999"
-                            ToolTip.Tip="Large: 64px height, prominent inputs or touch targets" />
-                    </StackPanel>
-                    <!-- Constraints & Buttons -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Constraints &amp; Buttons" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown ShowButtons="False" Watermark="No Spin Buttons" Value="25" ShowClearButton="True"
-                            ToolTip.Tip="ShowButtons=False: Hides the up/down spin buttons" />
-                        <controls:DaisyNumericUpDown Minimum="0" Maximum="100" Increment="5" Value="50" Watermark="Min/Max/Step"
-                            ToolTip.Tip="Constrained: Min=0, Max=100, Increment=5" />
-                        <controls:DaisyNumericUpDown Minimum="-50" Maximum="50" Value="0" Watermark="Negative Range"
-                            ToolTip.Tip="Negative values supported: Min=-50, Max=50" />
-                        <controls:DaisyNumericUpDown IsReadOnly="True" Value="42" Watermark="Read Only"
-                            ToolTip.Tip="IsReadOnly=True: Value displayed but not editable" />
-                    </StackPanel>
-                    <!-- Prefix & Suffix -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Prefix &amp; Suffix" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown Prefix="$" FormatString="N2" Value="19.99" Watermark="Currency ($)" ShowClearButton="True"
-                            ToolTip.Tip="Prefix='$': Fixed symbol on left, doesn't interfere with editing" />
-                        <controls:DaisyNumericUpDown Suffix="%" Minimum="0" Maximum="100" Value="75" Watermark="Percent (%)"
-                            ToolTip.Tip="Suffix='%': Fixed percent symbol on the right" />
-                        <controls:DaisyNumericUpDown Suffix="kg" FormatString="N1" Value="72.5" Watermark="Weight (kg)"
-                            ToolTip.Tip="Suffix='kg': Unit suffix for measurements" />
-                        <controls:DaisyNumericUpDown Prefix="€" FormatString="N2" Value="49.50" Watermark="Euro (€)"
-                            ToolTip.Tip="Prefix='€': Euro currency prefix" />
-                    </StackPanel>
-                    <!-- Thousand Separators -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Thousand Separators" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown ShowThousandSeparators="True" Value="1234567" Watermark="Millions" ShowClearButton="True"
-                            ToolTip.Tip="ShowThousandSeparators: Displays 1,234,567" />
-                        <controls:DaisyNumericUpDown ShowThousandSeparators="True" Value="9999" Watermark="Thousands"
-                            ToolTip.Tip="ShowThousandSeparators: Displays 9,999" />
-                        <controls:DaisyNumericUpDown ShowThousandSeparators="True" FormatString="N2" Value="12345.67" Watermark="With Decimals"
-                            ToolTip.Tip="Thousand separators work with decimals too" />
-                    </StackPanel>
-                    <!-- Hexadecimal -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Hexadecimal" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" Value="255" Watermark="Hex (0xFF)" ShowClearButton="True"
-                            ToolTip.Tip="Hexadecimal: Displays 0xFF, input allows 0-9 and A-F" />
-                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" ShowBasePrefix="False" Value="255" Watermark="Hex no prefix (FF)"
-                            ToolTip.Tip="ShowBasePrefix=False: Displays FF without 0x prefix" />
-                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" HexCase="Lower" Value="171" Watermark="Hex lowercase (0xab)"
-                            ToolTip.Tip="HexCase=Lower: Displays 0xab, auto-cases input to lowercase" />
-                        <controls:DaisyNumericUpDown NumberBase="Hexadecimal" Value="65535" Watermark="16-bit (0xFFFF)"
-                            ToolTip.Tip="Hexadecimal: 16-bit value displayed as 0xFFFF" />
-                    </StackPanel>
-                    <!-- Binary & Octal -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Binary &amp; Octal" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown NumberBase="Binary" Value="10" Watermark="Binary (0b1010)" ShowClearButton="True"
-                            ToolTip.Tip="Binary: Displays 0b1010, input allows only 0 and 1" />
-                        <controls:DaisyNumericUpDown NumberBase="Binary" ShowBasePrefix="False" Value="255" Watermark="Binary no prefix"
-                            ToolTip.Tip="Binary without prefix: 11111111" />
-                        <controls:DaisyNumericUpDown NumberBase="Octal" Value="493" Watermark="Octal (0o755)"
-                            ToolTip.Tip="Octal: Displays 0o755, input allows 0-7 (Unix permissions!)" />
-                        <controls:DaisyNumericUpDown NumberBase="Octal" Value="438" Watermark="Octal (0o666)"
-                            ToolTip.Tip="Octal: Unix file permission 666" />
-                    </StackPanel>
-                    <!-- Special Formats -->
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Special Formats" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyNumericUpDown NumberBase="ColorHex" Value="16734003" Watermark="Color (#FF5733)" ShowClearButton="True"
-                            ToolTip.Tip="ColorHex: Displays #FF5733, 6-digit padded, max 7 chars" />
-                        <controls:DaisyNumericUpDown NumberBase="ColorHex" Value="65280" Watermark="Color (#00FF00)"
-                            ToolTip.Tip="ColorHex: Green color, auto-pads to 6 digits" />
-                        <controls:DaisyNumericUpDown NumberBase="IPAddress" Value="3232235777" Watermark="IP (192.168.1.1)"
-                            ToolTip.Tip="IPAddress: Validates octets 0-255, per-octet increment" />
-                        <controls:DaisyNumericUpDown NumberBase="IPAddress" Value="2130706433" Watermark="Localhost (127.0.0.1)"
-                            ToolTip.Tip="IPAddress: localhost address" />
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- Radio -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="radio" Title="Radio" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <controls:DaisyRadio Content="Default" GroupName="G1" />
-                        <controls:DaisyRadio Content="Primary" Variant="Primary" GroupName="G1" IsChecked="True"/>
-                        <controls:DaisyRadio Content="Secondary" Variant="Secondary" GroupName="G1"/>
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- Range -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="range" Title="Range" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
-                        <TextBlock Text="Basic Variants" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyRange Value="20" Maximum="100"/>
-                        <controls:DaisyRange Value="40" Maximum="100" Variant="Primary"/>
-                        <controls:DaisyRange Value="60" Maximum="100" Variant="Secondary"/>
-                        <controls:DaisyRange Value="80" Maximum="100" Variant="Accent" Size="ExtraSmall"/>
-                    </StackPanel>
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
-                        <TextBlock Text="Custom Thumb Properties" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyRange Value="50" Maximum="100" ThumbSize="32"/>
-                        <controls:DaisyRange Value="70" Maximum="100" ThumbSize="20"/>
-                    </StackPanel>
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
-                        <TextBlock Text="With Progress Fill" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyRange Value="45" Maximum="100" ShowProgress="True" Variant="Primary"/>
-                        <controls:DaisyRange Value="75" Maximum="100" ShowProgress="True" Variant="Secondary"/>
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- Rating -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="rating" Title="Rating" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Full Stars" FontWeight="SemiBold" Margin="0,0,0,4" />
-                        <controls:DaisyRating Value="2" Maximum="5" ToolTip.Tip="Interactive Rating (Full)" />
-                        <TextBlock Text="Half Stars" FontWeight="SemiBold" Margin="0,8,0,4" />
-                        <controls:DaisyRating Value="3.5" Size="Large" Precision="Half" ToolTip.Tip="Half Star Precision (3.5)" />
-                        <TextBlock Text="Read Only" FontWeight="SemiBold" Margin="0,8,0,4" />
-                        <controls:DaisyRating Value="1" Size="ExtraSmall" IsReadOnly="True" ToolTip.Tip="Read Only" />
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- Select -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="select" Title="Select" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <controls:DaisySelect PlaceholderText="Pick a pizza" SelectedIndex="0">
-                            <ComboBoxItem>Pepperoni</ComboBoxItem>
-                            <ComboBoxItem>Margherita</ComboBoxItem>
-                            <ComboBoxItem>Hawaiian</ComboBoxItem>
-                        </controls:DaisySelect>
-                        <controls:DaisySelect Variant="Primary" PlaceholderText="Primary">
-                            <ComboBoxItem>Option 1</ComboBoxItem>
-                            <ComboBoxItem>Option 2</ComboBoxItem>
-                        </controls:DaisySelect>
-                        <controls:DaisySelect Variant="Ghost" PlaceholderText="Ghost">
-                            <ComboBoxItem>Option 1</ComboBoxItem>
-                            <ComboBoxItem>Option 2</ComboBoxItem>
-                        </controls:DaisySelect>
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- TextArea -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="textarea" Title="TextArea" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="250">
-                        <controls:DaisyTextArea Watermark="Bio" Height="80"/>
-                        <controls:DaisyTextArea Variant="Primary" Watermark="Primary" Height="80"/>
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-            <controls:DaisyDivider />
-
-            <!-- Toggle -->
-            <StackPanel Spacing="12">
-                <local:SectionHeader SectionId="toggle" Title="Toggle" />
-                <WrapPanel Orientation="Horizontal">
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Basic Variants" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyToggle Content="Default" />
-                        <controls:DaisyToggle Content="Primary" Variant="Primary" IsChecked="True"/>
-                        <controls:DaisyToggle Content="Secondary" Variant="Secondary" IsChecked="True"/>
-                        <controls:DaisyToggle Content="Large" Size="Large" Variant="Accent" IsChecked="True"/>
-                    </StackPanel>
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Sizes" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyToggle Content="Extra Small" Size="ExtraSmall" IsChecked="True"/>
-                        <controls:DaisyToggle Content="Small" Size="Small" IsChecked="True"/>
-                        <controls:DaisyToggle Content="Medium (Default)" IsChecked="True"/>
-                        <controls:DaisyToggle Content="Large" Size="Large" IsChecked="True"/>
-                    </StackPanel>
-                    <StackPanel Spacing="10" Margin="0,0,40,20" Width="200">
-                        <TextBlock Text="Custom Padding" FontSize="12" Opacity="0.7"/>
-                        <controls:DaisyToggle Content="Default Padding" Variant="Info" IsChecked="True"/>
-                        <controls:DaisyToggle Content="Tight Padding (1)" TogglePadding="1" Variant="Success" IsChecked="True"/>
-                        <controls:DaisyToggle Content="Loose Padding (4)" TogglePadding="4" Variant="Warning" IsChecked="True"/>
-                    </StackPanel>
-                </WrapPanel>
-            </StackPanel>
-
-        </StackPanel>
-    </ScrollViewer>
+        <!-- Toast for action button demo -->
+        <controls:DaisyToast x:Name="DemoToast"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0,0,24,24" />
+    </Panel>
 
 </UserControl>

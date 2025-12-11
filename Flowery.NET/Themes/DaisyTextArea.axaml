@@ -3,34 +3,268 @@
                     xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
 
     <Design.PreviewWith>
-        <Border Padding="20">
-            <controls:DaisyTextArea Watermark="Bio" Height="100" Width="300"/>
+        <Border Padding="20" Background="{DynamicResource DaisyBase100Brush}">
+            <StackPanel Spacing="15" Width="350">
+                <controls:DaisyTextArea Watermark="Default textarea" MinHeight="80" />
+                <controls:DaisyTextArea Label="Bio" IsRequired="True"
+                    Watermark="Tell us about yourself..." MinHeight="80" />
+                <controls:DaisyTextArea Label="Feedback"
+                    HelperText="Your feedback is useful for us." Watermark="Type your feedback here"
+                    MinHeight="80" />
+                <controls:DaisyTextArea Label="Characters left"
+                    ShowCharacterCount="True" MaxLength="200"
+                    Watermark="Type here..." MinHeight="80" />
+                <controls:DaisyTextArea Label="With button"
+                    ActionButtonContent="Submit Feedback"
+                    Watermark="Type your feedback here" MinHeight="80" />
+                <controls:DaisyTextArea IsAutoGrow="True"
+                    Watermark="Auto-growing textarea..." MinHeight="60" />
+            </StackPanel>
         </Border>
     </Design.PreviewWith>
 
-    <!-- Inherits most styles from DaisyInput, but we need to redefine the theme key -->
-    <ControlTheme x:Key="{x:Type controls:DaisyTextArea}" TargetType="controls:DaisyTextArea" BasedOn="{StaticResource {x:Type controls:DaisyInput}}">
-        <Setter Property="MinHeight" Value="{DynamicResource DaisyTextAreaMediumMinHeight}" />
+    <!-- DaisyTextArea has its own template to support character counter and action button -->
+    <ControlTheme x:Key="{x:Type controls:DaisyTextArea}" TargetType="controls:DaisyTextArea">
+        <Setter Property="Background" Value="{DynamicResource DaisyBase100Brush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="{DynamicResource DaisyTextAreaMediumPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DaisySizeMediumCornerRadius}" />
+        <Setter Property="FontSize" Value="{DynamicResource DaisySizeMediumFontSize}" />
+        <Setter Property="MinHeight" Value="{DynamicResource DaisyTextAreaMediumMinHeight}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        <Setter Property="SelectionForegroundBrush"
+            Value="{DynamicResource DaisyPrimaryContentBrush}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
         <Setter Property="VerticalContentAlignment" Value="{DynamicResource DaisyTextAreaVerticalContentAlignment}" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <DataValidationErrors>
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                        <!-- Row 0: Label row -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="4"
+                            Margin="0,0,0,4"
+                            IsVisible="{TemplateBinding Label, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                            <TextBlock Text="{TemplateBinding Label}"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource DaisyBaseContentBrush}" />
+                            <TextBlock Text="*"
+                                Foreground="{DynamicResource DaisyErrorBrush}"
+                                IsVisible="{TemplateBinding IsRequired}" />
+                            <TextBlock Text="Optional field"
+                                FontSize="11"
+                                Opacity="0.7"
+                                Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                IsVisible="{TemplateBinding IsOptional}" />
+                        </StackPanel>
+
+                        <!-- Row 1: Hint text -->
+                        <TextBlock Grid.Row="1"
+                            Text="{TemplateBinding HintText}"
+                            FontSize="12"
+                            Opacity="0.7"
+                            Margin="0,0,0,4"
+                            Foreground="{DynamicResource DaisyBaseContentBrush}"
+                            IsVisible="{TemplateBinding HintText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                        <!-- Row 2: Main textarea area -->
+                        <Panel Grid.Row="2">
+                            <Border x:Name="PART_Background"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                MinWidth="{TemplateBinding MinWidth}"
+                                Height="{TemplateBinding MinHeight}" />
+
+                            <Grid ColumnDefinitions="Auto,*,Auto"
+                                Height="{TemplateBinding MinHeight}"
+                                TextElement.Foreground="{DynamicResource DaisyBaseContentBrush}">
+                                <!-- Start Icon -->
+                                <PathIcon Grid.Column="0"
+                                    x:Name="PART_StartIcon"
+                                    Data="{TemplateBinding StartIcon}"
+                                    Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                    Width="16" Height="16"
+                                    Margin="12,12,0,0"
+                                    VerticalAlignment="Top"
+                                    IsVisible="{TemplateBinding StartIcon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+                                <!-- Text area -->
+                                <ScrollViewer Grid.Column="1"
+                                    HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                    VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                    <Panel>
+                                        <TextBlock Name="PART_Watermark"
+                                            Opacity="0.5"
+                                            Text="{TemplateBinding Watermark}"
+                                            TextAlignment="{TemplateBinding TextAlignment}"
+                                            TextWrapping="{TemplateBinding TextWrapping}"
+                                            IsVisible="{TemplateBinding Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+                                            Margin="{TemplateBinding Padding}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                        <TextPresenter Name="PART_TextPresenter"
+                                            Text="{TemplateBinding Text, Mode=TwoWay}"
+                                            CaretIndex="{TemplateBinding CaretIndex}"
+                                            SelectionStart="{TemplateBinding SelectionStart}"
+                                            SelectionEnd="{TemplateBinding SelectionEnd}"
+                                            TextAlignment="{TemplateBinding TextAlignment}"
+                                            TextWrapping="{TemplateBinding TextWrapping}"
+                                            PasswordChar="{TemplateBinding PasswordChar}"
+                                            RevealPassword="{TemplateBinding RevealPassword}"
+                                            SelectionBrush="{TemplateBinding SelectionBrush}"
+                                            SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                                            CaretBrush="{TemplateBinding CaretBrush}"
+                                            Margin="{TemplateBinding Padding}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    </Panel>
+                                </ScrollViewer>
+
+                                <!-- End Icon -->
+                                <PathIcon Grid.Column="2"
+                                    x:Name="PART_EndIcon"
+                                    Data="{TemplateBinding EndIcon}"
+                                    Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                    Width="16" Height="16"
+                                    Margin="0,12,12,0"
+                                    VerticalAlignment="Top"
+                                    IsVisible="{TemplateBinding EndIcon, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                            </Grid>
+                        </Panel>
+
+                        <!-- Row 3: Helper text + Character counter row -->
+                        <Grid Grid.Row="3" ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                            <!-- Helper text (left-aligned) -->
+                            <TextBlock Grid.Column="0"
+                                Text="{TemplateBinding HelperText}"
+                                HorizontalAlignment="Left"
+                                FontSize="11"
+                                Opacity="0.7"
+                                Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                IsVisible="{TemplateBinding HelperText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                            <!-- Character counter (right-aligned) -->
+                            <StackPanel Grid.Column="1" Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                IsVisible="{TemplateBinding ShowCharacterCount}">
+                                <TextBlock FontSize="11" Opacity="0.7"
+                                    Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                    Text="{Binding CharacterCount, RelativeSource={RelativeSource TemplatedParent}}" />
+                                <TextBlock FontSize="11" Opacity="0.7"
+                                    Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                    Text=" characters"
+                                    IsVisible="{TemplateBinding MaxLength, Converter={x:Static ObjectConverters.IsNull}}" />
+                                <TextBlock FontSize="11" Opacity="0.7"
+                                    Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                    IsVisible="{TemplateBinding MaxLength, Converter={x:Static ObjectConverters.IsNotNull}}">
+                                    <Run Text=" / " />
+                                    <Run Text="{TemplateBinding MaxLength}" />
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Row 4: Action button -->
+                        <controls:DaisyButton Grid.Row="4"
+                            x:Name="PART_ActionButton"
+                            Content="{TemplateBinding ActionButtonContent}"
+                            Command="{TemplateBinding ActionButtonCommand}"
+                            CommandParameter="{TemplateBinding ActionButtonCommandParameter}"
+                            HorizontalAlignment="Left"
+                            Margin="0,8,0,0"
+                            Variant="Primary"
+                            Size="Small"
+                            IsVisible="{TemplateBinding ActionButtonContent, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                    </Grid>
+                </DataValidationErrors>
+            </ControlTemplate>
+        </Setter>
+
+        <!-- States -->
+        <Style Selector="^:pointerover /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyBaseContentBrush}" />
+        </Style>
+
+        <Style Selector="^:focus /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+        <!-- Variants (copied from DaisyInput) -->
+        <Style Selector="^[Variant=Bordered] /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyNeutralBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Bordered]:focus /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Ghost]">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="^[Variant=Ghost]:focus /template/ Border#PART_Background">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+
+        <Style Selector="^[Variant=Filled]">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="BorderThickness" Value="0,0,0,2" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyNeutralBrush}" />
+            <Setter Property="CornerRadius" Value="8,8,0,0" />
+        </Style>
+        <Style Selector="^[Variant=Filled]:focus /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Primary]">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Primary]:focus /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryFocusBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Error]">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Error]:focus /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyErrorBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Success]">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Success]:focus /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisySuccessBrush}" />
+        </Style>
+
+        <Style Selector="^[Variant=Warning]">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
+        <Style Selector="^[Variant=Warning]:focus /template/ Border#PART_Background">
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyWarningBrush}" />
+        </Style>
 
         <!-- Size variants -->
         <Style Selector="^[Size=ExtraLarge]">
             <Setter Property="MinHeight" Value="{DynamicResource DaisyTextAreaExtraLargeMinHeight}" />
             <Setter Property="Padding" Value="{DynamicResource DaisyTextAreaExtraLargePadding}" />
+            <Setter Property="FontSize" Value="{DynamicResource DaisySizeExtraLargeFontSize}" />
         </Style>
         <Style Selector="^[Size=Large]">
             <Setter Property="MinHeight" Value="{DynamicResource DaisyTextAreaLargeMinHeight}" />
             <Setter Property="Padding" Value="{DynamicResource DaisyTextAreaLargePadding}" />
+            <Setter Property="FontSize" Value="{DynamicResource DaisySizeLargeFontSize}" />
         </Style>
-        <!-- Size=Medium is the default -->
         <Style Selector="^[Size=Small]">
             <Setter Property="MinHeight" Value="{DynamicResource DaisyTextAreaSmallMinHeight}" />
             <Setter Property="Padding" Value="{DynamicResource DaisyTextAreaSmallPadding}" />
+            <Setter Property="FontSize" Value="{DynamicResource DaisySizeSmallFontSize}" />
         </Style>
         <Style Selector="^[Size=ExtraSmall]">
             <Setter Property="MinHeight" Value="{DynamicResource DaisyTextAreaExtraSmallMinHeight}" />
             <Setter Property="Padding" Value="{DynamicResource DaisyTextAreaExtraSmallPadding}" />
+            <Setter Property="FontSize" Value="{DynamicResource DaisySizeExtraSmallFontSize}" />
         </Style>
     </ControlTheme>
 </ResourceDictionary>
