@@ -1,14 +1,31 @@
+using System;
+using System.Globalization;
 using Avalonia.Automation;
 using Avalonia.Automation.Peers;
 using Avalonia.Controls;
 using Avalonia.Headless.XUnit;
 using Flowery.Controls;
+using Flowery.Localization;
 using Xunit;
 
 namespace Flowery.NET.Tests
 {
-    public class DaisyAccessibilityTests
+    // Run sequentially to minimize interference
+    [Collection("LocalizationTests")]
+    public class DaisyAccessibilityTests : IDisposable
     {
+        private readonly CultureInfo _originalCulture;
+
+        public DaisyAccessibilityTests()
+        {
+            _originalCulture = FloweryLocalization.CurrentCulture;
+            FloweryLocalization.SetCulture("en-US");
+        }
+
+        public void Dispose()
+        {
+            FloweryLocalization.SetCulture(_originalCulture);
+        }
         #region DaisyLoading Tests
 
         [AvaloniaFact]
