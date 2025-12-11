@@ -1,0 +1,361 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Flowery.Controls;assembly=Flowery.NET">
+
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{DynamicResource DaisyBase100Brush}">
+            <StackPanel Spacing="20">
+                <!-- Default -->
+                <controls:DaisyDateTimeline HeaderType="MonthYear" />
+                
+                <!-- With switcher header -->
+                <controls:DaisyDateTimeline HeaderType="Switcher" />
+                
+                <!-- No header -->
+                <controls:DaisyDateTimeline HeaderType="None" />
+                
+                <!-- Small size -->
+                <controls:DaisyDateTimeline Size="Small" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <Styles.Resources>
+        <!-- DaisyDateTimelineItem theme -->
+        <ControlTheme x:Key="{x:Type controls:DaisyDateTimelineItem}" TargetType="controls:DaisyDateTimelineItem">
+            <Setter Property="Background" Value="{DynamicResource DaisyBase200Brush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DaisyBase300Brush}" />
+            <Setter Property="Foreground" Value="{DynamicResource DaisyBaseContentBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <!-- Default to Medium size tokens -->
+            <Setter Property="CornerRadius" Value="{DynamicResource DaisyDateTimelineMediumCornerRadius}" />
+            <Setter Property="Padding" Value="{DynamicResource DaisyDateTimelineMediumPadding}" />
+            <Setter Property="MinHeight" Value="{DynamicResource DaisyDateTimelineMediumHeight}" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Template">
+                <ControlTemplate TargetType="controls:DaisyDateTimelineItem">
+                    <Border x:Name="PART_Background"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            Width="{TemplateBinding Width}"
+                            MinHeight="{TemplateBinding MinHeight}">
+                        <StackPanel HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    Spacing="2">
+                            <!-- Month Name at TOP (e.g., JUN) - matches Flutter easy_date_timeline -->
+                            <TextBlock x:Name="PART_MonthName"
+                                       Text="{TemplateBinding MonthName}"
+                                       HorizontalAlignment="Center"
+                                       FontSize="{DynamicResource DaisyDateTimelineMediumMonthNameFontSize}"
+                                       FontWeight="Medium"
+                                       Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                       Opacity="0.7"
+                                       IsVisible="{TemplateBinding ShowMonthName}" />
+                            
+                            <!-- Day Number in CENTER (e.g., 22) - large and prominent -->
+                            <TextBlock x:Name="PART_DayNumber"
+                                       Text="{TemplateBinding DayNumber}"
+                                       HorizontalAlignment="Center"
+                                       FontSize="{DynamicResource DaisyDateTimelineMediumDayNumberFontSize}"
+                                       FontWeight="Bold"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       IsVisible="{TemplateBinding ShowDayNumber}" />
+                            
+                            <!-- Day Name at BOTTOM (e.g., THU) -->
+                            <TextBlock x:Name="PART_DayName"
+                                       Text="{TemplateBinding DayName}"
+                                       HorizontalAlignment="Center"
+                                       FontSize="{DynamicResource DaisyDateTimelineMediumDayNameFontSize}"
+                                       FontWeight="Medium"
+                                       Foreground="{DynamicResource DaisyBaseContentBrush}"
+                                       Opacity="0.7"
+                                       IsVisible="{TemplateBinding ShowDayName}" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+
+            <!-- Transitions -->
+            <Style Selector="^ /template/ Border#PART_Background">
+                <Setter Property="Transitions">
+                    <Transitions>
+                        <BrushTransition Property="Background" Duration="0:0:0.15" />
+                        <BrushTransition Property="BorderBrush" Duration="0:0:0.15" />
+                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" />
+                    </Transitions>
+                </Setter>
+            </Style>
+
+            <!-- Hover state -->
+            <Style Selector="^:pointerover /template/ Border#PART_Background">
+                <Setter Property="Background" Value="{DynamicResource DaisyBase300Brush}" />
+                <Setter Property="RenderTransform" Value="scale(1.02)" />
+            </Style>
+
+            <!-- Today highlight (when not selected) - uses primary border -->
+            <Style Selector="^[IsToday=True][ShowTodayHighlight=True][IsSelected=False]">
+                <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </Style>
+
+            <!-- Selected state -->
+            <Style Selector="^[IsSelected=True]">
+                <Setter Property="Background" Value="{DynamicResource DaisyPrimaryBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource DaisyPrimaryBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentBrush}" />
+            </Style>
+            <Style Selector="^[IsSelected=True] /template/ TextBlock#PART_DayName">
+                <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentBrush}" />
+                <Setter Property="Opacity" Value="0.8" />
+            </Style>
+            <Style Selector="^[IsSelected=True] /template/ TextBlock#PART_MonthName">
+                <Setter Property="Foreground" Value="{DynamicResource DaisyPrimaryContentBrush}" />
+                <Setter Property="Opacity" Value="0.8" />
+            </Style>
+            <Style Selector="^[IsSelected=True]:pointerover /template/ Border#PART_Background">
+                <Setter Property="Background" Value="{DynamicResource DaisyPrimaryFocusBrush}" />
+            </Style>
+
+            <!-- Marked dates (when not selected) - secondary color background -->
+            <Style Selector="^[IsMarked=True][IsSelected=False]">
+                <Setter Property="Background" Value="{DynamicResource DaisySecondaryBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentBrush}" />
+            </Style>
+            <Style Selector="^[IsMarked=True][IsSelected=False] /template/ TextBlock#PART_DayName">
+                <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentBrush}" />
+            </Style>
+            <Style Selector="^[IsMarked=True][IsSelected=False] /template/ TextBlock#PART_MonthName">
+                <Setter Property="Foreground" Value="{DynamicResource DaisySecondaryContentBrush}" />
+            </Style>
+            
+            <!-- Tooltip only for marked dates with text -->
+            <Style Selector="^[IsMarked=True]">
+                <Setter Property="ToolTip.Tip" Value="{Binding MarkerText, RelativeSource={RelativeSource Self}}" />
+            </Style>
+
+            <!-- Disabled state -->
+            <Style Selector="^[IsDisabled=True]">
+                <Setter Property="Opacity" Value="0.4" />
+                <Setter Property="Cursor" Value="Arrow" />
+            </Style>
+        </ControlTheme>
+
+        <!-- DaisyDateTimeline main theme -->
+        <ControlTheme x:Key="{x:Type controls:DaisyDateTimeline}" TargetType="controls:DaisyDateTimeline">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <ControlTemplate TargetType="controls:DaisyDateTimeline">
+                    <StackPanel Spacing="12">
+                        <!-- Header section (visibility controlled by HeaderType) -->
+                        <Grid x:Name="PART_Header" ColumnDefinitions="Auto,*,Auto">
+                            <!-- Previous button (only for Switcher type) - using DaisyButton -->
+                            <controls:DaisyButton x:Name="PART_PreviousButton"
+                                                  Grid.Column="0"
+                                                  Variant="Ghost"
+                                                  Shape="Square"
+                                                  Size="Small"
+                                                  IsVisible="False">
+                                <PathIcon Width="16" Height="16"
+                                          Data="{StaticResource DaisyIconChevronLeft}" />
+                            </controls:DaisyButton>
+                            
+                            <!-- Month/Year Header -->
+                            <TextBlock x:Name="PART_HeaderText"
+                                       Grid.Column="1"
+                                       Text="{TemplateBinding HeaderText}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource DaisyBaseContentBrush}" />
+                            
+                            <!-- Next button (only for Switcher type) - using DaisyButton -->
+                            <controls:DaisyButton x:Name="PART_NextButton"
+                                                  Grid.Column="2"
+                                                  Variant="Ghost"
+                                                  Shape="Square"
+                                                  Size="Small"
+                                                  IsVisible="False">
+                                <PathIcon Width="16" Height="16"
+                                          Data="{StaticResource DaisyIconChevronRight}" />
+                            </controls:DaisyButton>
+                        </Grid>
+                        
+                        <!-- Date items scroll area -->
+                        <ScrollViewer x:Name="PART_ScrollViewer"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollBarVisibility}"
+                                      VerticalScrollBarVisibility="Disabled">
+                            <ItemsControl x:Name="PART_ItemsControl">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter>
+
+            <!-- Hide header when HeaderType is None -->
+            <Style Selector="^[HeaderType=None] /template/ Grid#PART_Header">
+                <Setter Property="IsVisible" Value="False" />
+            </Style>
+
+            <!-- Show navigation buttons when HeaderType is Switcher -->
+            <Style Selector="^[HeaderType=Switcher] /template/ controls|DaisyButton#PART_PreviousButton">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+            <Style Selector="^[HeaderType=Switcher] /template/ controls|DaisyButton#PART_NextButton">
+                <Setter Property="IsVisible" Value="True" />
+            </Style>
+        </ControlTheme>
+    </Styles.Resources>
+
+    <!-- Focus style for keyboard navigation -->
+    <Style Selector="controls|DaisyDateTimeline:focus">
+        <!-- When focused, show a subtle focus indicator on the control -->
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline:focus controls|DaisyDateTimelineItem[IsSelected=True]">
+        <!-- Enhance the selected item's visibility when control has focus -->
+        <Setter Property="BorderThickness" Value="2" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline:focus controls|DaisyDateTimelineItem[IsSelected=True] /template/ Border#PART_Background">
+        <Setter Property="BoxShadow" Value="0 0 0 3 #40000000" />
+    </Style>
+
+    <!-- ItemWidth based on Size (set on the main control, propagated to items) -->
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraSmall]">
+        <Setter Property="ItemWidth" Value="{DynamicResource DaisyDateTimelineExtraSmallItemWidth}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Small]">
+        <Setter Property="ItemWidth" Value="{DynamicResource DaisyDateTimelineSmallItemWidth}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Medium]">
+        <Setter Property="ItemWidth" Value="{DynamicResource DaisyDateTimelineMediumItemWidth}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Large]">
+        <Setter Property="ItemWidth" Value="{DynamicResource DaisyDateTimelineLargeItemWidth}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraLarge]">
+        <Setter Property="ItemWidth" Value="{DynamicResource DaisyDateTimelineExtraLargeItemWidth}" />
+    </Style>
+
+    <!-- Size variants for items -->
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraSmall] controls|DaisyDateTimelineItem">
+        <Setter Property="MinHeight" Value="{DynamicResource DaisyDateTimelineExtraSmallHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource DaisyDateTimelineExtraSmallPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DaisyDateTimelineExtraSmallCornerRadius}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraSmall] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraSmallDayNameFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraSmall] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayNumber">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraSmallDayNumberFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraSmall] controls|DaisyDateTimelineItem /template/ TextBlock#PART_MonthName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraSmallMonthNameFontSize}" />
+    </Style>
+
+    <Style Selector="controls|DaisyDateTimeline[Size=Small] controls|DaisyDateTimelineItem">
+        <Setter Property="MinHeight" Value="{DynamicResource DaisyDateTimelineSmallHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource DaisyDateTimelineSmallPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DaisyDateTimelineSmallCornerRadius}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Small] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineSmallDayNameFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Small] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayNumber">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineSmallDayNumberFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Small] controls|DaisyDateTimelineItem /template/ TextBlock#PART_MonthName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineSmallMonthNameFontSize}" />
+    </Style>
+
+    <!-- Medium is default, no extra styles needed -->
+
+    <Style Selector="controls|DaisyDateTimeline[Size=Large] controls|DaisyDateTimelineItem">
+        <Setter Property="MinHeight" Value="{DynamicResource DaisyDateTimelineLargeHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource DaisyDateTimelineLargePadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DaisyDateTimelineLargeCornerRadius}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Large] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineLargeDayNameFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Large] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayNumber">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineLargeDayNumberFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Large] controls|DaisyDateTimelineItem /template/ TextBlock#PART_MonthName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineLargeMonthNameFontSize}" />
+    </Style>
+
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraLarge] controls|DaisyDateTimelineItem">
+        <Setter Property="MinHeight" Value="{DynamicResource DaisyDateTimelineExtraLargeHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource DaisyDateTimelineExtraLargePadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource DaisyDateTimelineExtraLargeCornerRadius}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraLarge] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraLargeDayNameFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraLarge] controls|DaisyDateTimelineItem /template/ TextBlock#PART_DayNumber">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraLargeDayNumberFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraLarge] controls|DaisyDateTimelineItem /template/ TextBlock#PART_MonthName">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraLargeMonthNameFontSize}" />
+    </Style>
+
+    <!-- Header size variants -->
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraSmall] /template/ TextBlock#PART_HeaderText">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraSmallHeaderFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Small] /template/ TextBlock#PART_HeaderText">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineSmallHeaderFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=Large] /template/ TextBlock#PART_HeaderText">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineLargeHeaderFontSize}" />
+    </Style>
+    <Style Selector="controls|DaisyDateTimeline[Size=ExtraLarge] /template/ TextBlock#PART_HeaderText">
+        <Setter Property="FontSize" Value="{DynamicResource DaisyDateTimelineExtraLargeHeaderFontSize}" />
+    </Style>
+
+    <!-- ==================== HORIZONTAL LAYOUT STYLES ==================== -->
+    <!-- When Layout=Horizontal: day name + day number side-by-side (like "MON 19") -->
+    
+    <!-- Change StackPanel to horizontal, hide month, adjust sizing -->
+    <Style Selector="controls|DaisyDateTimelineItem[Layout=Horizontal]">
+        <!-- Wider width for horizontal layout -->
+        <Setter Property="MinWidth" Value="100" />
+        <Setter Property="MinHeight" Value="48" />
+        <Setter Property="Padding" Value="16,8" />
+    </Style>
+    
+    <Style Selector="controls|DaisyDateTimelineItem[Layout=Horizontal] /template/ StackPanel">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Spacing" Value="6" />
+    </Style>
+    
+    <!-- Hide month name in horizontal layout -->
+    <Style Selector="controls|DaisyDateTimelineItem[Layout=Horizontal] /template/ TextBlock#PART_MonthName">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+    
+    <!-- Reorder: Day name comes first, same size as day number -->
+    <Style Selector="controls|DaisyDateTimelineItem[Layout=Horizontal] /template/ TextBlock#PART_DayName">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Opacity" Value="0.7" />
+    </Style>
+    
+    <!-- Day number is prominent -->
+    <Style Selector="controls|DaisyDateTimelineItem[Layout=Horizontal] /template/ TextBlock#PART_DayNumber">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+</Styles>

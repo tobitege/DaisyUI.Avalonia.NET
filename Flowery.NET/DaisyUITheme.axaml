@@ -82,5 +82,6 @@
     <StyleInclude Source="/Themes/DaisyFab.axaml" />
     <StyleInclude Source="/Themes/DaisyComponentSidebar.axaml" />
     <StyleInclude Source="/Themes/DaisyDock.axaml" />
+    <StyleInclude Source="/Themes/DaisyDateTimeline.axaml" />
     <StyleInclude Source="/Themes/Custom/Weather/DaisyWeatherIcon.axaml" />
 </Styles>

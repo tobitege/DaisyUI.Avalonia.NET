@@ -218,4 +218,61 @@
     <VerticalAlignment x:Key="DaisyInputVerticalContentAlignment">Center</VerticalAlignment>
     <VerticalAlignment x:Key="DaisyTextAreaVerticalContentAlignment">Top</VerticalAlignment>
 
+    <!-- ==================== DATE TIMELINE ITEM SIZES ==================== -->
+    <!-- DaisyDateTimeline date item heights -->
+    <sys:Double x:Key="DaisyDateTimelineExtraLargeHeight">130</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineLargeHeight">96</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineMediumHeight">80</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineSmallHeight">68</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineExtraSmallHeight">56</sys:Double>
+
+    <!-- DateTimeline item widths (wider for larger font sizes) -->
+    <sys:Double x:Key="DaisyDateTimelineExtraLargeItemWidth">96</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineLargeItemWidth">80</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineMediumItemWidth">64</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineSmallItemWidth">56</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineExtraSmallItemWidth">48</sys:Double>
+
+    <!-- DateTimeline item padding -->
+    <Thickness x:Key="DaisyDateTimelineExtraLargePadding">16,24</Thickness>
+    <Thickness x:Key="DaisyDateTimelineLargePadding">12,16</Thickness>
+    <Thickness x:Key="DaisyDateTimelineMediumPadding">8,12</Thickness>
+    <Thickness x:Key="DaisyDateTimelineSmallPadding">6,10</Thickness>
+    <Thickness x:Key="DaisyDateTimelineExtraSmallPadding">4,8</Thickness>
+
+    <!-- DateTimeline corner radius -->
+    <CornerRadius x:Key="DaisyDateTimelineExtraLargeCornerRadius">20</CornerRadius>
+    <CornerRadius x:Key="DaisyDateTimelineLargeCornerRadius">16</CornerRadius>
+    <CornerRadius x:Key="DaisyDateTimelineMediumCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="DaisyDateTimelineSmallCornerRadius">10</CornerRadius>
+    <CornerRadius x:Key="DaisyDateTimelineExtraSmallCornerRadius">8</CornerRadius>
+
+    <!-- DateTimeline day number font sizes (prominent, center) -->
+    <sys:Double x:Key="DaisyDateTimelineExtraLargeDayNumberFontSize">32</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineLargeDayNumberFontSize">26</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineMediumDayNumberFontSize">20</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineSmallDayNumberFontSize">16</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineExtraSmallDayNumberFontSize">14</sys:Double>
+
+    <!-- DateTimeline day name font sizes (small, bottom) -->
+    <sys:Double x:Key="DaisyDateTimelineExtraLargeDayNameFontSize">15</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineLargeDayNameFontSize">13</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineMediumDayNameFontSize">10</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineSmallDayNameFontSize">10</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineExtraSmallDayNameFontSize">9</sys:Double>
+
+    <!-- DateTimeline month name font sizes (small, top) -->
+    <sys:Double x:Key="DaisyDateTimelineExtraLargeMonthNameFontSize">14</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineLargeMonthNameFontSize">12</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineMediumMonthNameFontSize">10</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineSmallMonthNameFontSize">9</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineExtraSmallMonthNameFontSize">8</sys:Double>
+
+    <!-- DateTimeline header font sizes -->
+    <sys:Double x:Key="DaisyDateTimelineExtraLargeHeaderFontSize">20</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineLargeHeaderFontSize">18</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineMediumHeaderFontSize">16</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineSmallHeaderFontSize">14</sys:Double>
+    <sys:Double x:Key="DaisyDateTimelineExtraSmallHeaderFontSize">12</sys:Double>
+
 </ResourceDictionary>

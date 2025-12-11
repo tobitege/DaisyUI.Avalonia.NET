@@ -177,6 +177,7 @@ The following controls use design tokens for consistent sizing:
 - **DaisyMenu** - Item padding, font sizes
 - **DaisyKbd** - Heights, padding, font sizes, corner radius
 - **DaisyTextArea** - MinHeight, padding (multiline-specific)
+- **DaisyDateTimeline** - Item heights, padding, corner radius, font sizes
 
 ---
 
@@ -361,3 +362,85 @@ Outer border size for checkboxes and radio buttons.
 |-------|---------|
 | `DaisyInputVerticalContentAlignment` | Center |
 | `DaisyTextAreaVerticalContentAlignment` | Top |
+
+---
+
+### DateTimeline Item Heights
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargeHeight` | 130 |
+| `DaisyDateTimelineLargeHeight` | 96 |
+| `DaisyDateTimelineMediumHeight` | 80 |
+| `DaisyDateTimelineSmallHeight` | 68 |
+| `DaisyDateTimelineExtraSmallHeight` | 56 |
+
+### DateTimeline Item Widths
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargeItemWidth` | 96 |
+| `DaisyDateTimelineLargeItemWidth` | 80 |
+| `DaisyDateTimelineMediumItemWidth` | 64 |
+| `DaisyDateTimelineSmallItemWidth` | 56 |
+| `DaisyDateTimelineExtraSmallItemWidth` | 48 |
+
+### DateTimeline Item Padding
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargePadding` | 16,24 |
+| `DaisyDateTimelineLargePadding` | 12,16 |
+| `DaisyDateTimelineMediumPadding` | 8,12 |
+| `DaisyDateTimelineSmallPadding` | 6,10 |
+| `DaisyDateTimelineExtraSmallPadding` | 4,8 |
+
+### DateTimeline Corner Radius
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargeCornerRadius` | 20 |
+| `DaisyDateTimelineLargeCornerRadius` | 16 |
+| `DaisyDateTimelineMediumCornerRadius` | 12 |
+| `DaisyDateTimelineSmallCornerRadius` | 10 |
+| `DaisyDateTimelineExtraSmallCornerRadius` | 8 |
+
+### DateTimeline Day Number Font Sizes
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargeDayNumberFontSize` | 32 |
+| `DaisyDateTimelineLargeDayNumberFontSize` | 26 |
+| `DaisyDateTimelineMediumDayNumberFontSize` | 20 |
+| `DaisyDateTimelineSmallDayNumberFontSize` | 16 |
+| `DaisyDateTimelineExtraSmallDayNumberFontSize` | 14 |
+
+### DateTimeline Day Name Font Sizes
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargeDayNameFontSize` | 15 |
+| `DaisyDateTimelineLargeDayNameFontSize` | 13 |
+| `DaisyDateTimelineMediumDayNameFontSize` | 10 |
+| `DaisyDateTimelineSmallDayNameFontSize` | 10 |
+| `DaisyDateTimelineExtraSmallDayNameFontSize` | 9 |
+
+### DateTimeline Month Name Font Sizes
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargeMonthNameFontSize` | 14 |
+| `DaisyDateTimelineLargeMonthNameFontSize` | 12 |
+| `DaisyDateTimelineMediumMonthNameFontSize` | 10 |
+| `DaisyDateTimelineSmallMonthNameFontSize` | 9 |
+| `DaisyDateTimelineExtraSmallMonthNameFontSize` | 8 |
+
+### DateTimeline Header Font Sizes
+
+| Token | Default |
+|-------|---------|
+| `DaisyDateTimelineExtraLargeHeaderFontSize` | 20 |
+| `DaisyDateTimelineLargeHeaderFontSize` | 18 |
+| `DaisyDateTimelineMediumHeaderFontSize` | 16 |
+| `DaisyDateTimelineSmallHeaderFontSize` | 14 |
+| `DaisyDateTimelineExtraSmallHeaderFontSize` | 12 |
