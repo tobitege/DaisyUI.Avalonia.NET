@@ -15,6 +15,7 @@
 </div>
 
 ![Flowery.NET.Gallery Screenshot](Flowery.NET.Gallery.png)
+(English default language. Localized to 11 languages!)
 
 This library provides native Avalonia controls that mimic the utility-first, semantic class naming of DaisyUI, making it easy to build beautiful, themed UIs in Avalonia. A NuGet package is also available.
 
