@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Browser: Add `WasmBuildNative=true` (required for SkiaSharp in WASM)
 - Browser: Add MutationObserver splash screen hide and error handling to `main.js`
 - Android: Add `AcceptAndroidSDKLicenses=true` (avoids interactive license prompts)
+- Desktop/Android: Add `WithInterFont()` for consistent font rendering across all platforms
 - Shared library: Remove `Avalonia.Desktop` package (now in Desktop project only)
 - Shared library: Delete `Program.cs` (entry point now in platform-specific hosts)
 
