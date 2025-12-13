@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
@@ -9,7 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using Avalonia.Styling;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 
 namespace Flowery.Controls
@@ -92,54 +91,54 @@ namespace Flowery.Controls
             var parentBounds = (to.GetVisualParent() as Visual)?.Bounds ?? new Rect(0, 0, 400, 300);
             var width = parentBounds.Width;
 
-            var tasks = new List<Task>();
-
+            TranslateTransform? fromTransform = null;
             if (from != null)
             {
-                var outAnimation = new Animation
-                {
-                    Duration = _duration,
-                    Easing = new CubicEaseInOut(),
-                    Children =
-                    {
-                        new KeyFrame
-                        {
-                            Cue = new Cue(0),
-                            Setters = { new Setter(Visual.OpacityProperty, 1.0), new Setter(TranslateTransform.XProperty, 0.0) }
-                        },
-                        new KeyFrame
-                        {
-                            Cue = new Cue(1),
-                            Setters = { new Setter(Visual.OpacityProperty, 0.0), new Setter(TranslateTransform.XProperty, -direction * width) }
-                        }
-                    }
-                };
-                from.RenderTransform = new TranslateTransform();
-                tasks.Add(outAnimation.RunAsync(from, cancellationToken));
+                fromTransform = new TranslateTransform();
+                from.RenderTransform = fromTransform;
             }
 
-            var inAnimation = new Animation
-            {
-                Duration = _duration,
-                Easing = new CubicEaseInOut(),
-                Children =
-                {
-                    new KeyFrame
-                    {
-                        Cue = new Cue(0),
-                        Setters = { new Setter(Visual.OpacityProperty, 0.0), new Setter(TranslateTransform.XProperty, direction * width) }
-                    },
-                    new KeyFrame
-                    {
-                        Cue = new Cue(1),
-                        Setters = { new Setter(Visual.OpacityProperty, 1.0), new Setter(TranslateTransform.XProperty, 0.0) }
-                    }
-                }
-            };
-            to.RenderTransform = new TranslateTransform();
-            tasks.Add(inAnimation.RunAsync(to, cancellationToken));
+            var toTransform = new TranslateTransform { X = direction * width };
+            to.RenderTransform = toTransform;
+            to.Opacity = 0;
 
-            await Task.WhenAll(tasks);
+            // Use manual interpolation for transforms (more reliable across platforms)
+            var steps = 30;
+            var stepDuration = _duration.TotalMilliseconds / steps;
+            var easing = new CubicEaseInOut();
+
+            for (int i = 0; i <= steps; i++)
+            {
+                if (cancellationToken.IsCancellationRequested) break;
+
+                var t = (double)i / steps;
+                var easedT = easing.Ease(t);
+
+                // Animate opacity and translation on UI thread
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    if (from != null && fromTransform != null)
+                    {
+                        from.Opacity = 1.0 - easedT;
+                        fromTransform.X = -direction * width * easedT;
+                    }
+
+                    to.Opacity = easedT;
+                    toTransform.X = direction * width * (1.0 - easedT);
+                });
+
+                if (i < steps)
+                    await Task.Delay((int)stepDuration, cancellationToken);
+            }
+
+            // Ensure final state on UI thread
+            await Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                if (from != null)
+                    from.Opacity = 0;
+                to.Opacity = 1;
+                toTransform.X = 0;
+            });
         }
     }
 }

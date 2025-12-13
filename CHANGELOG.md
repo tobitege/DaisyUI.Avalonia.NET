@@ -17,11 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Flowery.NET.Gallery.Android` - Android mobile app
   - `Flowery.NET.Gallery.iOS` - iOS mobile app
 - Build scripts: `scripts/build_all.ps1` with per-project build and timing summary
+  - Run a full build with: `pwsh .\scripts\build_all.ps1`
 - Build scripts: `scripts/run_browser.ps1` for WASM development
 - Documentation: Gallery App Architecture section in README
+- Gallery: Enhanced Carousel example with descriptive text and emoji icons per slide
 
 ### Fixed
 
+- **DaisyStack/DaisyCarousel**: Fixed navigation animations not working in Browser/WebAssembly
+  - Root cause: Avalonia's `Animation.RunAsync()` with `TranslateTransform` properties doesn't work reliably across platforms
+  - Solution: Replaced with manual property interpolation using easing functions for consistent behavior on Desktop, Browser, Android, and iOS
 - Browser: Add `WasmBuildNative=true` (required for SkiaSharp in WASM)
 - Browser: Add MutationObserver splash screen hide and error handling to `main.js`
 - Android: Add `AcceptAndroidSDKLicenses=true` (avoids interactive license prompts)

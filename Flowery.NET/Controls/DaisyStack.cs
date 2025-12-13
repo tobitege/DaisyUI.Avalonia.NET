@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Animation;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using Avalonia.Styling;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 
@@ -350,76 +346,39 @@ namespace Flowery.Controls
             else
                 translateTo.Y = direction * distance;
 
-            var cts = new CancellationTokenSource();
-            var tasks = new List<Task>();
+            // Use manual interpolation for transforms (more reliable across platforms)
+            // combined with opacity animation
+            var steps = 30;
+            var stepDuration = TransitionDuration.TotalMilliseconds / steps;
+            var easing = new CubicEaseInOut();
 
-            var outAnim = new Animation
+            for (int i = 0; i <= steps; i++)
             {
-                Duration = TransitionDuration,
-                FillMode = FillMode.Forward, // Hold end state to prevent flicker
-                Easing = new CubicEaseInOut(),
-                Children =
+                var t = (double)i / steps;
+                var easedT = easing.Ease(t);
+
+                // Animate opacity
+                fromItem.Opacity = 1.0 - easedT;
+                toItem.Opacity = easedT;
+
+                // Animate translation
+                if (isHorizontal)
                 {
-                    new KeyFrame
-                    {
-                        Cue = new Cue(0),
-                        Setters =
-                        {
-                            new Setter(OpacityProperty, 1.0),
-                            new Setter(isHorizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty, 0.0)
-                        }
-                    },
-                    new KeyFrame
-                    {
-                        Cue = new Cue(1),
-                        Setters =
-                        {
-                            new Setter(OpacityProperty, 0.0),
-                            new Setter(isHorizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty,
-                                (-direction * distance))
-                        }
-                    }
+                    translateFrom.X = -direction * distance * easedT;
+                    translateTo.X = direction * distance * (1.0 - easedT);
                 }
-            };
-
-            var inAnim = new Animation
-            {
-                Duration = TransitionDuration,
-                FillMode = FillMode.Forward, // Hold end state to prevent flicker
-                Easing = new CubicEaseInOut(),
-                Children =
+                else
                 {
-                    new KeyFrame
-                    {
-                        Cue = new Cue(0),
-                        Setters =
-                        {
-                            new Setter(OpacityProperty, 0.0),
-                            new Setter(isHorizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty,
-                                (direction * distance))
-                        }
-                    },
-                    new KeyFrame
-                    {
-                        Cue = new Cue(1),
-                        Setters =
-                        {
-                            new Setter(OpacityProperty, 1.0),
-                            new Setter(isHorizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty, 0.0)
-                        }
-                    }
+                    translateFrom.Y = -direction * distance * easedT;
+                    translateTo.Y = direction * distance * (1.0 - easedT);
                 }
-            };
 
-            tasks.Add(outAnim.RunAsync(fromItem, cts.Token));
-            tasks.Add(inAnim.RunAsync(toItem, cts.Token));
+                if (i < steps)
+                    await Task.Delay((int)stepDuration);
+            }
 
-            await Task.WhenAll(tasks);
+            fromItem.IsVisible = false;
 
-            // Manual safe cleanup slightly different for prev/next to prevent flicker
-            fromItem.IsVisible = false; // Ensure it's hidden while still holding animation state
-
-            // Clean up everything properly
             UpdateItemVisibility();
 
             _isAnimating = false;

@@ -224,10 +224,30 @@
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Spacing="10" Margin="0,0,40,20">
                             <controls:DaisyCarousel Height="150" Width="450">
-                                <Border Background="#FF5F56" Width="200" />
-                                <Border Background="#FFBD2E" Width="200" />
-                                <Border Background="#27C93F" Width="200" />
-                                <Border Background="#007BFF" Width="200" />
+                                <Border Background="#FF5F56" CornerRadius="8">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="🍎 Slide 1" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" />
+                                        <TextBlock Text="Fresh Apples" FontSize="14" Foreground="White" Opacity="0.9" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#FFBD2E" CornerRadius="8">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="🍋 Slide 2" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" />
+                                        <TextBlock Text="Zesty Lemons" FontSize="14" Foreground="White" Opacity="0.9" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#27C93F" CornerRadius="8">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="🥒 Slide 3" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" />
+                                        <TextBlock Text="Cool Cucumbers" FontSize="14" Foreground="White" Opacity="0.9" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#007BFF" CornerRadius="8">
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="🫐 Slide 4" FontSize="24" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" />
+                                        <TextBlock Text="Bright Blueberries" FontSize="14" Foreground="White" Opacity="0.9" HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
                             </controls:DaisyCarousel>
                         </StackPanel>
                     </WrapPanel>
