@@ -51,19 +51,28 @@ namespace Flowery.NET.Gallery.Examples
             {
                 openDialogButton.Click += async (s, e) =>
                 {
+                    var currentColor = selectedColorPreview?.Background is SolidColorBrush brush
+                        ? brush.Color
+                        : Colors.Red;
+
+                    Color? result;
                     var topLevel = TopLevel.GetTopLevel(this);
+
                     if (topLevel is Window window)
                     {
-                        var currentColor = selectedColorPreview?.Background is SolidColorBrush brush
-                            ? brush.Color
-                            : Colors.Red;
+                        // Desktop: use native window dialog
+                        result = await DaisyColorPickerDialog.ShowDialogAsync(window, currentColor);
+                    }
+                    else
+                    {
+                        // Browser/WASM: use overlay dialog
+                        result = await DaisyColorPickerDialog.ShowOverlayAsync(this, currentColor);
+                    }
 
-                        var result = await DaisyColorPickerDialog.ShowDialogAsync(window, currentColor);
-                        if (result.HasValue && selectedColorPreview != null && selectedColorText != null)
-                        {
-                            selectedColorPreview.Background = new SolidColorBrush(result.Value);
-                            selectedColorText.Text = $"Selected: #{result.Value.R:X2}{result.Value.G:X2}{result.Value.B:X2}";
-                        }
+                    if (result.HasValue && selectedColorPreview != null && selectedColorText != null)
+                    {
+                        selectedColorPreview.Background = new SolidColorBrush(result.Value);
+                        selectedColorText.Text = $"Selected: #{result.Value.R:X2}{result.Value.G:X2}{result.Value.B:X2}";
                     }
                 };
             }
